@@ -1,0 +1,18 @@
+body{
+    background-color: black;
+    color: white;
+    font-family: "Poppins", sans-serif;
+}
+
+.a-login{
+    color: white;
+    text-decoration: none;
+}
+
+.a-login:hover{
+    color: #dc3545;
+    text-decoration: none;
+}
+
+
+
