@@ -27,4 +27,11 @@ class UserAuth extends Controller
 
         return response()->json($user, 201);
     }
+
+
+    public function login()
+    {
+        return view('auth/login');
+    }
+
 }
