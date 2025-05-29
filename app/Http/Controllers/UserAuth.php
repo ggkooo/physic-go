@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Illuminate\Http\JsonResponse;
 // use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Http\Requests\ValidationUserRequest;
@@ -30,13 +29,13 @@ class UserAuth extends Controller
     //     return response()->json($user, 201);
     // }
 
-    public function store(ValidationUserRequest $request): JsonResponse
+    public function store(ValidationUserRequest $request)
     {
         $validated = $request->validated();
 
-        $user = User::createUser($validated);
+        User::createUser($validated);
 
-        return response()->json($user, 201);
+        return redirect('/users/login')->with('success', 'Usuário registrado com sucesso!');
     }
 
     public function login()

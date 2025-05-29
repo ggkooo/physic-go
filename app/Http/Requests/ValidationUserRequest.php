@@ -22,32 +22,32 @@ class ValidationUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email',
+            'user_name' => 'required|string|max:255',
+            'user_email' => 'required|email|unique:users,email',
             'user_password' => 'required|string|min:6',
-            'confirm_password' => 'required|same:password',
-            'tipo_cadastro' => 'required',
+            'user_confirm_password' => 'required|same:user_password',
+            'user_account_type' => 'required',
         ];
     }
 
     public function messages(): array
     {
         return [
-            'name.required' => 'O campo nome é obrigatório.',
-            'name.string' => 'O nome deve conter apenas letras.',
-            'name.max' => 'O nome não pode ter mais que 255 caracteres.',
+            'user_name.required' => 'O campo nome é obrigatório.',
+            'user_name.string' => 'O nome deve conter apenas letras.',
+            'user_name.max' => 'O nome não pode ter mais que 255 caracteres.',
 
-            'email.required' => 'O campo email é obrigatório.',
-            'email.email' => 'Informe um email válido.',
-            'email.unique' => 'Este email já está cadastrado.',
+            'user_email.required' => 'O campo email é obrigatório.',
+            'user_email.email' => 'Informe um email válido.',
+            'user_email.unique' => 'Este email já está cadastrado.',
 
             'user_password.required' => 'A campo senha é obrigatório.',
             'user_password.min' => 'A senha deve conter no mínimo 6 caracteres.',
 
-            'confirm_password.required' => 'A campo confirmação de senha é obrigatório.',
-            'confirm_password.same' => 'As senhas digitadas não conferem. Tente novamente.',
+            'user_confirm_password.required' => 'A campo confirmação de senha é obrigatório.',
+            'user_confirm_password.same' => 'As senhas digitadas não conferem. Tente novamente.',
 
-            'tipo_cadastro.required' => 'O campo Tipo de cadastro é obrigatório.',
+            'user_account_type.required' => 'O campo Tipo de cadastro é obrigatório.',
         ];
     }
 }

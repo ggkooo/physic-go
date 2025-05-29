@@ -15,7 +15,7 @@ class User extends Model
     {
         $data['user_password'] = Hash::make($data['user_password']);
 
-        $user = DB::table("users")->insert(['name' => $data['user_name'], 'email' => $data['email'], 'password' => $data['user_password']]);
+        $user = DB::table("users")->insert(['name' => $data['user_name'], 'email' => $data['user_email'], 'password' => $data['user_password']]);
 
         return response()->json($user, 201);
     }
