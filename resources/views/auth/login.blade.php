@@ -30,7 +30,6 @@
                         </div>
                     </div>
 
-
                     <div class="row mt-4">
                         <div class="input-group">
                             <button type="submit" class="btn btn-danger w-100">Entrar</button>
@@ -40,7 +39,7 @@
                 </form>
 
                 <div class="row mt-3">
-                    <div class="d-flex justify-content-center mt-5">
+                    <div class="d-flex justify-content-center mt-4">
                         <small class="form-text text-light">
                             <a class="a-login" href="#">Esqueci minha senha</a>
                         </small>
