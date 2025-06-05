@@ -45,7 +45,7 @@ class UserAuth extends Controller
 
     public function register()
     {
-        return view('auth/register');
+        return view('admin.index', ['page' => 'auth.register']);
     }
 
 }

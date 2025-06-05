@@ -1,5 +1,5 @@
 <div class="d-flex flex-column justify-content-center align-items-center min-vh-100">
-    
+
     <img src="{{ asset('assets/img/physic-go-logo.png') }}" alt="Logo" width="280" class="img-fluid mb-4">
 
     <div class="card col-md-5 card-border col-12">
