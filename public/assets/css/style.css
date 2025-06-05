@@ -14,5 +14,19 @@ body{
     color: #dc3545;
 }
 
+.card-border{
+    border-radius: 30px;
+}
 
+.btn-default{
+    border-radius: 20px;
+}
 
+.btn-outline{
+    border: 1px solid #b4b4b4;
+    border-radius: 20px;
+}
+
+.btn-outline:hover{
+    border: 1px solid #dc3545;
+}

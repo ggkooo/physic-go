@@ -40,7 +40,7 @@ class UserAuth extends Controller
 
     public function login()
     {
-        return view('auth/login');
+        return view('admin.index', ['page' => 'auth.login']);
     }
 
     public function register()

@@ -1,83 +1,106 @@
-@include('admin.head')
+<div class="d-flex flex-column justify-content-center align-items-center min-vh-100">
+    
+    <img src="{{ asset('assets/img/physic-go-logo.png') }}" alt="Logo" width="280" class="img-fluid mb-4">
 
-<body class="container">
+    <div class="card col-md-5 card-border col-12">
+        <div class="card-body">
 
-    <div class="content">
+            <form action="#">
 
-        <div class="d-flex justify-content-center mb-4 mt-5">
-            <img src="{{ asset('assets/img/logo.png') }}" alt="" width="380" class="img-fluid mt-5">
-        </div>
+                <div class="row mt-3 m-2">
+                    <label for="email" class="form-label fw-bold">Email</label>
+                    <div class="position-relative">
+                        <i class="bi bi-at position-absolute top-50 translate-middle-y ms-3 text-secondary fs-4"></i>
+                        <input type="text" class="form-control ps-5 p-2" placeholder="Digite seu email" name="email"
+                            id="email">
+                    </div>
+                </div>
 
-        <div class="col-md-12 d-flex justify-content-center">
-            <div class="col-md-5 col-10">
+                <div class="row mt-3 m-2">
+                    <label for="password" class="form-label fw-bold">Senha</label>
+                    <div class="position-relative">
+                        <i
+                            class="bi bi-lock-fill position-absolute top-50 translate-middle-y ms-3 text-secondary fs-5"></i>
+                        <input type="password" class="form-control ps-5 p-2" placeholder="Digite sua senha"
+                            name="password" id="password">
+                        <span class="position-absolute top-50 end-0 translate-middle-y me-4" style="cursor: pointer;"
+                            id="togglePassword">
+                            <i class="bi bi-eye-fill" id="iconEye"></i>
+                        </span>
+                    </div>
+                </div>
 
-                <form action="#">
-
-                    <div class="row mt-3">
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Email" aria-label="Email" name="email"
-                                id="email">
+                <div class="row m-2">
+                    <div class="d-flex justify-content-between align-items-center w-100">
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input me-1" id="rememberMe" name="rememberMe">
+                            <label for="rememberMe" class="form-check-label small">Lembre de mim</label>
                         </div>
+
+                        <a href="#" class="small text-decoration-none text-danger">Esqueceu a senha?</a>
                     </div>
+                </div>
 
-                    <div class="row mt-3">
-                        <div class="input-group">
-                            <input type="password" class="form-control" placeholder="Senha" aria-label="Senha"
-                                name="password" id="password">
-                            <span class="input-group-text" id="togglePassword" style="cursor: pointer;">
-                                <i class="bi bi-eye-fill" id="iconEye"></i>
-                            </span>
-                        </div>
+
+                <div class="row mt-4 m-2">
+                    <div class="input-group">
+                        <button type="submit" class="btn btn-danger btn-default w-100 p-2">Entrar</button>
                     </div>
+                </div>
 
-                    <div class="row mt-4">
-                        <div class="input-group">
-                            <button type="submit" class="btn btn-danger w-100">Entrar</button>
-                        </div>
-                    </div>
-
-                </form>
-
-                <div class="row mt-3">
-                    <div class="d-flex justify-content-center mt-4">
-                        <small class="form-text text-light">
-                            <a class="a-login" href="#">Esqueci minha senha</a>
-                        </small>
-                    </div>
-
-                    <div class="d-flex justify-content-center mt-2 mb-3">
-                        <small class="form-text text-light">
-                            Não tem uma conta? <a class="a-login" href="/users/register">Cadastre-se</a>
+                <div class="row m-2">
+                    <div class="d-flex justify-content-center mt-3">
+                        <small class="form-text text-dark">
+                            Não tem uma conta? <a class="text-danger" href="/users/register">Cadastre-se</a>
                         </small>
                     </div>
                 </div>
-            </div>
+
+                <div class="row m-2">
+                    <div class="d-flex justify-content-center mt-4">
+                        <small class="form-text text-dark">
+                            Ou entrar com
+                        </small>
+                    </div>
+                </div>
+
+                <div class="row mt-4 mb-3">
+                    <div class="col-md-12 d-flex justify-content-center">
+                        <div class="col-md-6 p-2">
+                            <a href="#" class="btn btn-outline w-100">
+                                <i class="bi bi-google me-1"></i> Google
+                            </a>
+                        </div>
+                        <div class="col-md-6 p-2">
+                            <a href="#" class="btn btn-outline w-100">
+                                <i class="bi bi-facebook me-1"></i> Facebook
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </form>
+
         </div>
-
-        <footer class="mt-5 text-center fixed">
-            <a href="https://www.unijui.edu.br/" target="_blank"><img src="{{ asset('assets/img/unijui_branco.png') }}" alt="Unijuí" width="190" class="img-fluid"></a>
-        </footer>
-
     </div>
+</div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous">
-        </script>
-
-    <script>
-        const togglePassword = document.getElementById('togglePassword');
-        const password = document.getElementById('password');
-        const iconEye = document.getElementById('iconEye');
-
-        togglePassword.addEventListener('click', () => {
-            const type = password.type === 'password' ? 'text' : 'password';
-            password.type = type;
-
-            iconEye.classList.toggle('bi-eye-fill');
-            iconEye.classList.toggle('bi-eye-slash-fill');
-        });
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous">
     </script>
 
-</body>
+<script>
+    const togglePassword = document.getElementById('togglePassword');
+    const password = document.getElementById('password');
+    const iconEye = document.getElementById('iconEye');
 
-</html>
+    togglePassword.addEventListener('click', () => {
+        const type = password.type === 'password' ? 'text' : 'password';
+        password.type = type;
+
+        iconEye.classList.toggle('bi-eye-fill');
+        iconEye.classList.toggle('bi-eye-slash-fill');
+    });
+</script>
