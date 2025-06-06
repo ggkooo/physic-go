@@ -1,19 +1,21 @@
-<div class="d-flex flex-column justify-content-center align-items-center min-vh-100">
-
-    <img src="{{ asset('assets/img/physic-go-logo.png') }}" alt="Logo" width="280" class="img-fluid mb-4">
+<div class="d-flex flex-column justify-content-center align-items-center">
 
     <div class="card col-md-5 card-border col-12">
         <div class="card-body">
 
-            <form action="#">
+            <form action="{{ route('login.login_validation') }}" method="POST">
+                @csrf
 
                 <div class="row mt-3 m-2">
                     <label for="email" class="form-label fw-bold">Email</label>
                     <div class="position-relative">
                         <i class="bi bi-at position-absolute top-50 translate-middle-y ms-3 text-secondary fs-4"></i>
-                        <input type="text" class="form-control ps-5 p-2" placeholder="Digite seu email" name="email"
-                            id="email">
+                        <input type="text" class="form-control ps-5 p-2 @error('user_email') is-invalid @enderror" placeholder="Digite seu email"
+                            name="user_email" id="user_email">
                     </div>
+                    @error('user_email')
+                        <small class="text-danger mt-1">{{ $message }}</small>
+                    @enderror
                 </div>
 
                 <div class="row mt-3 m-2">
@@ -21,13 +23,16 @@
                     <div class="position-relative">
                         <i
                             class="bi bi-lock-fill position-absolute top-50 translate-middle-y ms-3 text-secondary fs-5"></i>
-                        <input type="password" class="form-control ps-5 p-2" placeholder="Digite sua senha"
-                            name="password" id="password">
+                        <input type="password" class="form-control ps-5 p-2  @error('user_password') is-invalid @enderror" placeholder="Digite sua senha"
+                            name="user_password" id="user_password">
                         <span class="position-absolute top-50 end-0 translate-middle-y me-4" style="cursor: pointer;"
                             id="togglePassword">
                             <i class="bi bi-eye-fill" id="iconEye"></i>
                         </span>
                     </div>
+                    @error('user_password')
+                        <small class="text-danger mt-1">{{ $message }}</small>
+                    @enderror
                 </div>
 
                 <div class="row m-2">
@@ -37,7 +42,8 @@
                             <label for="rememberMe" class="form-check-label small">Lembre de mim</label>
                         </div>
 
-                        <a href="#" class="small text-decoration-none text-danger">Esqueceu a senha?</a>
+                        <a href="/users/forgot_password" class="small text-decoration-none text-danger">Esqueceu a
+                            senha?</a>
                     </div>
                 </div>
 
@@ -79,8 +85,6 @@
                     </div>
                 </div>
 
-
-
             </form>
 
         </div>
@@ -93,7 +97,7 @@
 
 <script>
     const togglePassword = document.getElementById('togglePassword');
-    const password = document.getElementById('password');
+    const password = document.getElementById('user_password');
     const iconEye = document.getElementById('iconEye');
 
     togglePassword.addEventListener('click', () => {

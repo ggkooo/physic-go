@@ -6,6 +6,8 @@ use App\Models\User;
 // use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Http\Requests\ValidationUserRequest;
+use App\Http\Requests\LoginRequest;
+use App\Http\Requests\ForgotPasswordRequest;
 
 
 class UserAuth extends Controller
@@ -15,19 +17,11 @@ class UserAuth extends Controller
         return view('auth');
     }
 
-    // public function store(Request $request): JsonResponse
-    // {
-    //     $validated = $request->validate([
-    //         'user_name' => 'required|string',
-    //         'email' => 'required|email|unique:users',
-    //         'user_password' => 'required|min:6',
-    //         'user_confirm_password' => 'required|same:user_password'
-    //     ]);
 
-    //     $user = User::createUser($validated);
-
-    //     return response()->json($user, 201);
-    // }
+    public function register()
+    {
+        return view('admin.index', ['page' => 'auth.register']);
+    }
 
     public function store(ValidationUserRequest $request)
     {
@@ -43,9 +37,23 @@ class UserAuth extends Controller
         return view('admin.index', ['page' => 'auth.login']);
     }
 
-    public function register()
+    public function login_validation(LoginRequest $request)
     {
-        return view('admin.index', ['page' => 'auth.register']);
+        $validated = $request->validated();
+
+        return redirect('/home')->with('success', 'Sessão iniciada com sucesso!');
+    }
+
+    public function forgot_password()
+    {
+        return view('admin.index', ['page' => 'auth.forgot_password']);
+    }
+
+    public function forgot_password_validation(ForgotPasswordRequest $request)
+    {
+        $validated = $request->validated();
+
+        return redirect('/users/login')->with('success', 'Alterações salvas com sucesso!');
     }
 
 }

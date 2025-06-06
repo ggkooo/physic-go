@@ -1,32 +1,32 @@
-body{
+body {
     background-color: black;
     color: white;
     font-family: "Space Mono", sans-serif;
 }
 
-.a-login{
+.a-login {
     color: white;
     text-decoration: underline;
     text-underline-offset: 5px;
 }
 
-.a-login:hover{
+.a-login:hover {
     color: #dc3545;
 }
 
-.card-border{
+.card-border {
     border-radius: 30px;
 }
 
-.btn-default{
+.btn-default {
     border-radius: 20px;
 }
 
-.btn-outline{
+.btn-outline {
     border: 1px solid #b4b4b4;
     border-radius: 20px;
 }
 
-.btn-outline:hover{
+.btn-outline:hover {
     border: 1px solid #dc3545;
 }

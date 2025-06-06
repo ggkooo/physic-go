@@ -9,9 +9,15 @@ Route::get('/', function () {
 
 // USER
 Route::get('/users', [UserAuth::class, 'index']);
-Route::post('/users/register', [UserAuth::class, 'store'])->name('register.store');
-Route::get('/users/get-user-data', [UserAuth::class, 'getUserData']);
-Route::get('/users/login', [UserAuth::class, 'login']);
-Route::get('/users/register', [UserAuth::class, 'register']);
 
+Route::get('/users/register', [UserAuth::class, 'register']);
+Route::post('/users/register', [UserAuth::class, 'store'])->name('register.store');
+
+Route::get('/users/get-user-data', [UserAuth::class, 'getUserData']);
+
+Route::get('/users/login', [UserAuth::class, 'login']);
+Route::post('/users/login', [UserAuth::class, 'login_validation'])->name('login.login_validation');
+
+Route::get('/users/forgot_password', [UserAuth::class, 'forgot_password']);
+Route::post('/users/forgot_password', [UserAuth::class, 'forgot_password_validation'])->name('forgot_password.forgot_password_validation');
 
