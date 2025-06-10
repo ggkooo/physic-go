@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\UserAuth;
+use App\Http\Controllers\Home;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -21,3 +22,5 @@ Route::post('/users/login', [UserAuth::class, 'login_validation'])->name('login.
 Route::get('/users/forgot_password', [UserAuth::class, 'forgot_password']);
 Route::post('/users/forgot_password', [UserAuth::class, 'forgot_password_validation'])->name('forgot_password.forgot_password_validation');
 
+// HOME
+Route::get('/home', [Home::class, 'index']);

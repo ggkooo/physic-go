@@ -1,7 +1,8 @@
-<!-- <footer class="text-center fixed mb-3 mt-5">
+<!-- <footer class="text-center fixed mb-1 mt-4">
     <a href="https://www.unijui.edu.br/" target="_blank"><img src="{{ asset('assets/img/unijui_branco.png') }}"
-            alt="Unijuí" width="190" class="img-fluid"></a>
+            alt="Unijuí" width="155" class="img-fluid"></a>
 </footer> -->
+
 
 </div>
 

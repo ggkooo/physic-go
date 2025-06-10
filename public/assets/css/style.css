@@ -30,3 +30,56 @@ body {
 .btn-outline:hover {
     border: 1px solid #dc3545;
 }
+
+
+
+.btn-raise {
+    transition: transform 0.2s ease;
+    letter-spacing: 1.2px;
+}
+
+.btn-raise:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    
+}
+
+
+.btn-exit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    user-select: none;
+}
+
+.btn-exit .icon {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    transition: left 0.3s ease, transform 0.3s ease;
+}
+
+.btn-exit .exit-text {
+    opacity: 0;
+    margin-left: 35px;
+    white-space: nowrap;
+    transition: opacity 0.3s ease;
+    color: white;
+    user-select: none;
+}
+
+.btn-exit:hover .icon {
+    left: 10px;
+    transform: translate(0, -50%);
+}
+
+.btn-exit:hover .exit-text {
+    opacity: 1;
+}
+
+  
