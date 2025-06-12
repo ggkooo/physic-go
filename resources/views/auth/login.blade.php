@@ -73,7 +73,7 @@
                 <div class="row mt-4 mb-3">
                     <div class="col-md-12 d-flex justify-content-center">
                         <div class="col-md-6 p-2">
-                            <a href="#" class="btn btn-outline w-100">
+                            <a href="{{ route('google.login') }}" class="btn btn-outline w-100">
                                 <i class="bi bi-google me-1"></i> Google
                             </a>
                         </div>
