@@ -22,7 +22,7 @@
     </div>
 
     <div class="row">
-        <a href="#"
+        <a href="/users/logout"
             class="btn-exit text-decoration-none text-white w-100 p-2 position-relative d-inline-block overflow-hidden mt-3">
             <i class="bi bi-box-arrow-right icon" style="font-size: 25px;"></i>
             <span class="exit-text" style="font-size: 18px;">Sair</span>

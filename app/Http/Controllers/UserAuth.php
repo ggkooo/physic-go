@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 // use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\View\View;
 use App\Http\Requests\ValidationUserRequest;
 use App\Http\Requests\LoginRequest;
@@ -41,7 +42,14 @@ class UserAuth extends Controller
     {
         $validated = $request->validated();
 
+        Cookie::queue('logged_in', 'valor', 20160);
         return redirect('/home')->with('success', 'Sessão iniciada com sucesso!');
+    }
+
+    public function logout()
+    {
+        Cookie::queue(Cookie::forget('logged_in'));
+        return redirect('/users/login')->with('success', 'Sessão encerrada com sucesso!');
     }
 
     public function forgot_password()
