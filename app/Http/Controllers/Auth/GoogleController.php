@@ -31,6 +31,6 @@ class GoogleController extends Controller
         Cookie::queue('logged_in', 'true', 20160);
 
 
-        return redirect()->intended('/home')->with('success', 'Login successful!');
+        return redirect()->intended('/')->with('success', 'Login successful!');
     }
 }

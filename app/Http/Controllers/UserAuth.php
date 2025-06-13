@@ -43,7 +43,7 @@ class UserAuth extends Controller
         $validated = $request->validated();
 
         Cookie::queue('logged_in', 'valor', 20160);
-        return redirect('/home')->with('success', 'Sessão iniciada com sucesso!');
+        return redirect('/')->with('success', 'Sessão iniciada com sucesso!');
     }
 
     public function logout()

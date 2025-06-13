@@ -30,4 +30,4 @@ Route::get('auth/google', [GoogleController::class, 'redirectToGoogle'])->name('
 Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
 
 // HOME
-Route::get('/home', [Home::class, 'index']);
+Route::get('/', [Home::class, 'index']);
