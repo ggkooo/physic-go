@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 // use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\View\View;
 use App\Http\Requests\ValidationUserRequest;
 use App\Http\Requests\LoginRequest;
@@ -41,6 +42,14 @@ class UserAuth extends Controller
     public function login_validation(LoginRequest $request)
     {
         $validated = $request->validated();
+
+        $user = User::where('email', $validated['user_email'])->first();
+
+        if (!$user || !Hash::check($validated['user_password'], $user->password)) {
+            return back()
+                ->withErrors(['auth_error' => 'E-mail ou senha inválidos.'])
+                ->withInput();
+        }
 
         Cookie::queue('logged_in', 'valor', 20160);
         return redirect('/')->with('success', 'Sessão iniciada com sucesso!');

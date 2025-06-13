@@ -33,6 +33,9 @@
                     @error('user_password')
                         <small class="text-danger mt-1">{{ $message }}</small>
                     @enderror
+                     @error('auth_error')
+                        <small class="text-danger mt-1">{{ $message }}</small>
+                    @enderror
                 </div>
 
                 <div class="row m-2">
