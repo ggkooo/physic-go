@@ -7,15 +7,15 @@
                 <h5 class="">Cadastro de Usuário</h5>
             </div>
 
-            <form action="{{ route('register.store') }}" method="POST">
+            <form action="{{ route('register.perform') }}" method="POST">
                 @csrf
 
                 <div class="row mt-3 m-2">
                     <label for="email" class="form-label fw-bold">Nome</label>
                     <div class="position-relative">
                         <i class="bi bi-person position-absolute top-50 translate-middle-y ms-3 text-secondary fs-4"></i>
-                        <input type="text" class="form-control ps-5 p-2 @error('user_name') is-invalid @enderror" placeholder="Digite seu nome"
-                            name="user_name" id="user_name">
+                        <input type="text" class="form-control ps-5 p-2 @error('name') is-invalid @enderror" placeholder="Digite seu nome"
+                            name="name" id="name">
                     </div>
                     @error('user_name')
                         <small class="text-danger mt-1">{{ $message }}</small>
@@ -26,8 +26,8 @@
                     <label for="email" class="form-label fw-bold">Email</label>
                     <div class="position-relative">
                         <i class="bi bi-at position-absolute top-50 translate-middle-y ms-3 text-secondary fs-4"></i>
-                        <input type="text" class="form-control ps-5 p-2 @error('user_email') is-invalid @enderror" placeholder="Digite seu email"
-                            name="user_email" id="user_email">
+                        <input type="text" class="form-control ps-5 p-2 @error('email') is-invalid @enderror" placeholder="Digite seu email"
+                            name="email" id="email">
                     </div>
                     @error('user_email')
                         <small class="text-danger mt-1">{{ $message }}</small>
@@ -39,8 +39,8 @@
                     <div class="position-relative">
                         <i
                             class="bi bi-lock-fill position-absolute top-50 translate-middle-y ms-3 text-secondary fs-5"></i>
-                        <input type="password" class="form-control ps-5 p-2  @error('user_password') is-invalid @enderror" placeholder="Digite sua senha"
-                            name="user_password" id="user_password">
+                        <input type="password" class="form-control ps-5 p-2  @error('password') is-invalid @enderror" placeholder="Digite sua senha"
+                            name="password" id="password">
                         <span class="position-absolute top-50 end-0 translate-middle-y me-4" style="cursor: pointer;"
                             id="togglePassword">
                             <i class="bi bi-eye-fill" id="iconEye"></i>
@@ -56,8 +56,8 @@
                     <div class="position-relative">
                         <i
                             class="bi bi-lock-fill position-absolute top-50 translate-middle-y ms-3 text-secondary fs-5"></i>
-                        <input type="password" class="form-control ps-5 p-2  @error('user_confirm_password') is-invalid @enderror" placeholder="Confirme sua senha"
-                            name="user_confirm_password" id="user_confirm_password">
+                        <input type="password" class="form-control ps-5 p-2  @error('password_confirmation') is-invalid @enderror" placeholder="Confirme sua senha"
+                            name="password_confirmation" id="password_confirmation">
                     </div>
                     @error('user_confirm_password')
                         <small class="text-danger mt-1">{{ $message }}</small>
