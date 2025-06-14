@@ -6,11 +6,14 @@ use Illuminate\Foundation\Auth\User as Authenticatable; // Alterado
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
+    use Notifiable;
+
     public $timestamps = false;
-    protected $fillable = ['name', 'email', 'password']; // lembre de adicionar 'password'
+    protected $fillable = ['name', 'email', 'password', 'user_account_type']; // lembre de adicionar 'password'
 
     public static function createUser(array $data): JsonResponse
     {
