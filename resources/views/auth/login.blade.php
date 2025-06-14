@@ -3,7 +3,7 @@
     <div class="card col-md-5 card-border col-12">
         <div class="card-body">
 
-            <form action="{{ route('login.login_validation') }}" method="POST">
+            <form action="{{ route('login.perform') }}" method="POST">
                 @csrf
 
                 <div class="row mt-3 m-2">
