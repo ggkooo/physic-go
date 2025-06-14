@@ -1,33 +1,35 @@
 <?php
 
 use App\Http\Controllers\UserAuth;
-use App\Http\Controllers\Home;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\GoogleController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\HomeController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 // USER
-Route::get('/users', [UserAuth::class, 'index']);
+Route::get('/users/login', [LoginController::class, 'showLoginForm'])->name('login');
+Route::post('/users/login', [LoginController::class, 'login'])->name('login.perform');
+Route::get('/users/logout', [LoginController::class, 'logout'])->name('logout');
 
-Route::get('/users/register', [UserAuth::class, 'register']);
-Route::post('/users/register', [UserAuth::class, 'store'])->name('register.store');
+// Registro
+Route::get('/users/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
+Route::post('/users/register', [RegisterController::class, 'register'])->name('register.perform');
 
-Route::get('/users/get-user-data', [UserAuth::class, 'getUserData']);
+// Esqueci a senha
+Route::get('password/reset', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
+Route::post('password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
 
-Route::get('/users/login', [UserAuth::class, 'login']);
-Route::post('/users/login', [UserAuth::class, 'login_validation'])->name('login.login_validation');
-
-Route::get('/users/forgot_password', [UserAuth::class, 'forgot_password']);
-Route::post('/users/forgot_password', [UserAuth::class, 'forgot_password_validation'])->name('forgot_password.forgot_password_validation');
-
-Route::get('/users/logout', [UserAuth::class, 'logout'])->name('logout');
+Route::get('password/reset/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
+Route::post('password/reset', [ResetPasswordController::class, 'reset'])->name('password.update');
 
 // GOOGLE AUTH
 Route::get('auth/google', [GoogleController::class, 'redirectToGoogle'])->name('google.login');
 Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
 
 // HOME
-Route::get('/', [Home::class, 'index']);
+
+Route::get('/home', [HomeController::class, 'index'])->name('home');
