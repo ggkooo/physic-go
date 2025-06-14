@@ -45,7 +45,7 @@
                             <label for="rememberMe" class="form-check-label small">Lembre de mim</label>
                         </div>
 
-                        <a href="/users/forgot_password" class="small text-decoration-none text-danger">Esqueceu a
+                        <a href="/password/reset" class="small text-decoration-none text-danger">Esqueceu a
                             senha?</a>
                     </div>
                 </div>
