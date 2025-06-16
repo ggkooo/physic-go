@@ -10,7 +10,7 @@
     </div>
 
     <div class="col-10 col-md-3 mb-4">
-        <button class="btn btn-danger w-100 p-3 btn-default btn-raise">CONFIGURAR</button>
+        <a href="/account" class="btn btn-danger w-100 p-3 btn-default btn-raise">CONFIGURAR</a>
     </div>
 
     <div class="col-10 col-md-3 mb-4">
