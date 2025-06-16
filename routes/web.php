@@ -1,12 +1,12 @@
 <?php
 
-use App\Http\Controllers\UserAuth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\GoogleController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\Config\ConfigAccountController;
 use App\Http\Controllers\HomeController;
 
 
@@ -31,5 +31,11 @@ Route::get('auth/google', [GoogleController::class, 'redirectToGoogle'])->name('
 Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
 
 // HOME
+Route::get('/', function () {
+    return redirect()->route('home');
+});
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+// CONFIG ACCOUNT
+Route::get('/account', [ConfigAccountController::class, 'index'])->name('config.account');
