@@ -9,6 +9,12 @@ class ConfigAccountController extends Controller
 {
     public function index()
     {
-        return view('admin.index', ['page' => 'config.config-account']);
+        $user = auth()->user();
+
+        if (!$user) {
+            return redirect('/users/login')->with('error', 'Você precisa estar logado para acessar esta página.');
+        }
+
+        return view('admin.index', ['page' => 'config.config-account', 'user' => $user]);
     }
 }
