@@ -3,13 +3,13 @@
         <div class="row d-flex my-2">
             <div class="col-12 col-md-6 col-lg-6">
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="name" name="name" placeholder="John Doe">
+                    <input type="text" class="form-control" id="name" name="name" placeholder="John Doe" value="{{ $user->name ?? '' }}" readonly>
                     <label for="floatingInput">Nome Completo</label>
                 </div>
             </div>
             <div class="col-12 col-md-6 col-lg-6">
                 <div class="form-floating mb-3">
-                    <input type="email" class="form-control" id="email" name="email" placeholder="john@doe.com">
+                    <input type="email" class="form-control" id="email" name="email" placeholder="john@doe.com" value="{{ $user->email ?? '' }}" readonly>
                     <label for="floatingInput">Email</label>
                 </div>
             </div>
@@ -17,41 +17,43 @@
         <div class="row d-flex my-2">
             <div class="col-12 col-md-6 col-lg-6">
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="cpf" name="cpf" placeholder="123.456.789-10">
+                    <input type="text" class="form-control" id="cpf" name="cpf" placeholder="123.456.789-10" value="{{ $user->cpf ?? '' }}" @if($user->cpf) readonly @endif>
                     <label for="floatingInput">CPF</label>
                 </div>
             </div>
             <div class="col-12 col-md-6 col-lg-6">
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="phone" name="phone" placeholder="(55) 12345-6789">
+                    <input type="text" class="form-control" id="phone" name="phone" placeholder="(55) 12345-6789" value="{{ $user->phone ?? '' }}">
                     <label for="floatingInput">Telefone</label>
                 </div>
             </div>
         </div>
-        <div class="row d-flex my-2">
+        <div class="row d-flex my-2 mb-4">
             <div class="col-12 col-md-6 col-lg-6">
-                <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="state" name="state" placeholder="SP">
-                    <label for="floatingInput">Estado</label>
+                <div class="form-group">
+                    <select class="form-control py-3" id="estado" name="estado">
+                        <option value="">Selecione o Estado</option>
+                    </select>
                 </div>
             </div>
             <div class="col-12 col-md-6 col-lg-6">
-                <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="city" name="city" placeholder="Mogi das Cruzes">
-                    <label for="floatingInput">Cidade</label>
+                <div class="form-group">
+                    <select class="form-control py-3" id="cidade" name="cidade" disabled>
+                        <option value="">Selecione a Cidade</option>
+                    </select>
                 </div>
             </div>
         </div>
         <div class="row d-flex my-2">
             <div class="col-12 col-md-6 col-lg-6">
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="school" name="school" placeholder="Escola Nacional">
+                    <input type="text" class="form-control" id="school" name="school" placeholder="Escola Nacional" value="{{ $user->school ?? '' }}">
                     <label for="floatingInput">Escola</label>
                 </div>
             </div>
             <div class="col-12 col-md-6 col-lg-6">
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="class" name="class" placeholder="061">
+                    <input type="text" class="form-control" id="class" name="class" placeholder="061" value="{{ $user->class ?? '' }}">
                     <label for="floatingInput">Turma</label>
                 </div>
             </div>
