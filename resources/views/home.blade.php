@@ -18,7 +18,7 @@
     </div>
 
     <div class="col-10 col-md-3 mb-4">
-        <button class="btn btn-danger w-100 p-3 btn-default btn-raise">CONTATO</button>
+        <a href="/contact"><button class="btn btn-danger w-100 p-3 btn-default btn-raise">CONTATO</button></a>
     </div>
 
     <div class="row">

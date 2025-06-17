@@ -8,6 +8,7 @@ use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Config\ConfigAccountController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ContactController;
 
 
 // USER
@@ -40,3 +41,6 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 // CONFIG ACCOUNT
 Route::get('/account', [ConfigAccountController::class, 'index'])->name('config.account');
 Route::post('/account', [ConfigAccountController::class, 'update'])->name('config.account.update');
+
+// CONTACT
+Route::get('/contact', [ContactController::class, 'index'])->name('contact');

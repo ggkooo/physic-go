@@ -82,4 +82,27 @@ body {
     opacity: 1;
 }
 
+.card-contact{
+    border-radius: 30px;
+    background-color: #303030;
+    color: #fff;
+    transition: transform 0.2s ease;
+    letter-spacing: 1px;
+    font-size: 15px;
+}
+
+.card-contact:hover {
+    transform: translateY(-3px);
+}
+
+.text-email{
+    color: #dc3545;
+}
+
+.text-email:hover{
+    color: #fa2c41;
+    cursor:pointer;
+}
+
+
   
