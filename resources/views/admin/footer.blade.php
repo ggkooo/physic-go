@@ -8,7 +8,4 @@
 
 </body>
 
-<script src="{{ asset('assets/js/config-account-mask.js') }}"></script>
-<script src="{{ asset('assets/js/api-states-cities.js') }}"></script>
-
 </html>
