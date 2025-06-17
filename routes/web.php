@@ -39,3 +39,4 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 // CONFIG ACCOUNT
 Route::get('/account', [ConfigAccountController::class, 'index'])->name('config.account');
+Route::post('/account', [ConfigAccountController::class, 'update'])->name('config.account.update');

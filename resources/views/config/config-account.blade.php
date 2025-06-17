@@ -1,5 +1,6 @@
 <div class="container bg-light w-75 border rounded">
-    <form action="#" class="py-3 px-2">
+    <form action="{{ route('config.account.update') }}" method="POST" class="py-3 px-2">
+        @csrf
         <div class="row d-flex my-2">
             <div class="col-12 col-md-6 col-lg-6">
                 <div class="form-floating mb-3">
@@ -31,14 +32,16 @@
         <div class="row d-flex my-2 mb-4">
             <div class="col-12 col-md-6 col-lg-6">
                 <div class="form-group">
-                    <select class="form-control py-3" id="estado" name="estado">
+                    <input type="hidden" id="user_state" value="{{ $user->state ?? '' }}">
+                    <select class="form-control py-3" id="state" name="state">
                         <option value="">Selecione o Estado</option>
                     </select>
                 </div>
             </div>
             <div class="col-12 col-md-6 col-lg-6">
                 <div class="form-group">
-                    <select class="form-control py-3" id="cidade" name="cidade" disabled>
+                    <input type="hidden" id="user_city" value="{{ $user->city ?? '' }}">
+                    <select class="form-control py-3" id="city" name="city" disabled>
                         <option value="">Selecione a Cidade</option>
                     </select>
                 </div>
@@ -66,7 +69,7 @@
                 <button class="w-100 btn btn-danger py-3" type="button"><i class="bi bi-lock"></i> ALTERAR SENHA</button>
             </div>
             <div class="col-12 col-md-4 col-lg-4">
-                <button class="w-100 btn btn-light py-3" type="button">SLA</button>
+                <button class="w-100 btn btn-dark py-3" type="submit">SALVAR</button>
             </div>
         </div>
     </form>

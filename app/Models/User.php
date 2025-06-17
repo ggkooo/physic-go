@@ -13,7 +13,16 @@ class User extends Authenticatable
     use Notifiable;
 
     public $timestamps = false;
-    protected $fillable = ['name', 'email', 'password', 'user_account_type']; // lembre de adicionar 'password'
+    protected $fillable = [
+        'name',
+        'email',
+        'cpf',
+        'phone',
+        'state',
+        'city',
+        'school',
+        'class',
+    ];
 
     public static function createUser(array $data): JsonResponse
     {

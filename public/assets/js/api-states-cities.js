@@ -1,7 +1,20 @@
-const stateSelect = document.getElementById('estado'); // <--- ESSA LINHA É CRÍTICA
-const citySelect = document.getElementById('cidade');
+const stateSelect = document.getElementById('state');
+const citySelect = document.getElementById('city');
 
-function loadStates() {
+var userStateValue = '';
+var userCityValue = '';
+
+const userState = document.getElementById('user_state');
+if (userState) {
+    userStateValue = userState.value;
+}
+
+const userCity = document.getElementById('user_city');
+if (userCity) {
+    userCityValue = userCity.value;
+}
+
+function loadStates(user_state = '', user_city = '') {
     fetch('https://brasilapi.com.br/api/ibge/uf/v1')
     .then(response => {
         if (!response.ok) {
@@ -17,6 +30,11 @@ function loadStates() {
             option.textContent = state.nome;
             stateSelect.appendChild(option);
         });
+
+        if (user_state) {
+            stateSelect.value = user_state;
+            loadCities(user_state, user_city);
+        }
     })
     .catch(error => {
         console.error('Erro ao carregar estados:', error);
@@ -64,7 +82,6 @@ function loadCities(uf, cityToSelect = '') {
 
 stateSelect.addEventListener('change', function() {
     const selectUf = this.value;
-    console.log('Estado selecionado (UF):', selectUf);
     if (selectUf) {
         loadCities(selectUf);
     } else {
@@ -73,4 +90,4 @@ stateSelect.addEventListener('change', function() {
     }
 });
 
-loadStates();
+loadStates(userStateValue, userCityValue);
