@@ -8,15 +8,15 @@
                         <span class="mb-3">Desenvolvedores</span>
 
                         <div class="mb-3">
-                            <div>Cássia Polleto</div>
+                            Cássia Polleto
                             <a href="mailto:cassiapolleto@gmail.com"
-                                class="text-email text-decoration-none d-block small">cassiapolleto@gmail.com</a>
+                                class="text-email text-decoration-none small">cassiapolleto@gmail.com</a>
                         </div>
 
                         <div class="mb-3">
-                            <div>Giordano Berwig</div>
+                           Giordano Berwig
                             <a href="mailto:giordanoberwig@proton.me"
-                                class="text-email text-decoration-none d-block small">giordanoberwig@proton.me</a>
+                                class="text-email text-decoration-none small">giordanoberwig@proton.me</a>
                         </div>
                     </div>
                 </div>
@@ -28,15 +28,15 @@
                         <span class="mb-3">Professor Coordenador</span>
 
                         <div class="mb-3">
-                            <div>Edson Padoin</div>
+                            Edson Padoin
                             <a href="mailto:padoin@unijui.edu.br"
-                                class="text-email text-decoration-none d-block small">padoin@unijui.edu.br</a>
+                                class="text-email text-decoration-none small">padoin@unijui.edu.br</a>
                         </div>
 
                         <div class="mb-3">
-                            <div>Barbara Gundel</div>
+                            Barbara Gundel
                             <a href="mailto:barbara.gundel@unijui.edu.br"
-                                class="text-email text-decoration-none d-block small">barbara.gundel@unijui.edu.br</a>
+                                class="text-email text-decoration-none small">barbara.gundel@unijui.edu.br</a>
                         </div>
                     </div>
                 </div>
@@ -98,7 +98,7 @@
                                             <div class="form-floating">
                                                 <textarea class="form-control @error('message') is-invalid @enderror"
                                                     id="floatingInputMessage" name="message" placeholder="Sua mensagem"
-                                                    style="height: 170px">{{ old('message') }}</textarea>
+                                                    style="height: 200px">{{ old('message') }}</textarea>
                                                 <label for="floatingInputMessage">Mensagem</label>
                                             </div>
                                             @error('message')
