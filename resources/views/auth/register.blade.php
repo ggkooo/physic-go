@@ -17,7 +17,7 @@
                         <input type="text" class="form-control ps-5 p-2 @error('name') is-invalid @enderror" placeholder="Digite seu nome"
                             name="name" id="name">
                     </div>
-                    @error('user_name')
+                    @error('name')
                         <small class="text-danger mt-1">{{ $message }}</small>
                     @enderror
                 </div>
@@ -29,7 +29,7 @@
                         <input type="text" class="form-control ps-5 p-2 @error('email') is-invalid @enderror" placeholder="Digite seu email"
                             name="email" id="email">
                     </div>
-                    @error('user_email')
+                    @error('email')
                         <small class="text-danger mt-1">{{ $message }}</small>
                     @enderror
                 </div>
@@ -46,7 +46,7 @@
                             <i class="bi bi-eye-fill" id="iconEye"></i>
                         </span>
                     </div>
-                    @error('user_password')
+                    @error('password')
                         <small class="text-danger mt-1">{{ $message }}</small>
                     @enderror
                 </div>
@@ -59,7 +59,7 @@
                         <input type="password" class="form-control ps-5 p-2  @error('password_confirmation') is-invalid @enderror" placeholder="Confirme sua senha"
                             name="password_confirmation" id="password_confirmation">
                     </div>
-                    @error('user_confirm_password')
+                    @error('confirm_password')
                         <small class="text-danger mt-1">{{ $message }}</small>
                     @enderror
                 </div>
@@ -109,8 +109,8 @@
 
 <script>
     const togglePassword = document.getElementById('togglePassword');
-    const password = document.getElementById('user_password');
-    const confirmPassword = document.getElementById('user_confirm_password');
+    const password = document.getElementById('password');
+    const confirmPassword = document.getElementById('confirm_password');
     const iconEye = document.getElementById('iconEye');
 
     togglePassword.addEventListener('click', () => {

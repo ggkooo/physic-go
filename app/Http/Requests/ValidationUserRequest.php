@@ -22,10 +22,10 @@ class ValidationUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user_name' => 'required|string|max:255',
-            'user_email' => 'required|email|unique:users,email',
-            'user_password' => 'required|string|min:6',
-            'user_confirm_password' => 'required|same:user_password',
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|string|min:8',
+            'confirm_password' => 'required|same:password',
             'user_account_type' => 'required',
         ];
     }
@@ -33,19 +33,19 @@ class ValidationUserRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'user_name.required' => 'O campo nome é obrigatório.',
-            'user_name.string' => 'O nome deve conter apenas letras.',
-            'user_name.max' => 'O nome não pode ter mais que 255 caracteres.',
+            'name.required' => 'O campo nome é obrigatório.',
+            'name.string' => 'O nome deve conter apenas letras.',
+            'name.max' => 'O nome não pode ter mais que 255 caracteres.',
 
-            'user_email.required' => 'O campo email é obrigatório.',
-            'user_email.email' => 'Informe um email válido.',
-            'user_email.unique' => 'Este email já está cadastrado.',
+            'email.required' => 'O campo email é obrigatório.',
+            'email.email' => 'Informe um email válido.',
+            'email.unique' => 'Este email já está cadastrado.',
 
-            'user_password.required' => 'O campo senha é obrigatório.',
-            'user_password.min' => 'A senha deve conter no mínimo 6 caracteres.',
+            'password.required' => 'O campo senha é obrigatório.',
+            'password.min' => 'A senha deve conter no mínimo 8 caracteres.',
 
-            'user_confirm_password.required' => 'O campo confirmação de senha é obrigatório.',
-            'user_confirm_password.same' => 'As senhas digitadas não conferem. Tente novamente.',
+            'confirm_password.required' => 'O campo confirmação de senha é obrigatório.',
+            'confirm_password.same' => 'As senhas digitadas não conferem. Tente novamente.',
 
             'user_account_type.required' => 'O campo Tipo de cadastro é obrigatório.',
         ];
