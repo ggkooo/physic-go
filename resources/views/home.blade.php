@@ -14,7 +14,7 @@
     </div>
 
     <div class="col-10 col-md-3 mb-4">
-        <button class="btn btn-danger w-100 p-3 btn-default btn-raise">CRÉDITOS</button>
+         <a href="/credits"><button class="btn btn-danger w-100 p-3 btn-default btn-raise">CRÉDITOS</button></a>
     </div>
 
     <div class="col-10 col-md-3 mb-4">
