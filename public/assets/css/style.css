@@ -41,7 +41,7 @@ body {
 .btn-raise:hover {
     transform: translateY(-3px);
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
-    
+
 }
 
 
@@ -82,7 +82,7 @@ body {
     opacity: 1;
 }
 
-.card-contact{
+.card-contact {
     border-radius: 30px;
     background-color: #303030;
     color: #fff;
@@ -92,17 +92,33 @@ body {
 }
 
 .card-contact:hover {
-    transform: translateY(-3px);
+    transform: translateY(-5px);
 }
 
-.text-email{
+.text-email {
     color: #dc3545;
 }
 
-.text-email:hover{
+.text-email:hover {
     color: #fa2c41;
-    cursor:pointer;
+    cursor: pointer;
+}
+
+.circle-photo {
+    width: 130px;
+    height: 130px;
+    border-radius: 100px;
+    background-color: #fff;
 }
 
 
-  
+.icon-credits {
+    color: #c1c0c0;
+    transition: color 0.3s ease; 
+}
+
+.icon-credits:hover {
+    color: #fff;
+    cursor: pointer;
+}
+

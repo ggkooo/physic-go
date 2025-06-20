@@ -27,4 +27,12 @@ class HomeController extends Controller
             return view('admin.index', ['page' => 'home']);
         }
     }
+
+
+     public function credits()
+    {
+        if (Auth::check()) {
+            return view('admin.index', ['page' => 'credits']);
+        }
+    }
 }
