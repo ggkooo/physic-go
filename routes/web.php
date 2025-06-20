@@ -37,6 +37,7 @@ Route::get('/', function () {
 });
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/credits', [HomeController::class, 'credits']);
 
 // CONFIG ACCOUNT
 Route::get('/account', [ConfigAccountController::class, 'index'])->name('config.account');
