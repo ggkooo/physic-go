@@ -43,7 +43,7 @@
             </div>
         </div>
 
-         <div class="d-flex justify-content-center mb-4">
+        <div class="d-flex justify-content-center mb-4">
             <span>Sob supervisão de</span>
         </div>
 
@@ -86,6 +86,19 @@
                 </div>
             </div>
         </div>
-
     </div>
+
+    <div class="row">
+        <a href="/home"
+            class="btn-exit text-decoration-none text-white w-100 p-1 position-relative d-inline-block overflow-hidden mt-4 mb-3">
+            <i class="bi bi-arrow-left icon" style="font-size: 20px; margin-top: 2px;"></i>
+            <span class="exit-text" style="font-size: 18px;">Voltar</span>
+        </a>
+    </div>
+
 </div>
+
+<footer class="text-center fixed mb-3 mt-4">
+    <a href="https://www.unijui.edu.br/" target="_blank"><img src="{{ asset('assets/img/unijui_branco.png') }}"
+            alt="Unijuí" width="150" class="img-fluid"></a>
+</footer>
