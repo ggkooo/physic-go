@@ -2,6 +2,7 @@ body {
     background-color: black;
     color: white;
     font-family: "Space Mono", sans-serif;
+    letter-spacing: 1.5px;
 }
 
 .a-login {

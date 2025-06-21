@@ -9,6 +9,7 @@ use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Config\ConfigAccountController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\StudyController;
 
 
 // USER
@@ -45,3 +46,6 @@ Route::post('/account', [ConfigAccountController::class, 'update'])->name('confi
 
 // CONTACT
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
+
+// STUDY
+Route::get('/study', [StudyController::class, 'index'])->name('study');
