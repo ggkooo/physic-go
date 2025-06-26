@@ -10,6 +10,7 @@ use App\Http\Controllers\Config\ConfigAccountController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\StudyController;
+use App\Http\Controllers\GameController;
 
 
 // USER
@@ -49,3 +50,6 @@ Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 
 // STUDY
 Route::get('/study', [StudyController::class, 'index'])->name('study');
+
+// GAME
+Route::get('/game', [GameController::class, 'index'])->name('game');
