@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\LoginRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -24,21 +25,19 @@ class LoginController extends Controller
         return view('admin.index', ['page' => 'auth.login']);
     }
 
-    public function login(Request $request)
+    public function login(LoginRequest $request)
     {
-        $credentials = $request->validate([
-            'user_email' => ['required', 'email'],
-            'user_password' => ['required'],
-        ]);
+        $credentials = $request->only('email', 'password');
 
-        if (Auth::attempt(['email' => $credentials['user_email'], 'password' => $credentials['user_password']])) {
+
+        if (Auth::attempt(['email' => $credentials['email'], 'password' => $credentials['password']])) {
             $request->session()->regenerate();
-            return redirect()->intended('/home'); // ou sua rota pós-login
+            return redirect()->intended('/home');
         }
 
         return back()->withErrors([
             'auth_error' => 'E-mail ou senha inválidos.',
-            ])->withInput();
+        ])->withInput();
     }
 
     public function logout(Request $request)
