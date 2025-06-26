@@ -1,0 +1,125 @@
+body {
+    background-color: black;
+    color: white;
+    font-family: "Space Mono", sans-serif;
+    letter-spacing: 1.5px;
+}
+
+.a-login {
+    color: white;
+    text-decoration: underline;
+    text-underline-offset: 5px;
+}
+
+.a-login:hover {
+    color: #dc3545;
+}
+
+.card-border {
+    border-radius: 30px;
+}
+
+.btn-default {
+    border-radius: 20px;
+}
+
+.btn-outline {
+    border: 1px solid #b4b4b4;
+    border-radius: 20px;
+}
+
+.btn-outline:hover {
+    border: 1px solid #dc3545;
+}
+
+
+
+.btn-raise {
+    transition: transform 0.2s ease;
+    letter-spacing: 1.2px;
+}
+
+.btn-raise:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+
+}
+
+
+.btn-exit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    user-select: none;
+}
+
+.btn-exit .icon {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    transition: left 0.3s ease, transform 0.3s ease;
+}
+
+.btn-exit .exit-text {
+    opacity: 0;
+    margin-left: 35px;
+    white-space: nowrap;
+    transition: opacity 0.3s ease;
+    color: white;
+    user-select: none;
+}
+
+.btn-exit:hover .icon {
+    left: 10px;
+    transform: translate(0, -50%);
+}
+
+.btn-exit:hover .exit-text {
+    opacity: 1;
+}
+
+.card-contact {
+    border-radius: 30px;
+    background-color: #303030;
+    color: #fff;
+    transition: transform 0.2s ease;
+    letter-spacing: 1px;
+    font-size: 15px;
+}
+
+.card-contact:hover {
+    transform: translateY(-5px);
+}
+
+.text-email {
+    color: #dc3545;
+}
+
+.text-email:hover {
+    color: #fa2c41;
+    cursor: pointer;
+}
+
+.circle-photo {
+    width: 130px;
+    height: 130px;
+    border-radius: 100px;
+    background-color: #fff;
+}
+
+
+.icon-credits {
+    color: #c1c0c0;
+    transition: color 0.3s ease; 
+}
+
+.icon-credits:hover {
+    color: #fff;
+    cursor: pointer;
+}
+
