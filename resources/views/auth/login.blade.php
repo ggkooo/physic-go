@@ -10,10 +10,9 @@
                     <label for="email" class="form-label fw-bold">Email</label>
                     <div class="position-relative">
                         <i class="bi bi-at position-absolute top-50 translate-middle-y ms-3 text-secondary fs-4"></i>
-                        <input type="text" class="form-control ps-5 p-2 @error('user_email') is-invalid @enderror" placeholder="Digite seu email"
-                            name="user_email" id="user_email">
+                        <input type="text" class="form-control ps-5 p-2 @error('email') is-invalid @enderror" placeholder="Digite seu email" name="email" id="email" value="{{ old('email') }}">
                     </div>
-                    @error('user_email')
+                    @error('email')
                         <small class="text-danger mt-1">{{ $message }}</small>
                     @enderror
                 </div>
@@ -21,16 +20,13 @@
                 <div class="row mt-3 m-2">
                     <label for="password" class="form-label fw-bold">Senha</label>
                     <div class="position-relative">
-                        <i
-                            class="bi bi-lock-fill position-absolute top-50 translate-middle-y ms-3 text-secondary fs-5"></i>
-                        <input type="password" class="form-control ps-5 p-2  @error('user_password') is-invalid @enderror" placeholder="Digite sua senha"
-                            name="user_password" id="user_password">
-                        <span class="position-absolute top-50 end-0 translate-middle-y me-4" style="cursor: pointer;"
-                            id="togglePassword">
+                        <i class="bi bi-lock-fill position-absolute top-50 translate-middle-y ms-3 text-secondary fs-5"></i>
+                        <input type="password" class="form-control ps-5 p-2  @error('password') is-invalid @enderror" placeholder="Digite sua senha" name="password" id="password">
+                        <span class="position-absolute top-50 end-0 translate-middle-y me-4" style="cursor: pointer;" id="togglePassword">
                             <i class="bi bi-eye-fill" id="iconEye"></i>
                         </span>
                     </div>
-                    @error('user_password')
+                    @error('password')
                         <small class="text-danger mt-1">{{ $message }}</small>
                     @enderror
                      @error('auth_error')
@@ -100,7 +96,7 @@
 
 <script>
     const togglePassword = document.getElementById('togglePassword');
-    const password = document.getElementById('user_password');
+    const password = document.getElementById('password');
     const iconEye = document.getElementById('iconEye');
 
     togglePassword.addEventListener('click', () => {
