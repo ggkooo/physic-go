@@ -113,10 +113,5 @@
 
 </div>
 
-<footer class="text-center fixed mb-3 mt-3">
-    <a href="https://www.unijui.edu.br/" target="_blank"><img src="{{ asset('assets/img/unijui_branco.png') }}"
-            alt="Unijuí" width="150" class="img-fluid"></a>
-</footer>
-
 <script src="{{ asset('assets/js/config-account-mask.js') }}"></script>
 <script src="{{ asset('assets/js/api-states-cities.js') }}"></script>
