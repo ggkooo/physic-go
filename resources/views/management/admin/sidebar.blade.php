@@ -5,12 +5,12 @@
   <hr class="text-white">
   <ul class="nav nav-pills flex-column mb-auto">
     <li class="nav-item">
-      <a href="#" class="nav-link text-white">
+      <a href="/management/home" class="nav-link text-white">
         <i class="bi bi-house-door-fill me-2"></i> Home
       </a>
     </li>
     <li>
-      <a href="#" class="nav-link text-white">
+      <a href="/management/publications" class="nav-link text-white">
         <i class="bi bi-magic me-2"></i> Publicações
       </a>
     </li>

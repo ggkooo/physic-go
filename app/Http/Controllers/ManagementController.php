@@ -28,4 +28,12 @@ class ManagementController extends Controller
             return view('management.admin.index', ['page' => 'management/home']);
         }
     }
+
+
+     public function publications()
+    {
+        if (Auth::check()) {
+            return view('management.admin.index', ['page' => 'management/publications']);
+        }
+    }
 }

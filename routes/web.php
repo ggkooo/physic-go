@@ -58,3 +58,6 @@ Route::get('/game', [GameController::class, 'index'])->name('game');
 // MANAGEMENT
 // home
 Route::get('/management/home', [ManagementController::class, 'home']);
+
+// publications
+Route::get('/management/publications', [ManagementController::class, 'publications']);
