@@ -1,7 +1,7 @@
 <div class="d-flex flex-column align-items-center mt-4">
 
     <div class="col-10 col-md-3 mb-4">
-        <button class="btn btn-danger w-100 p-3 btn-default btn-raise">JOGAR</button>
+        <a href="/game" class="btn btn-danger w-100 p-3 btn-default btn-raise">JOGAR</a>
     </div>
 
 
@@ -31,8 +31,3 @@
 
 
 </div>
-
-<footer class="text-center fixed mb-3 mt-3">
-    <a href="https://www.unijui.edu.br/" target="_blank"><img src="{{ asset('assets/img/unijui_branco.png') }}"
-            alt="Unijuí" width="150" class="img-fluid"></a>
-</footer>
