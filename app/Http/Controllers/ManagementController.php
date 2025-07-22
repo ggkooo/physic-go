@@ -36,4 +36,20 @@ class ManagementController extends Controller
             return view('management.admin.index', ['page' => 'management/publications']);
         }
     }
+
+
+    public function questions()
+    {
+        if (Auth::check()) {
+            return view('management.admin.index', ['page' => 'management/questions/display']);
+        }
+    }
+
+
+     public function registerQuestions()
+    {
+        if (Auth::check()) {
+            return view('management.admin.index', ['page' => 'management/questions/register']);
+        }
+    }
 }

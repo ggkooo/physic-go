@@ -61,3 +61,7 @@ Route::get('/management/home', [ManagementController::class, 'home']);
 
 // publications
 Route::get('/management/publications', [ManagementController::class, 'publications']);
+
+// questions 
+Route::get('/management/questions', [ManagementController::class, 'questions']);
+Route::get('/management/registerQuestions', [ManagementController::class, 'registerQuestions']);

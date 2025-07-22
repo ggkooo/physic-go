@@ -23,7 +23,7 @@
       <div class="collapse ps-4" id="submenuGestao">
         <ul class="nav flex-column">
           <li class="nav-item">
-            <a class="nav-link text-white" href="#">Perguntas</a>
+            <a href="/management/questions" class="nav-link text-white" href="#">Perguntas</a>
           </li>
           <li class="nav-item">
             <a class="nav-link text-white" href="#">Escolas</a>
