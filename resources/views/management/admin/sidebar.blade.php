@@ -74,6 +74,12 @@
       </a>
     </li> -->
 
+    <li>
+      <a href="/users/logout" class="nav-link text-white mb-1">
+        <i class="bi bi-box-arrow-left me-2"></i> Logout
+      </a>
+    </li>
+
   </ul>
 </div>
 </li>
