@@ -78,3 +78,7 @@ Route::get('/management/template', [ManagementController::class, 'template']);
 
 // statistics
 Route::get('/management/statistics', [ManagementController::class, 'statistics']);
+
+// users
+Route::get('/management/users', [ManagementController::class, 'users']);
+Route::get('/management/usersRegister', [ManagementController::class, 'usersRegister']);
