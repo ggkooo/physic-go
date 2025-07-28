@@ -66,4 +66,12 @@ class ManagementController extends Controller
             return view('management.admin.index', ['page' => 'management/schools/register']);
         }
     }
+
+    public function messages()
+    {
+        if (Auth::check()) {
+            return view('management.admin.index', ['page' => 'management/messages/display']);
+        }
+    }
+
 }

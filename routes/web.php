@@ -69,3 +69,6 @@ Route::get('/management/questionsRegister', [ManagementController::class, 'quest
 // schools
 Route::get('/management/schools', [ManagementController::class, 'schools']);
 Route::get('/management/schoolsRegister', [ManagementController::class, 'schoolsRegister']);
+
+// messages
+Route::get('/management/messages', [ManagementController::class, 'messages']);
