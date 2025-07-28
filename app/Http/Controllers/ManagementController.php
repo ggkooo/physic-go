@@ -74,4 +74,18 @@ class ManagementController extends Controller
         }
     }
 
+    public function template()
+    {
+        if (Auth::check()) {
+            return view('management.admin.index', ['page' => 'management/template/display']);
+        }
+    }
+
+    public function statistics()
+    {
+        if (Auth::check()) {
+            return view('management.admin.index', ['page' => 'management/statistics/graphics']);
+        }
+    }
+
 }

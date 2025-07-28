@@ -109,6 +109,7 @@
         .highcharts-description {
             margin: 0.3rem 10px;
         }
+
     </style>
 </head>
 
