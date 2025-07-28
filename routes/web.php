@@ -52,7 +52,9 @@ Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 Route::get('/study', [StudyController::class, 'index'])->name('study');
 
 // GAME
-Route::get('/game', [GameController::class, 'index'])->name('game');
+Route::get('/game/menu', [GameController::class, 'menu']);
+Route::get('/game/new', [GameController::class, 'new']);
+Route::get('/game/display', [GameController::class, 'display']);
 
 
 // MANAGEMENT

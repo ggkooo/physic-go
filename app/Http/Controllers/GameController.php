@@ -22,9 +22,20 @@ class GameController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+
+     public function menu()
     {
-        return view('admin.index', ['page' => 'game/index']);
+        return view('admin.index', ['page' => 'game/menu']);
+    }
+
+    public function new()
+    {
+        return view('admin.index', ['page' => 'game/new_game']);
+    }
+
+    public function display()
+    {
+        return view('admin.index', ['page' => 'game/display']);
     }
 }
 
