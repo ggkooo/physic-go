@@ -62,17 +62,17 @@
       </a>
     </li>
 
-    <li>
+    <!-- <li>
       <a href="#" class="nav-link text-white mb-1">
         <i class="bi bi-journal-bookmark-fill me-2"></i> Módulo de Estudo
       </a>
-    </li>
+    </li> -->
 
-    <li>
+    <!-- <li>
       <a href="#" class="nav-link text-white mb-1">
         <i class="bi bi-server me-2"></i> Servidor
       </a>
-    </li>
+    </li> -->
 
   </ul>
 </div>
