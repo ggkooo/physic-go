@@ -20,22 +20,22 @@
         aria-controls="submenuGestao">
         <span><i class="bi bi-bar-chart-fill me-2"></i> Gestão</span>
       </a>
-      <div class="collapse ps-4 {{ request()->is('management/questions*') ? 'show' : '' }}" id="submenuGestao">
+      <div class="collapse ps-4 {{ request()->is('management/questions*') || request()->is('management/schools*') ? 'show' : '' }}" id="submenuGestao">
         <ul class="nav flex-column">
           <li class="nav-item">
-            <a href="/management/questions" class="nav-link text-white mb-1 {{ activeClass('management/questions') }}" href="#">Perguntas</a>
+            <a href="/management/questions" class="nav-link text-white mb-1 {{ activeClass('management/questions*') }}">Perguntas</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-white mb-1" href="#">Escolas</a>
+            <a href="/management/schools" class="nav-link text-white mb-1 {{ activeClass('management/schools*') }}">Escolas</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-white mb-1" href="#">Mensagens</a>
+            <a href="#" class="nav-link text-white mb-1">Mensagens</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-white mb-1" href="#">Gabarito</a>
+            <a href="#" class="nav-link text-white mb-1">Gabarito</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-white mb-1" href="#">Estatísticas</a>
+            <a href="#" class="nav-link text-white mb-1">Estatísticas</a>
           </li>
         </ul>
       </div>
