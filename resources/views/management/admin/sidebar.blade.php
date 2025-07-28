@@ -57,7 +57,7 @@
     </li>
 
     <li>
-      <a href="#" class="nav-link text-white mb-1">
+      <a href="/management/teams" class="nav-link text-white mb-1 {{ activeClass('management/teams*') }}">
         <i class="bi bi-rocket-takeoff-fill me-2"></i> Equipes
       </a>
     </li>

@@ -102,4 +102,11 @@ class ManagementController extends Controller
         }
     }
 
+    public function teams()
+    {
+        if (Auth::check()) {
+            return view('management.admin.index', ['page' => 'management/teams/display']);
+        }
+    }
+
 }

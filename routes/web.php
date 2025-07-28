@@ -82,3 +82,6 @@ Route::get('/management/statistics', [ManagementController::class, 'statistics']
 // users
 Route::get('/management/users', [ManagementController::class, 'users']);
 Route::get('/management/usersRegister', [ManagementController::class, 'usersRegister']);
+
+// teams
+Route::get('/management/teams', [ManagementController::class, 'teams']);
