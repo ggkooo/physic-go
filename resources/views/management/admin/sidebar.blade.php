@@ -4,74 +4,85 @@
   </div>
   <hr class="text-white">
   <ul class="nav nav-pills flex-column mb-auto">
+
     <li class="nav-item">
-      <a href="/management/home" class="nav-link text-white">
+      <a href="/management/home" class="nav-link text-white mb-1 {{ activeClass('management/home') }}">
         <i class="bi bi-house-door-fill me-2"></i> Home
       </a>
     </li>
+
     <li>
-      <a href="/management/publications" class="nav-link text-white">
+      <a href="/management/publications" class="nav-link text-white mb-1 {{ activeClass('management/publications') }}">
         <i class="bi bi-magic me-2"></i> Publicações
       </a>
     </li>
+
     <li class="nav-item">
-      <a class="nav-link text-white d-flex justify-content-between align-items-center"
-        data-bs-toggle="collapse" href="#submenuGestao" role="button" aria-expanded="false"
-        aria-controls="submenuGestao">
+      <a class="nav-link text-white d-flex justify-content-between align-items-center mb-1" data-bs-toggle="collapse"
+        href="#submenuGestao" role="button" aria-expanded="false" aria-controls="submenuGestao">
         <span><i class="bi bi-bar-chart-fill me-2"></i> Gestão</span>
       </a>
-      <div class="collapse ps-4" id="submenuGestao">
+      <div
+        class="collapse ps-4 {{ request()->is('management/questions*') || request()->is('management/schools*') || request()->is('management/messages*') || request()->is('management/template*') || request()->is('management/statistics*') ? 'show' : '' }}"
+        id="submenuGestao">
         <ul class="nav flex-column">
           <li class="nav-item">
-            <a class="nav-link text-white" href="#">Perguntas</a>
+            <a href="/management/questions"
+              class="nav-link text-white mb-1 {{ activeClass('management/questions*') }}">Perguntas</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-white" href="#">Escolas</a>
+            <a href="/management/schools"
+              class="nav-link text-white mb-1 {{ activeClass('management/schools*') }}">Escolas</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-white" href="#">Mensagens</a>
+            <a href="/management/messages"
+              class="nav-link text-white mb-1 {{ activeClass('management/messages*') }}">Mensagens</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-white" href="#">Gabarito</a>
+            <a href="/management/template"
+              class="nav-link text-white mb-1 {{ activeClass('management/template') }}">Gabarito</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-white" href="#">Estatísticas</a>
+            <a href="/management/statistics"
+              class="nav-link text-white mb-1 {{ activeClass('management/statistics') }}">Estatísticas</a>
           </li>
         </ul>
       </div>
     </li>
-    <li class="nav-item">
-      <a class="nav-link text-white d-flex justify-content-between align-items-center"
-        data-bs-toggle="collapse" href="#submenuUsuarios" role="button" aria-expanded="false"
-        aria-controls="submenuUsuarios">
-        <span><i class="bi bi-people-fill me-2"></i> Usuários</span>
+
+    <li>
+      <a href="/management/users" class="nav-link text-white mb-1 {{ activeClass('management/users*') }}">
+        <i class="bi bi-people-fill me-2"></i> Usuários
       </a>
-      <div class="collapse ps-4" id="submenuUsuarios">
-        <ul class="nav flex-column">
-          <li class="nav-item">
-            <a class="nav-link text-white" href="#">Alunos</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-white" href="#">Professores</a>
-          </li>
     </li>
+
+    <li>
+      <a href="/management/teams" class="nav-link text-white mb-1 {{ activeClass('management/teams*') }}">
+        <i class="bi bi-rocket-takeoff-fill me-2"></i> Equipes
+      </a>
+    </li>
+
+    <!-- <li>
+      <a href="#" class="nav-link text-white mb-1">
+        <i class="bi bi-journal-bookmark-fill me-2"></i> Módulo de Estudo
+      </a>
+    </li> -->
+
+    <!-- <li>
+      <a href="#" class="nav-link text-white mb-1">
+        <i class="bi bi-server me-2"></i> Servidor
+      </a>
+    </li> -->
+
+    <li>
+      <a href="/users/logout" class="nav-link text-white mb-1">
+        <i class="bi bi-box-arrow-left me-2"></i> Logout
+      </a>
+    </li>
+
   </ul>
 </div>
 </li>
-<li>
-  <a href="#" class="nav-link text-white">
-    <i class="bi bi-rocket-takeoff-fill me-2"></i> Equipes
-  </a>
-</li>
-<li>
-  <a href="#" class="nav-link text-white">
-    <i class="bi bi-journal-bookmark-fill me-2"></i> Módulo de Estudo
-  </a>
-</li>
-<li>
-  <a href="#" class="nav-link text-white">
-    <i class="bi bi-server me-2"></i> Servidor
-  </a>
-</li>
+
 </ul>
 </div>

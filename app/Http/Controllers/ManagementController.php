@@ -36,4 +36,77 @@ class ManagementController extends Controller
             return view('management.admin.index', ['page' => 'management/publications']);
         }
     }
+
+
+    public function questions()
+    {
+        if (Auth::check()) {
+            return view('management.admin.index', ['page' => 'management/questions/display']);
+        }
+    }
+
+
+     public function questionsRegister()
+    {
+        if (Auth::check()) {
+            return view('management.admin.index', ['page' => 'management/questions/register']);
+        }
+    }
+
+    public function schools()
+    {
+        if (Auth::check()) {
+            return view('management.admin.index', ['page' => 'management/schools/display']);
+        }
+    }
+
+    public function schoolsRegister()
+    {
+        if (Auth::check()) {
+            return view('management.admin.index', ['page' => 'management/schools/register']);
+        }
+    }
+
+    public function messages()
+    {
+        if (Auth::check()) {
+            return view('management.admin.index', ['page' => 'management/messages/display']);
+        }
+    }
+
+    public function template()
+    {
+        if (Auth::check()) {
+            return view('management.admin.index', ['page' => 'management/template/display']);
+        }
+    }
+
+    public function statistics()
+    {
+        if (Auth::check()) {
+            return view('management.admin.index', ['page' => 'management/statistics/graphics']);
+        }
+    }
+
+    public function users()
+    {
+        if (Auth::check()) {
+            return view('management.admin.index', ['page' => 'management/users/display']);
+        }
+    }
+    
+    public function usersRegister()
+    {
+        if (Auth::check()) {
+            return view('management.admin.index', ['page' => 'management/users/register']);
+        }
+    }
+
+    public function teams()
+    {
+        if (Auth::check()) {
+            return view('management.admin.index', ['page' => 'management/teams/display']);
+        }
+    }
+
 }
