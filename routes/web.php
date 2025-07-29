@@ -13,6 +13,7 @@ use App\Http\Controllers\StudyController;
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\ManagementController;
 use App\Http\Controllers\Management\SchoolController;
+use App\Http\Controllers\Management\UserController;
 
 // USER
 Route::get('/users/login', [LoginController::class, 'showLoginForm'])->name('login');
@@ -86,9 +87,8 @@ Route::get('/management/template', [ManagementController::class, 'template']);
 // statistics
 Route::get('/management/statistics', [ManagementController::class, 'statistics']);
 
-// users
-Route::get('/management/users', [ManagementController::class, 'users']);
-Route::get('/management/usersRegister', [ManagementController::class, 'usersRegister']);
-
-// teams
-Route::get('/management/teams', [ManagementController::class, 'teams']);
+// USERS
+Route::get('/management/users', [UserController::class, 'users'])->name('management.users');
+Route::get('/management/users/edit/{id}', [UserController::class, 'editUser'])->name('management.users.edit');
+Route::put('/management/users/update/{id}', [UserController::class, 'updateUser'])->name('management.users.update');
+Route::delete('/management/users/remove/{id}', [UserController::class, 'removeUser'])->name('management.users.remove');
