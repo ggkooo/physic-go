@@ -76,20 +76,6 @@ class ManagementController extends Controller
         }
     }
 
-    public function users()
-    {
-        if (Auth::check()) {
-            return view('management.admin.index', ['page' => 'management/users/display']);
-        }
-    }
-    
-    public function usersRegister()
-    {
-        if (Auth::check()) {
-            return view('management.admin.index', ['page' => 'management/users/register']);
-        }
-    }
-
     public function teams()
     {
         if (Auth::check()) {
