@@ -12,6 +12,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\StudyController;
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\ManagementController;
+use App\Http\Controllers\Management\SchoolController;
 
 // USER
 Route::get('/users/login', [LoginController::class, 'showLoginForm'])->name('login');
@@ -69,8 +70,12 @@ Route::get('/management/questions', [ManagementController::class, 'questions']);
 Route::get('/management/questionsRegister', [ManagementController::class, 'questionsRegister']);
 
 // schools
-Route::get('/management/schools', [ManagementController::class, 'schools']);
-Route::get('/management/schoolsRegister', [ManagementController::class, 'schoolsRegister']);
+Route::get('/management/schools', [SchoolController::class, 'schools'])->name('management.schools');
+Route::get('/management/schoolsRegister', [SchoolController::class, 'schoolsRegister'])->name('management.schools.register');
+Route::post('/management/schoolsRegister', [SchoolController::class, 'schoolsStore'])->name('management.schools.store');
+Route::delete('/management/schools/remove/{id}', [SchoolController::class, 'removeSchool'])->name('management.schools.remove');
+Route::get('/management/schools/edit/{id}', [SchoolController::class, 'editSchool'])->name('management.schools.edit');
+Route::put('/management/schools/update/{id}', [SchoolController::class, 'updateSchool'])->name('management.schools.update');
 
 // messages
 Route::get('/management/messages', [ManagementController::class, 'messages']);
