@@ -12,7 +12,6 @@ class User extends Authenticatable
 {
     use Notifiable;
 
-    public $timestamps = false;
     protected $fillable = [
         'name',
         'email',
@@ -23,6 +22,7 @@ class User extends Authenticatable
         'city',
         'school',
         'class',
+        'user_account_type',
     ];
 
     public static function createUser(array $data): JsonResponse
