@@ -21,23 +21,33 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>
-                            <a class="btn btn-secondary btn-sm" href="#" title="Editar">
-                                <i class="bi bi-pencil-square"></i>
-                            </a>
-                            <a class="btn btn-secondary btn-sm" href="#" title="Alunos">
-                                <i class="bi bi-person-fill"></i>
-                            </a>
-                            <a class="btn btn-secondary btn-sm" href="#" title="Remover">
-                                <i class="bi bi-trash3-fill"></i>
-                            </a>
-                        </td>
-                    </tr>
+                    @forelse($schools as $index => $school)
+                        <tr>
+                            <td>{{ $index + 1 }}</td>
+                            <td>{{ $school->nome_escola }}</td>
+                            <td>{{ $school->state }}</td>
+                            <td>{{ $school->city }}</td>
+                            <td>
+                                <a class="btn btn-secondary btn-sm" href="{{ route('management.schools.edit', $school->id) }}" title="Editar">
+                                    <i class="bi bi-pencil-square"></i>
+                                </a>
+                                <a class="btn btn-secondary btn-sm" href="#" title="Alunos">
+                                    <i class="bi bi-person-fill"></i>
+                                </a>
+                                <form action="{{ route('management.schools.remove', $school->id) }}" method="POST" style="display:inline;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-secondary btn-sm" title="Remover" onclick="return confirm('Tem certeza que deseja remover esta escola?');">
+                                        <i class="bi bi-trash3-fill"></i>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="5" class="text-center">Nenhuma escola cadastrada.</td>
+                        </tr>
+                    @endforelse
                 </tbody>
                 <tfoot>
                     <th>#</th>

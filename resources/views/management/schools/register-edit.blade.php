@@ -7,12 +7,16 @@
         <div>Novo Cadastro</div>
     </div>
     <div class="card-body">
-        <form id="form_layout" method="post" action="" enctype="multipart/form-data">
+        <form id="form_layout" method="post" action="{{ isset($school) ? route('management.schools.update', $school->id) : route('management.schools.store') }}" enctype="multipart/form-data">
+            @csrf
+            @if(isset($school))
+                @method('PUT')
+            @endif
             <div class="row align-items-end">
 
                 <div class="col-md-6 mb-3">
                     <label for="nome_escola" class="form-label fw-bold">Nome</label>
-                    <input type="text" class="form-control" name="nome_escola" id="nome_escola">
+                    <input type="text" class="form-control" name="nome_escola" id="nome_escola" value="{{ old('nome_escola', $school->nome_escola ?? '') }}">
                 </div>
 
                 <div class="col-md-6 mb-3">
@@ -22,13 +26,19 @@
                             <input type="hidden" id="school_state" value="">
                             <select class="form-control" id="state" name="state">
                                 <option value="">Selecione o Estado</option>
+                                @if(isset($school))
+                                    <option value="{{ $school->state }}" selected>{{ $school->state }}</option>
+                                @endif
                             </select>
                         </div>
                         <div class="col-md-6">
                             <label for="city" class="form-label fw-bold">Cidade</label>
                             <input type="hidden" id="school_city" value="">
-                            <select class="form-control" id="city" name="city" disabled>
+                            <select class="form-control" id="city" name="city" {{ isset($school) ? '' : 'disabled' }}>
                                 <option value="">Selecione a Cidade</option>
+                                @if(isset($school))
+                                    <option value="{{ $school->city }}" selected>{{ $school->city }}</option>
+                                @endif
                             </select>
                         </div>
                     </div>
