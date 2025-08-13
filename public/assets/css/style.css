@@ -236,3 +236,28 @@ body {
     transform: translateY(-3px);
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
 }
+
+.card-303030 {
+    border-radius: 30px;
+    background-color: #303030;
+    color: #fff;
+    letter-spacing: 1px;
+    font-size: 15px;
+}
+
+.ranking .banner-ranking{
+    margin-top: -80px;
+    height: 100px;
+    width: 600px;
+}
+
+.ranking h3{
+    margin-top: -80px;
+}
+
+.card-b4b4b4 {
+    background-color: #b4b4b4;
+    border-radius: 20px;
+    color: #fff;
+    letter-spacing: 1px;
+}

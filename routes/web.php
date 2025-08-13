@@ -55,7 +55,7 @@ Route::get('/study', [StudyController::class, 'index'])->name('study');
 Route::get('/game/menu', [GameController::class, 'menu']);
 Route::get('/game/new', [GameController::class, 'new']);
 Route::get('/game/display', [GameController::class, 'display']);
-
+Route::get('/game/students_ranking', [GameController::class, 'students_ranking']);
 
 // MANAGEMENT
 // home

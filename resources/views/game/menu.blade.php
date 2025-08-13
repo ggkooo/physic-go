@@ -5,7 +5,7 @@
     </div>
 
     <div class="col-10 col-md-3 mb-4">
-         <a href="" class="btn btn-danger w-100 p-3 btn-default btn-raise">RANKING ALUNO</a>
+         <a href="/game/students_ranking" class="btn btn-danger w-100 p-3 btn-default btn-raise">RANKING ALUNO</a>
     </div>
 
     <div class="col-10 col-md-3 mb-4">
