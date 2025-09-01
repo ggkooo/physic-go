@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Question;
+use App\Models\Ranking;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class GameController extends Controller
 {
@@ -42,6 +45,37 @@ class GameController extends Controller
     {
         return view('admin.index', ['page' => 'game/students_ranking']);
     }
+
+    public function questionsBySerie(Request $request)
+    {
+        $serie = $request->query('serie');
+        if (!$serie) {
+            return response()->json(['error' => 'Serie parameter is required'], 400);
+        }
+        $questions = Question::where('serie', $serie)->inRandomOrder()->limit(5)->get();
+        return response()->json($questions);
+    }
+
+    public function saveRanking(Request $request)
+    {
+        $user = Auth::user();
+        $points = $request->input('points');
+        if (!$user || $points === null) {
+            return response()->json(['error' => 'Dados insuficientes'], 400);
+        }
+        // Busca o ranking atual do usuário
+        $ranking = Ranking::where('user_id', $user->id)->first();
+        if ($ranking) {
+            $ranking->points += $points;
+            $ranking->user_name = $user->name;
+            $ranking->save();
+        } else {
+            $ranking = Ranking::create([
+                'user_id' => $user->id,
+                'user_name' => $user->name,
+                'points' => $points,
+            ]);
+        }
+        return response()->json(['success' => true, 'ranking' => $ranking]);
+    }
 }
-
-
