@@ -7,16 +7,16 @@
 
         <div class="d-flex flex-column align-items-center mt-4">
             <div class="col-12 col-md-4 mb-4">
-                <a href="/game/display" class="btn btn-danger w-100 p-3 btn-default btn-raise">6º ANO</a>
+                <a href="/game/display?serie=6" class="btn btn-danger w-100 p-3 btn-default btn-raise">6º ANO</a>
             </div>
             <div class="col-12 col-md-4 mb-4">
-                <a href="#" class="btn btn-danger w-100 p-3 btn-default btn-raise">7º ANO</a>
+                <a href="/game/display?serie=7" class="btn btn-danger w-100 p-3 btn-default btn-raise">7º ANO</a>
             </div>
             <div class="col-12 col-md-4 mb-4">
-                <a href="#" class="btn btn-danger w-100 p-3 btn-default btn-raise">8º ANO</a>
+                <a href="/game/display?serie=8" class="btn btn-danger w-100 p-3 btn-default btn-raise">8º ANO</a>
             </div>
             <div class="col-12 col-md-4 mb-4">
-                <a href="#" class="btn btn-danger w-100 p-3 btn-default btn-raise">9º ANO</a>
+                <a href="/game/display?serie=9" class="btn btn-danger w-100 p-3 btn-default btn-raise">9º ANO</a>
             </div>
         </div>
 
@@ -29,13 +29,13 @@
 
         <div class="d-flex flex-column align-items-center mt-4 mb-2">
             <div class="col-12 col-md-4 mb-4">
-                <button class="btn btn-danger w-100 p-3 btn-default btn-raise">1º ANO</button>
+                <a href="/game/display?serie=1" class="btn btn-danger w-100 p-3 btn-default btn-raise">1º ANO</a>
             </div>
             <div class="col-12 col-md-4 mb-4">
-                <button class="btn btn-danger w-100 p-3 btn-default btn-raise">2º ANO</button>
+                <a href="/game/display?serie=2" class="btn btn-danger w-100 p-3 btn-default btn-raise">2º ANO</a>
             </div>
             <div class="col-12 col-md-4 mb-4">
-                <button class="btn btn-danger w-100 p-3 btn-default btn-raise">3º ANO</button>
+                <a href="/game/display?serie=3" class="btn btn-danger w-100 p-3 btn-default btn-raise">3º ANO</a>
             </div>
         </div>
     </div>
