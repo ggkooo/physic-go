@@ -12,6 +12,8 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\StudyController;
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\ManagementController;
+use App\Http\Controllers\Management\SchoolController;
+use App\Http\Controllers\Management\UserController;
 
 // USER
 Route::get('/users/login', [LoginController::class, 'showLoginForm'])->name('login');
@@ -55,7 +57,7 @@ Route::get('/study', [StudyController::class, 'index'])->name('study');
 Route::get('/game/menu', [GameController::class, 'menu']);
 Route::get('/game/new', [GameController::class, 'new']);
 Route::get('/game/display', [GameController::class, 'display']);
-
+Route::get('/game/students_ranking', [GameController::class, 'students_ranking']);
 
 // MANAGEMENT
 // home
@@ -69,8 +71,12 @@ Route::get('/management/questions', [ManagementController::class, 'questions']);
 Route::get('/management/questionsRegister', [ManagementController::class, 'questionsRegister']);
 
 // schools
-Route::get('/management/schools', [ManagementController::class, 'schools']);
-Route::get('/management/schoolsRegister', [ManagementController::class, 'schoolsRegister']);
+Route::get('/management/schools', [SchoolController::class, 'schools'])->name('management.schools');
+Route::get('/management/schoolsRegister', [SchoolController::class, 'schoolsRegister'])->name('management.schools.register');
+Route::post('/management/schoolsRegister', [SchoolController::class, 'schoolsStore'])->name('management.schools.store');
+Route::delete('/management/schools/remove/{id}', [SchoolController::class, 'removeSchool'])->name('management.schools.remove');
+Route::get('/management/schools/edit/{id}', [SchoolController::class, 'editSchool'])->name('management.schools.edit');
+Route::put('/management/schools/update/{id}', [SchoolController::class, 'updateSchool'])->name('management.schools.update');
 
 // messages
 Route::get('/management/messages', [ManagementController::class, 'messages']);
@@ -81,9 +87,8 @@ Route::get('/management/template', [ManagementController::class, 'template']);
 // statistics
 Route::get('/management/statistics', [ManagementController::class, 'statistics']);
 
-// users
-Route::get('/management/users', [ManagementController::class, 'users']);
-Route::get('/management/usersRegister', [ManagementController::class, 'usersRegister']);
-
-// teams
-Route::get('/management/teams', [ManagementController::class, 'teams']);
+// USERS
+Route::get('/management/users', [UserController::class, 'users'])->name('management.users');
+Route::get('/management/users/edit/{id}', [UserController::class, 'editUser'])->name('management.users.edit');
+Route::put('/management/users/update/{id}', [UserController::class, 'updateUser'])->name('management.users.update');
+Route::delete('/management/users/remove/{id}', [UserController::class, 'removeUser'])->name('management.users.remove');

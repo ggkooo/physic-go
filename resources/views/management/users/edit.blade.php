@@ -1,43 +1,47 @@
 <div class="row col-md-12 text-white mb-2">
-    <h3>Usuários</h3>
+    <h3>Editar Usuário</h3>
 </div>
 
 <div class="card border mb-4">
     <div class="card-header fw-bold d-flex justify-content-between align-items-center">
-        <div>Cadastro</div>
+        <div>Edição</div>
     </div>
     <div class="card-body">
-        <form id="form_layout" method="post" action="" enctype="multipart/form-data">
+        <form id="form_layout" method="post" action="{{ route('management.users.update', $editUser->id) }}" enctype="multipart/form-data">
+            @csrf
+            @method('PUT')
             <div class="row align-items-end">
 
                 <div class="col-sm-6 mb-3">
                     <label for="nome" class="form-label fw-bold">Nome <span>*</span></label>
-                    <input class="form-control" name="nome" id="nome" required placeholder="Informe o nome...">
+                    <input class="form-control" name="nome" id="nome" required placeholder="Informe o nome..." value="{{ $editUser->name ?? '' }}">
                 </div>
 
                 <div class="col-sm-6 mb-3">
                     <label for="email" class="form-label fw-bold">Email <span>*</span></label>
-                    <input class="form-control" name="email" id="email" required placeholder="Informe o email...">
+                    <input class="form-control" name="email" id="email" required placeholder="Informe o email..." value="{{ $editUser->email ?? '' }}">
                 </div>
 
                 <div class="col-sm-3 mb-3">
                     <label for="cpf" class="form-label fw-bold">CPF <span>*</span></label>
-                    <input type="text" class="form-control cpf-mask" id="cpf" name="cpf" placeholder="Ex: 123.456.789-10" value="">
+                    <input type="text" class="form-control cpf-mask" id="cpf" name="cpf" placeholder="Ex: 123.456.789-10" value="{{ $editUser->cpf ?? '' }}">
                 </div>
 
                 <div class="col-sm-3 mb-3">
                     <label for="telefone" class="form-label fw-bold">Telefone <span>*</span></label>
                     <input type="text" class="form-control telefone-mask" name="telefone" id="telefone"
-                        placeholder="Ex: (99) 99999-9999">
+                        placeholder="Ex: (99) 99999-9999" value="{{ $editUser->phone ?? '' }}">
                 </div>
 
                 <div class="col-sm-6 mb-3">
                     <label for="cargo" class="form-label fw-bold">Cargo <span>*</span></label>
                     <select class="form-select" name="cargo" id="cargo" required>
                         <option value="">Selecione o cargo...</option>
+                        <option value="Aluno" @if($editUser->user_account_type == 'Aluno' || $editUser->user_account_type == 'student') selected @endif>Aluno</option>
+                        <option value="Professor" @if($editUser->user_account_type == 'Professor' || $editUser->user_account_type == 'teacher') selected @endif>Professor</option>
+                        <option value="Administrador" @if($editUser->user_account_type == 'Administrador' || $editUser->user_account_type == 'admin' || $editUser->user_account_type == 'administrator') selected @endif>Administrador</option>
                     </select>
                 </div>
-
 
             </div>
     </div>

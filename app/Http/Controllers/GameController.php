@@ -37,6 +37,11 @@ class GameController extends Controller
     {
         return view('admin.index', ['page' => 'game/display']);
     }
+
+    public function students_ranking()
+    {
+        return view('admin.index', ['page' => 'game/students_ranking']);
+    }
 }
 
 

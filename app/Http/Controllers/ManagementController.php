@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Management\CreateSchoolRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\School;
 
 class ManagementController extends Controller
 {
@@ -53,20 +55,6 @@ class ManagementController extends Controller
         }
     }
 
-    public function schools()
-    {
-        if (Auth::check()) {
-            return view('management.admin.index', ['page' => 'management/schools/display']);
-        }
-    }
-
-    public function schoolsRegister()
-    {
-        if (Auth::check()) {
-            return view('management.admin.index', ['page' => 'management/schools/register']);
-        }
-    }
-
     public function messages()
     {
         if (Auth::check()) {
@@ -88,25 +76,10 @@ class ManagementController extends Controller
         }
     }
 
-    public function users()
-    {
-        if (Auth::check()) {
-            return view('management.admin.index', ['page' => 'management/users/display']);
-        }
-    }
-    
-    public function usersRegister()
-    {
-        if (Auth::check()) {
-            return view('management.admin.index', ['page' => 'management/users/register']);
-        }
-    }
-
     public function teams()
     {
         if (Auth::check()) {
             return view('management.admin.index', ['page' => 'management/teams/display']);
         }
     }
-
 }
