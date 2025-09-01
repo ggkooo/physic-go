@@ -58,6 +58,8 @@ Route::get('/game/menu', [GameController::class, 'menu']);
 Route::get('/game/new', [GameController::class, 'new']);
 Route::get('/game/display', [GameController::class, 'display']);
 Route::get('/game/students_ranking', [GameController::class, 'students_ranking']);
+Route::get('/game/questions-by-serie', [GameController::class, 'questionsBySerie'])->name('game.questionsBySerie');
+Route::post('/game/save-ranking', [GameController::class, 'saveRanking'])->name('game.saveRanking');
 
 // MANAGEMENT
 // home
@@ -66,7 +68,7 @@ Route::get('/management/home', [ManagementController::class, 'home']);
 // publications
 Route::get('/management/publications', [ManagementController::class, 'publications']);
 
-// questions 
+// questions
 Route::get('/management/questions', [ManagementController::class, 'questions']);
 Route::get('/management/questionsRegister', [ManagementController::class, 'questionsRegister']);
 
@@ -92,3 +94,4 @@ Route::get('/management/users', [UserController::class, 'users'])->name('managem
 Route::get('/management/users/edit/{id}', [UserController::class, 'editUser'])->name('management.users.edit');
 Route::put('/management/users/update/{id}', [UserController::class, 'updateUser'])->name('management.users.update');
 Route::delete('/management/users/remove/{id}', [UserController::class, 'removeUser'])->name('management.users.remove');
+
