@@ -69,8 +69,8 @@ Route::get('/management/home', [ManagementController::class, 'home']);
 Route::get('/management/publications', [ManagementController::class, 'publications']);
 
 // questions
-Route::get('/management/questions', [ManagementController::class, 'questions']);
-Route::get('/management/questionsRegister', [ManagementController::class, 'questionsRegister']);
+Route::get('/management/questionsDisplay', [ManagementController::class, 'questionsDisplay']);
+Route::get('/management/questionsRegister', [ManagementController::class, 'questionsRegister'])->name('questions.register');
 
 // schools
 Route::get('/management/schools', [SchoolController::class, 'schools'])->name('management.schools');
@@ -88,6 +88,10 @@ Route::get('/management/template', [ManagementController::class, 'template']);
 
 // statistics
 Route::get('/management/statistics', [ManagementController::class, 'statistics']);
+
+// question/level
+Route::get('/management/questionsLevel', [ManagementController::class, 'questionsLevel']);
+Route::get('/management/questionsContent', [ManagementController::class, 'questionsContent']);
 
 // USERS
 Route::get('/management/users', [UserController::class, 'users'])->name('management.users');

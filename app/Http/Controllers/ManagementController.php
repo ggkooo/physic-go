@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Management\CreateSchoolRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\School;
 
 class ManagementController extends Controller
 {
-     /**
+    /**
      * Create a new controller instance.
      *
      * @return void
@@ -32,26 +30,10 @@ class ManagementController extends Controller
     }
 
 
-     public function publications()
+    public function publications()
     {
         if (Auth::check()) {
             return view('management.admin.index', ['page' => 'management/publications']);
-        }
-    }
-
-
-    public function questions()
-    {
-        if (Auth::check()) {
-            return view('management.admin.index', ['page' => 'management/questions/display']);
-        }
-    }
-
-
-     public function questionsRegister()
-    {
-        if (Auth::check()) {
-            return view('management.admin.index', ['page' => 'management/questions/register']);
         }
     }
 
@@ -82,4 +64,36 @@ class ManagementController extends Controller
             return view('management.admin.index', ['page' => 'management/teams/display']);
         }
     }
+
+    public function questionsDisplay()
+    {
+        if (Auth::check()) {
+            return view('management.admin.index', ['page' => 'management/questions/display']);
+        }
+    }
+
+
+    public function questionsRegister()
+    {
+        if (Auth::check()) {
+            return view('management.admin.index', ['page' => 'management/questions/register']);
+        }
+    }
+
+    public function questionsLevel()
+    {
+        if (Auth::check()) {
+            return view('management.admin.index', ['page' => 'management/questions/level']);
+        }
+    }
+
+    public function questionsContent()
+    {
+        if (Auth::check()) {
+            return view('management.admin.index', ['page' => 'management/questions/content']);
+        }
+    }
+
+
+
 }
