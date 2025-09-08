@@ -9,6 +9,24 @@
         </div>
 
         <div class="row col-12 card-b4b4b4 p-3 mt-3">
+            <table class="table table-dark table-striped mb-0">
+                <thead>
+                    <tr>
+                        <th>Posição</th>
+                        <th>Nome</th>
+                        <th>Pontuação</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($topStudents as $index => $student)
+                        <tr>
+                            <td>{{ $index + 1 }}</td>
+                            <td>{{ $student->user_name }}</td>
+                            <td>{{ $student->points }}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
 
     </div>

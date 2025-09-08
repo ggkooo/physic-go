@@ -43,7 +43,12 @@ class GameController extends Controller
 
     public function students_ranking()
     {
-        return view('admin.index', ['page' => 'game/students_ranking']);
+        // Busca os 5 alunos com maior pontuação
+        $topStudents = Ranking::orderByDesc('points')->limit(5)->get();
+        return view('admin.index', [
+            'page' => 'game.students_ranking', 
+            'topStudents' => $topStudents
+        ]);
     }
 
     public function questionsBySerie(Request $request)
