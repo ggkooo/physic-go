@@ -152,7 +152,7 @@
         if (letraClicada === resposta) {
             indiceAtual++;
             nivel++;
-            pontos += 1000;
+            pontos += 100;
             setTimeout(() => {
                 if (indiceAtual < questoes.length) {
                     exibirQuestao(indiceAtual);
