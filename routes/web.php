@@ -69,8 +69,9 @@ Route::get('/management/home', [ManagementController::class, 'home']);
 Route::get('/management/publications', [ManagementController::class, 'publications']);
 
 // questions
-Route::get('/management/questions', [ManagementController::class, 'questions']);
-Route::get('/management/questionsRegister', [ManagementController::class, 'questionsRegister']);
+Route::get('/management/questions', [ManagementController::class, 'questions'])->name('management.questions');
+Route::get('/management/questionsRegister', [ManagementController::class, 'questionsRegister'])->name('management.questionsRegister');
+Route::post('/management/questionsRegister', [ManagementController::class, 'questionsStore'])->name('management.questions.store');
 
 // schools
 Route::get('/management/schools', [SchoolController::class, 'schools'])->name('management.schools');
