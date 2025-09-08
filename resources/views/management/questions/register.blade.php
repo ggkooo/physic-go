@@ -7,7 +7,8 @@
         <div>Novo Cadastro</div>
     </div>
     <div class="card-body">
-        <form id="form_layout" method="post" action="" enctype="multipart/form-data">
+        <form id="form_layout" method="post" action="{{ route('management.questions.store') }}" enctype="multipart/form-data">
+            @csrf
             <div class="row align-items-end">
 
                 <span class="fw-bold mb-2 mt-2">
@@ -15,32 +16,34 @@
                 </span>
 
                 <div class="col-sm-4 mb-3">
-                    <label for="nivel" class="form-label fw-bold">Nível <span>*</span></label>
-                    <select class="form-select" name="nivel" id="nivel" required>
-                        <option value="">Selecione o nível...</option>
+                    <label for="grade" class="form-label fw-bold">Série <span>*</span></label>
+                    <select class="form-select" name="grade" id="grade" required>
+                        <option selected disabled>Selecione uma série...</option>
+                        <option value="1">Test</option>
                     </select>
                 </div>
 
                 <div class="col-sm-4 mb-3">
-                    <label for="conteudo" class="form-label fw-bold">Conteúdo <span>*</span></label>
-                    <select class="form-select" name="conteudo" id="conteudo" required>
-                        <option value="">Selecione o conteúdo...</option>
+                    <label for="content" class="form-label fw-bold">Conteúdo <span>*</span></label>
+                    <select class="form-select" name="content" id="content" required>
+                        <option selected disabled>Selecione um conteúdo...</option>
+                        <option value="2">Test2</option>
                     </select>
                 </div>
 
                 <div class="col-sm-4 mb-3">
-                    <label for="fonte" class="form-label fw-bold">Fonte <span>*</span></label>
-                    <input class="form-control" name="fonte" id="fonte" required placeholder="Informe a fonte...">
+                    <label for="source" class="form-label fw-bold">Fonte <span>*</span></label>
+                    <input class="form-control" name="source" id="source" required placeholder="Coloque a fonte da questão...">
                 </div>
 
                 <div class="col-sm-6 mb-3">
-                    <label for="dica" class="form-label fw-bold">Dica <span>*</span></label>
-                    <input class="summernote" name="dica" id="dica" required placeholder="Informe a dica...">
+                    <label for="tip" class="form-label fw-bold">Dica <span>*</span></label>
+                    <textarea class="summernote" name="tip" id="tip" required placeholder="Coloque a dica da questão...">{{ old('tip') }}</textarea>
                 </div>
 
                 <div class="col-md-6 mb-3 align-self-start">
-                    <label for="arquivo_dica" class="form-label fw-bold">Anexo</label>
-                    <input type="file" class="form-control" name="arquivo_dica" id="arquivo_dica" accept=".pdf,.doc,.docx,.jpg,.png,.jpeg">
+                    <label for="tip_attachment" class="form-label fw-bold">Arquivo da dica</label>
+                    <input type="file" class="form-control" name="tip_attachment" id="tip_attachment" accept=".pdf,.doc,.docx,.jpg,.png,.jpeg">
                 </div>
 
 
@@ -49,82 +52,87 @@
                 </span>
 
                 <div class="col-sm-12 mb-3">
-                    <label for="enunciado" class="form-label fw-bold">Enunciado <span>*</span></label>
-                    <input class="summernote" name="enunciado" id="enunciado" required placeholder="Informe o enunciado...">
+                    <label for="statement" class="form-label fw-bold">Enunciado <span>*</span></label>
+                    <textarea class="summernote" name="statement" id="statement" required placeholder="Coloque o enunciado da questão...">{{ old('statement') }}</textarea>
                 </div>
 
                 <div class="col-md-4 mb-3 align-self-start">
-                    <label for="arquivo_enunciado_um" class="form-label fw-bold">Anexo 1</label>
-                    <input type="file" class="form-control" name="arquivo_enunciado_um" id="arquivo_enunciado_um" accept=".pdf,.doc,.docx,.jpg,.png,.jpeg">
+                    <label for="statement_attachment1" class="form-label fw-bold">Arquivo 1</label>
+                    <input type="file" class="form-control" name="statement_attachment1" id="statement_attachment1" accept=".pdf,.doc,.docx,.jpg,.png,.jpeg">
                 </div>
 
                 <div class="col-md-4 mb-3 align-self-start">
-                    <label for="arquivo_enunciado_dois" class="form-label fw-bold">Anexo 2</label>
-                    <input type="file" class="form-control" name="arquivo_enunciado_dois" id="arquivo_enunciado_dois" accept=".pdf,.doc,.docx,.jpg,.png,.jpeg">
+                    <label for="statement_attachment2" class="form-label fw-bold">Arquivo 2</label>
+                    <input type="file" class="form-control" name="statement_attachment2" id="statement_attachment2" accept=".pdf,.doc,.docx,.jpg,.png,.jpeg">
                 </div>
 
                 <div class="col-md-4 mb-3 align-self-start">
-                    <label for="arquivo_enunciado_tres" class="form-label fw-bold">Anexo 3</label>
-                    <input type="file" class="form-control" name="arquivo_enunciado_tres" id="arquivo_enunciado_tres" accept=".pdf,.doc,.docx,.jpg,.png,.jpeg">
+                    <label for="statement_attachment3" class="form-label fw-bold">Arquivo 3</label>
+                    <input type="file" class="form-control" name="statement_attachment3" id="statement_attachment3" accept=".pdf,.doc,.docx,.jpg,.png,.jpeg">
                 </div>
 
 
                 <span class="fw-bold mb-2 mt-4">
-                    <h5>ALTERNATIVAS</h5>
+                    <h5>OPÇÕES</h5>
                 </span>
 
                 <div class="col-md-12">
                     <div class="col-sm-4 mb-3">
-                        <label for="alternativa_correta" class="form-label fw-bold">Alternativa Correta <span>*</span></label>
-                        <select class="form-select" name="alternativa_correta" id="alternativa_correta" required>
-                            <option value="">Selecione uma opção</option>
+                        <label for="correct_option" class="form-label fw-bold">Opção correta <span>*</span></label>
+                        <select class="form-select" name="correct_option" id="correct_option" required>
+                            <option disabled selected>Selecione uma opção</option>
+                            <option value="a">A</option>
+                            <option value="b">B</option>
+                            <option value="c">C</option>
+                            <option value="d">D</option>
+                            <option value="e">E</option>
                         </select>
                     </div>
                 </div>
 
                 <div class="col-sm-8 mb-3">
-                    <label for="alternativa_a" class="form-label fw-bold">Alternativa A </label>
-                    <input class="form-control" name="alternativa_a" id="alternativa_a" required placeholder="Alternativa A">
+                    <label for="option_a" class="form-label fw-bold">Opção A </label>
+                    <input class="form-control" name="option_a" id="option_a" required placeholder="Option A">
                 </div>
                 <div class="col-md-4 mb-3 align-self-start">
-                    <label for="anexo_a" class="form-label fw-bold">Anexo A</label>
-                    <input type="file" class="form-control" name="anexo_a" id="anexo_a" accept=".pdf,.doc,.docx,.jpg,.png,.jpeg">
+                    <label for="option_a_attachment" class="form-label fw-bold">Arquivo A</label>
+                    <input type="file" class="form-control" name="option_a_attachment" id="option_a_attachment" accept=".pdf,.doc,.docx,.jpg,.png,.jpeg">
                 </div>
 
                 <div class="col-sm-8 mb-3">
-                    <label for="alternativa_b" class="form-label fw-bold">Alternativa B </label>
-                    <input class="form-control" name="alternativa_b" id="alternativa_b" required placeholder="Alternativa B">
+                    <label for="option_b" class="form-label fw-bold">Opção B </label>
+                    <input class="form-control" name="option_b" id="option_b" required placeholder="Option B">
                 </div>
                 <div class="col-md-4 mb-3 align-self-start">
-                    <label for="anexo_b" class="form-label fw-bold">Anexo B</label>
-                    <input type="file" class="form-control" name="anexo_b" id="anexo_b" accept=".pdf,.doc,.docx,.jpg,.png,.jpeg">
+                    <label for="option_b_attachment" class="form-label fw-bold">Arquivo B</label>
+                    <input type="file" class="form-control" name="option_b_attachment" id="option_b_attachment" accept=".pdf,.doc,.docx,.jpg,.png,.jpeg">
                 </div>
 
                 <div class="col-sm-8 mb-3">
-                    <label for="alternativa_c" class="form-label fw-bold">Alternativa C </label>
-                    <input class="form-control" name="alternativa_c" id="alternativa_c" required placeholder="Alternativa C">
+                    <label for="option_c" class="form-label fw-bold">Opção C </label>
+                    <input class="form-control" name="option_c" id="option_c" required placeholder="Option C">
                 </div>
                 <div class="col-md-4 mb-3 align-self-start">
-                    <label for="anexo_c" class="form-label fw-bold">Anexo C</label>
-                    <input type="file" class="form-control" name="anexo_c" id="anexo_c" accept=".pdf,.doc,.docx,.jpg,.png,.jpeg">
+                    <label for="option_c_attachment" class="form-label fw-bold">Arquivo C</label>
+                    <input type="file" class="form-control" name="option_c_attachment" id="option_c_attachment" accept=".pdf,.doc,.docx,.jpg,.png,.jpeg">
                 </div>
 
                 <div class="col-sm-8 mb-3">
-                    <label for="alternativa_d" class="form-label fw-bold">Alternativa D </label>
-                    <input class="form-control" name="alternativa_d" id="alternativa_d" required placeholder="Alternativa D">
+                    <label for="option_d" class="form-label fw-bold">Opção D </label>
+                    <input class="form-control" name="option_d" id="option_d" required placeholder="Option D">
                 </div>
                 <div class="col-md-4 mb-3 align-self-start">
-                    <label for="anexo_d" class="form-label fw-bold">Anexo D</label>
-                    <input type="file" class="form-control" name="anexo_d" id="anexo_d" accept=".pdf,.doc,.docx,.jpg,.png,.jpeg">
+                    <label for="option_d_attachment" class="form-label fw-bold">Arquivo D</label>
+                    <input type="file" class="form-control" name="option_d_attachment" id="option_d_attachment" accept=".pdf,.doc,.docx,.jpg,.png,.jpeg">
                 </div>
 
                 <div class="col-sm-8 mb-3">
-                    <label for="alternativa_e" class="form-label fw-bold">Alternativa E </label>
-                    <input class="form-control" name="alternativa_e" id="alternativa_e" required placeholder="Alternativa E">
+                    <label for="option_e" class="form-label fw-bold">Opção E </label>
+                    <input class="form-control" name="option_e" id="option_e" required placeholder="Option E">
                 </div>
                 <div class="col-md-4 mb-3 align-self-start">
-                    <label for="anexo_e" class="form-label fw-bold">Anexo E</label>
-                    <input type="file" class="form-control" name="anexo_e" id="anexo_e" accept=".pdf,.doc,.docx,.jpg,.png,.jpeg">
+                    <label for="option_e_attachment" class="form-label fw-bold">Arquivo E</label>
+                    <input type="file" class="form-control" name="option_e_attachment" id="option_e_attachment" accept=".pdf,.doc,.docx,.jpg,.png,.jpeg">
                 </div>
 
             </div>
@@ -132,7 +140,7 @@
 
     <div class="card-footer">
         <div class="d-flex justify-content-end">
-            <button type="submit" name="btn" value="salvar" id="btnSalvar" class="btn btn-danger">Salvar</button>
+            <button type="submit" name="btn" value="save" id="btnSave" class="btn btn-danger">Save</button>
         </div>
     </div>
     </form>
