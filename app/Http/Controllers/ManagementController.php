@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Management\CreateSchoolRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\School;
@@ -10,7 +9,7 @@ use Illuminate\Pagination\Paginator;
 
 class ManagementController extends Controller
 {
-     /**
+    /**
      * Create a new controller instance.
      *
      * @return void
@@ -34,13 +33,40 @@ class ManagementController extends Controller
     }
 
 
-     public function publications()
+    public function publications()
     {
         if (Auth::check()) {
             return view('management.admin.index', ['page' => 'management/publications']);
         }
     }
 
+    public function messages()
+    {
+        if (Auth::check()) {
+            return view('management.admin.index', ['page' => 'management/messages/display']);
+        }
+    }
+
+    public function template()
+    {
+        if (Auth::check()) {
+            return view('management.admin.index', ['page' => 'management/template/display']);
+        }
+    }
+
+    public function statistics()
+    {
+        if (Auth::check()) {
+            return view('management.admin.index', ['page' => 'management/statistics/graphics']);
+        }
+    }
+
+    public function teams()
+    {
+        if (Auth::check()) {
+            return view('management.admin.index', ['page' => 'management/teams/display']);
+        }
+    }
 
     public function questions(Request $request)
     {
@@ -54,8 +80,7 @@ class ManagementController extends Controller
         }
     }
 
-
-     public function questionsRegister()
+    public function questionsRegister()
     {
         if (Auth::check()) {
             return view('management.admin.index', ['page' => 'management/questions/register']);
@@ -164,31 +189,34 @@ class ManagementController extends Controller
         return redirect()->route('login');
     }
 
-    public function messages()
+    public function questionsLevel()
     {
         if (Auth::check()) {
-            return view('management.admin.index', ['page' => 'management/messages/display']);
+            return view('management.admin.index', ['page' => 'management/questions/level']);
         }
     }
 
-    public function template()
+    public function questionsContent()
     {
         if (Auth::check()) {
-            return view('management.admin.index', ['page' => 'management/template/display']);
+            return view('management.admin.index', ['page' => 'management/questions/content']);
         }
     }
 
-    public function statistics()
+    public function challenge()
     {
         if (Auth::check()) {
-            return view('management.admin.index', ['page' => 'management/statistics/graphics']);
+            return view('management.admin.index', ['page' => 'management/challenge/display']);
         }
     }
 
-    public function teams()
+    public function challengeRegister()
     {
         if (Auth::check()) {
-            return view('management.admin.index', ['page' => 'management/teams/display']);
+            return view('management.admin.index', ['page' => 'management/challenge/register']);
         }
     }
+
+
+
 }

@@ -73,8 +73,6 @@
                     <label for="statement_attachment3" class="form-label fw-bold">Arquivo 3</label>
                     <input type="file" class="form-control" name="statement_attachment3" id="statement_attachment3" accept=".pdf,.doc,.docx,.jpg,.png,.jpeg">
                 </div>
-
-
                 <span class="fw-bold mb-2 mt-4">
                     <h5>OPÇÕES</h5>
                 </span>

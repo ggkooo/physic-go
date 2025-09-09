@@ -94,6 +94,14 @@ Route::get('/management/template', [ManagementController::class, 'template']);
 // statistics
 Route::get('/management/statistics', [ManagementController::class, 'statistics']);
 
+// question/level
+Route::get('/management/questionsLevel', [ManagementController::class, 'questionsLevel']);
+Route::get('/management/questionsContent', [ManagementController::class, 'questionsContent']);
+
+// challenge
+Route::get('/management/challenge', [ManagementController::class, 'challenge']);
+Route::get('/management/challengeRegister', [ManagementController::class, 'challengeRegister']);
+
 // USERS
 Route::get('/management/users', [UserController::class, 'users'])->name('management.users');
 Route::get('/management/users/edit/{id}', [UserController::class, 'editUser'])->name('management.users.edit');

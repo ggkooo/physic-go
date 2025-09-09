@@ -23,13 +23,9 @@
         <span><i class="bi bi-bar-chart-fill me-2"></i> Gestão</span>
       </a>
       <div
-        class="collapse ps-4 {{ request()->is('management/questions*') || request()->is('management/schools*') || request()->is('management/messages*') || request()->is('management/template*') || request()->is('management/statistics*') ? 'show' : '' }}"
+        class="collapse ps-4 {{ request()->is('management/schools*') || request()->is('management/messages*') || request()->is('management/statistics*') ? 'show' : '' }}"
         id="submenuGestao">
         <ul class="nav flex-column">
-          <li class="nav-item">
-            <a href="/management/questions"
-              class="nav-link text-white mb-1 {{ activeClass('management/questions*') }}">Perguntas</a>
-          </li>
           <li class="nav-item">
             <a href="/management/schools"
               class="nav-link text-white mb-1 {{ activeClass('management/schools*') }}">Escolas</a>
@@ -39,12 +35,39 @@
               class="nav-link text-white mb-1 {{ activeClass('management/messages*') }}">Mensagens</a>
           </li>
           <li class="nav-item">
-            <a href="/management/template"
-              class="nav-link text-white mb-1 {{ activeClass('management/template') }}">Gabarito</a>
-          </li>
-          <li class="nav-item">
             <a href="/management/statistics"
               class="nav-link text-white mb-1 {{ activeClass('management/statistics') }}">Estatísticas</a>
+          </li>
+        </ul>
+      </div>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link text-white d-flex justify-content-between align-items-center mb-1" data-bs-toggle="collapse"
+        href="#submenuQuestions" role="button" aria-expanded="false" aria-controls="submenuQuestions">
+        <span><i class="bi bi-question-lg me-2"></i> Perguntas</span>
+      </a>
+      <div
+        class="collapse ps-4 {{ request()->is('management/questions*') || request()->is('management/template') ? 'show' : '' }}"
+        id="submenuQuestions">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a href="/management/questionsDisplay"
+              class="nav-link text-white mb-1 {{ activeClass(['management/questionsDisplay*', 'management/questionsRegister*']) }}">
+              Enunciado
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/management/questionsLevel"
+              class="nav-link text-white mb-1 {{ activeClass('management/questionsLevel*') }}">Nível</a>
+          </li>
+          <li class="nav-item">
+            <a href="/management/questionsContent"
+              class="nav-link text-white mb-1 {{ activeClass('management/questionsContent*') }}">Conteúdo</a>
+          </li>
+          <li class="nav-item">
+            <a href="/management/template"
+              class="nav-link text-white mb-1 {{ activeClass('management/template') }}">Gabarito</a>
           </li>
         </ul>
       </div>
@@ -59,6 +82,12 @@
     <li>
       <a href="/management/teams" class="nav-link text-white mb-1 {{ activeClass('management/teams*') }}">
         <i class="bi bi-rocket-takeoff-fill me-2"></i> Equipes
+      </a>
+    </li>
+
+    <li>
+      <a href="/management/challenge" class="nav-link text-white mb-1 {{ activeClass('management/challenge*') }}">
+        <i class="bi bi-lightning-charge-fill me-2"></i> Desafio Temático
       </a>
     </li>
 
