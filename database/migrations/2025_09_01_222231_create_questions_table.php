@@ -13,13 +13,26 @@ return new class extends Migration
     {
         Schema::create('questions', function (Blueprint $table) {
             $table->id();
-            $table->string('serie');
-            $table->text('enunciado');
-            $table->string('alternativa_a');
-            $table->string('alternativa_b');
-            $table->string('alternativa_c');
-            $table->string('alternativa_d');
-            $table->string('resposta_correta');
+            $table->string('grade');
+            $table->string('content');
+            $table->string('source');
+            $table->text('tip');
+            $table->string('tip_attachment')->nullable();
+            $table->text('statement');
+            $table->string('statement_attachment1')->nullable();
+            $table->string('statement_attachment2')->nullable();
+            $table->string('statement_attachment3')->nullable();
+            $table->string('correct_option');
+            $table->string('option_a');
+            $table->string('option_a_attachment')->nullable();
+            $table->string('option_b');
+            $table->string('option_b_attachment')->nullable();
+            $table->string('option_c');
+            $table->string('option_c_attachment')->nullable();
+            $table->string('option_d');
+            $table->string('option_d_attachment')->nullable();
+            $table->string('option_e');
+            $table->string('option_e_attachment')->nullable();
             $table->timestamps();
         });
     }
