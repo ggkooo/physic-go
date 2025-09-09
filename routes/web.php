@@ -70,8 +70,12 @@ Route::get('/management/publications', [ManagementController::class, 'publicatio
 
 // questions
 Route::get('/management/questions', [ManagementController::class, 'questions'])->name('management.questions');
-Route::get('/management/questionsRegister', [ManagementController::class, 'questionsRegister'])->name('management.questionsRegister');
-Route::post('/management/questionsRegister', [ManagementController::class, 'questionsStore'])->name('management.questions.store');
+Route::get('/management/questions/register', [ManagementController::class, 'questionsRegister'])->name('management.questionsRegister');
+Route::post('/management/questions/register', [ManagementController::class, 'questionsStore'])->name('management.questions.store');
+Route::get('/management/questions/edit/{id}', [ManagementController::class, 'questionsEdit'])->name('management.questions.edit');
+Route::get('/management/questions/view/{id}', [ManagementController::class, 'questionsView'])->name('management.questions.view');
+Route::put('/management/questions/update/{id}', [ManagementController::class, 'questionsUpdate'])->name('management.questions.update');
+Route::get('/management/questions/statistics/{id}', [ManagementController::class, 'questionsStatistics'])->name('management.questions.statistics');
 
 // schools
 Route::get('/management/schools', [SchoolController::class, 'schools'])->name('management.schools');
