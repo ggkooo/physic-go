@@ -85,6 +85,12 @@
       </a>
     </li>
 
+    <li>
+      <a href="/management/challenge" class="nav-link text-white mb-1 {{ activeClass('management/challenge*') }}">
+        <i class="bi bi-lightning-charge-fill me-2"></i> Desafio Temático
+      </a>
+    </li>
+
     <!-- <li>
       <a href="#" class="nav-link text-white mb-1">
         <i class="bi bi-journal-bookmark-fill me-2"></i> Módulo de Estudo

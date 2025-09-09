@@ -94,6 +94,20 @@ class ManagementController extends Controller
         }
     }
 
+    public function challenge()
+    {
+        if (Auth::check()) {
+            return view('management.admin.index', ['page' => 'management/challenge/display']);
+        }
+    }
+
+    public function challengeRegister()
+    {
+        if (Auth::check()) {
+            return view('management.admin.index', ['page' => 'management/challenge/register']);
+        }
+    }
+
 
 
 }
