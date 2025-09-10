@@ -1,5 +1,5 @@
 <div class="row col-md-12 text-white mb-2">
-    <h3>Conteúdo</h3>
+    <h3>Níveis</h3>
 </div>
 
 <div class="card border mb-4">
@@ -9,17 +9,10 @@
     <div class="card-body">
         <form id="form_layout" method="post" action="" enctype="multipart/form-data">
             <div class="row align-items-end">
-                <div class="col-sm-6 mb-3">
+                <div class="col-sm-9 mb-3">
                     <label for="nome" class="form-label fw-bold">Descrição <span>*</span></label>
                     <input type="text" class="form-control" placeholder="Informe a descrição." name="nome" id="nome"
-                        value="">
-                </div>
-
-                <div class="col-sm-3 mb-3">
-                    <label for="categoria" class="form-label fw-bold">Categoria </label>
-                    <select class="form-select" name="categoria" id="categoria">
-                        <option value="" disabled selected>Selecione...</option>
-                    </select>
+                           value="">
                 </div>
 
                 <div class="col-sm-3 mb-3">
@@ -52,38 +45,35 @@
         <div class="table-responsive">
             <table id="table" class="table table-light table-bordered table-hover table-striped table-sm mb-0">
                 <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Data Cadastro</th>
-                        <th>Descrição</th>
-                        <th>Categoria</th>
-                        <th>Situação</th>
-                        <th width="70px">Ações</th>
-                    </tr>
+                <tr>
+                    <th>#</th>
+                    <th>Data Cadastro</th>
+                    <th>Descrição</th>
+                    <th>Situação</th>
+                    <th width="70px">Ações</th>
+                </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>
-                            <a class="btn btn-secondary btn-sm" href="#" title="Editar">
-                                <i class="bi bi-pencil-square"></i>
-                            </a>
-                        </td>
-                    </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <a class="btn btn-secondary btn-sm" href="#" title="Editar">
+                            <i class="bi bi-pencil-square"></i>
+                        </a>
+                    </td>
+                </tr>
                 </tbody>
                 <tfoot>
-                    <tr>
-                        <th>#</th>
-                        <th>Data Cadastro</th>
-                        <th>Descrição</th>
-                        <th>Categoria</th>
-                        <th>Situação</th>
-                        <th>Ações</th>
-                    </tr>
+                <tr>
+                    <th>#</th>
+                    <th>Data Cadastro</th>
+                    <th>Descrição</th>
+                    <th>Situação</th>
+                    <th>Ações</th>
+                </tr>
                 </tfoot>
             </table>
         </div>
