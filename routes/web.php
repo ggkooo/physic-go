@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Management\GradesController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\GoogleController;
 use App\Http\Controllers\Auth\LoginController;
@@ -116,18 +117,18 @@ use App\Http\Controllers\Management\UserController;
 
     // Grade
         // show
-        Route::get('/management/grades', [ManagementController::class, 'grades'])->name('management.grades');
+        Route::get('/management/grades', [GradesController::class, 'grades'])->name('management.grades');
 
         // register
-        Route::get('/management/grades/register', [ManagementController::class, 'gradesRegister'])->name('management.grades.register');
-        Route::post('/management/grades/register', [ManagementController::class, 'gradesStore'])->name('management.grades.store');
+        Route::get('/management/grades/register', [GradesController::class, 'register'])->name('management.grades.register');
+        Route::post('/management/grades/register', [GradesController::class, 'store'])->name('management.grades.store');
 
         // edit
-        Route::get('/management/grades/edit/{id}', [ManagementController::class, 'gradesEdit'])->name('management.grades.edit');
-        Route::put('/management/grades/update/{id}', [ManagementController::class, 'gradesUpdate'])->name('management.grades.update');
+        Route::get('/management/grades/edit/{id}', [GradesController::class, 'edit'])->name('management.grades.edit');
+        Route::put('/management/grades/update/{id}', [GradesController::class, 'update'])->name('management.grades.update');
 
         // remove
-        Route::delete('/management/grades/remove/{id}', [ManagementController::class, 'gradesRemove'])->name('management.grades.remove');
+        Route::delete('/management/grades/remove/{id}', [GradesController::class, 'remove'])->name('management.grades.remove');
 
     // Content
         // show
