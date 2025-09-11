@@ -80,13 +80,13 @@ use App\Http\Controllers\Management\UserController;
         Route::get('/management/schools', [SchoolController::class, 'schools'])->name('management.schools');
 
         // register
-        Route::get('/management/schools-register', [SchoolController::class, 'schoolsRegister'])->name('management.schools.register');
-        Route::post('/management/schools-register', [SchoolController::class, 'schoolsStore'])->name('management.schools.store');
+        Route::get('/management/schools/register', [SchoolController::class, 'register'])->name('management.schools.register');
+        Route::post('/management/schools/register', [SchoolController::class, 'store'])->name('management.schools.store');
 
         // edit, update, remove
-        Route::delete('/management/schools/remove/{id}', [SchoolController::class, 'removeSchool'])->name('management.schools.remove');
-        Route::get('/management/schools/edit/{id}', [SchoolController::class, 'editSchool'])->name('management.schools.edit');
-        Route::put('/management/schools/update/{id}', [SchoolController::class, 'updateSchool'])->name('management.schools.update');
+        Route::delete('/management/schools/remove/{id}', [SchoolController::class, 'remove'])->name('management.schools.remove');
+        Route::get('/management/schools/edit/{id}', [SchoolController::class, 'edit'])->name('management.schools.edit');
+        Route::put('/management/schools/update/{id}', [SchoolController::class, 'update'])->name('management.schools.update');
 
     // Messages
     Route::get('/management/messages', [ManagementController::class, 'messages'])->name('management.messages');
