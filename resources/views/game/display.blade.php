@@ -1,29 +1,17 @@
 <div class="d-flex flex-column align-items-center mt-5">
-
-
     <div class="col-md-10 col-10 card-questions mt-3 mb-5">
         <div class="content-questions w-100">
-
             <div class="col-md-12 d-flex justify-content-between">
-
                 <div class="col-md-6">
-                    <span>
-                        <h5><strong id="nivel">Nível 1</strong></h5>
-                    </span>
+                    <h5><strong id="nivel">Nível 1</strong></h5>
                 </div>
-
                 <div class="col-md-6 text-end">
-                    <span>
-                        <h5><strong id="pontuacao">Pontuação: 0</strong></h5>
-                    </span>
+                    <h5><strong id="pontuacao">Pontuação: 0</strong></h5>
                 </div>
-
             </div>
-
             <p class="para">
                 <span id="enunciado"></span>
             </p>
-
             <div class="col-md-12 d-flex flex-column align-items-center mb-2">
                 <div class="card-alternativas p-3 mb-3 col-md-10 ">
                     <span class="ms-3" id="alternativa_a"></span>
@@ -38,27 +26,19 @@
                     <span class="ms-3" id="alternativa_d"></span>
                 </div>
             </div>
-
             <div class="col-md-12 d-flex justify-content-between">
                 <div class="col-md-6">
                     <i class="bi bi-lightbulb-fill me-2" style="font-size: 35px;"></i>
                     <i class="bi bi-arrow-left-right" style="font-size: 35px;"></i>
                 </div>
                 <div class="col-md-6 text-end">
-                    <a href="/game/menu" class="btn btn-secondary p-2 mt-2 px-4">Desistir</a>
+                    <a href="{{ route('game.menu') }}" class="btn btn-secondary p-2 mt-2 px-4">Desistir</a>
                 </div>
             </div>
-
-
         </div>
     </div>
-
-
-
-
 </div>
 
-<!-- Modal de Derrota -->
 <div class="modal fade" id="modalDerrota" tabindex="-1" aria-labelledby="modalDerrotaLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
@@ -67,14 +47,13 @@
           <i class="bi bi-emoji-frown" style="font-size: 2rem;"></i>
           Que pena!
         </h5>
-        <!-- Botão de fechar removido -->
       </div>
       <div class="modal-body text-center">
         <p class="mb-2" style="font-size: 1.2rem;">Você errou a resposta desta vez.</p>
         <p class="mb-0">Não desanime! Tente novamente e mostre seu conhecimento!</p>
       </div>
       <div class="modal-footer justify-content-center">
-        <a href="/game/menu" class="btn btn-danger btn-lg px-4" id="btnVoltarMenu">
+        <a href="{{ route('game.menu') }}" class="btn btn-danger btn-lg px-4" id="btnVoltarMenu">
           <i class="bi bi-arrow-left-circle me-2"></i>Voltar ao menu
         </a>
       </div>
@@ -82,7 +61,6 @@
   </div>
 </div>
 
-<!-- Modal de Vitória -->
 <div class="modal fade" id="modalVitoria" tabindex="-1" aria-labelledby="modalVitoriaLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
@@ -97,10 +75,10 @@
         <p class="mb-0">Continue assim, seu conhecimento está incrível!</p>
       </div>
       <div class="modal-footer justify-content-center">
-        <a href="/game/menu" class="btn btn-success btn-lg px-4 me-2" id="btnVoltarMenuVitoria">
+        <a href="{{ route('game.menu') }}" class="btn btn-success btn-lg px-4 me-2" id="btnVoltarMenuVitoria">
           <i class="bi bi-arrow-left-circle me-2"></i>Voltar ao menu
         </a>
-        <a href="/game/students_ranking" class="btn btn-outline-success btn-lg px-4" id="btnRankingVitoria">
+        <a href="{{ route('game.students-ranking') }}" class="btn btn-outline-success btn-lg px-4" id="btnRankingVitoria">
           <i class="bi bi-trophy me-2"></i>Visualizar Ranking
         </a>
       </div>
@@ -116,7 +94,6 @@
     let nivel = 1;
     let pontos = 0;
 
-    // Checa se o usuário perdeu ou venceu anteriormente
     if (localStorage.getItem('quiz_perdeu') === '1' || localStorage.getItem('quiz_vitoria') === '1') {
         localStorage.removeItem('quiz_perdeu');
         localStorage.removeItem('quiz_vitoria');
@@ -167,9 +144,7 @@
                 }
             }, 300);
         } else {
-            // Marca que perdeu no localStorage
             localStorage.setItem('quiz_perdeu', '1');
-            // Exibe modal sem possibilidade de fechar manualmente
             var modal = new bootstrap.Modal(document.getElementById('modalDerrota'), { backdrop: 'static', keyboard: false });
             modal.show();
         }
@@ -194,7 +169,6 @@
         });
     }
 
-    // Limpa localStorage ao sair das modais de vitória/derrota
     function limparQuizFlags() {
         localStorage.removeItem('quiz_perdeu');
         localStorage.removeItem('quiz_vitoria');
@@ -202,18 +176,17 @@
     document.addEventListener('DOMContentLoaded', function() {
         function getSerieFromUrl() {
             const params = new URLSearchParams(window.location.search);
-            return params.get('serie');
+            return params.get('grade');
         }
-        const serie = getSerieFromUrl();
-        if (serie) {
-            fetch(`/game/questions-by-serie?serie=${encodeURIComponent(serie)}`)
+        const grade = getSerieFromUrl();
+        if (grade) {
+            fetch(`/game/questions-by-grade?grade=${encodeURIComponent(grade)}`)
                 .then(response => response.json())
                 .then(data => {
                     if (Array.isArray(data) && data.length > 0) {
                         questoes = data;
                         indiceAtual = 0;
                         nivel = 1;
-                        // Inicializa pontuação
                         pontos = 0;
                         exibirQuestao(indiceAtual);
                     } else {
@@ -240,7 +213,6 @@
             document.getElementById('alternativa_d').textContent = '';
         }
 
-        // Torna as alternativas clicáveis
         document.getElementById('alternativa_a').parentElement.style.cursor = 'pointer';
         document.getElementById('alternativa_b').parentElement.style.cursor = 'pointer';
         document.getElementById('alternativa_c').parentElement.style.cursor = 'pointer';
@@ -250,7 +222,6 @@
         document.getElementById('alternativa_c').parentElement.onclick = function() { alternativaClickHandler('c'); };
         document.getElementById('alternativa_d').parentElement.onclick = function() { alternativaClickHandler('d'); };
 
-        // Adiciona listeners aos botões das modais para limpar localStorage
         var btnVoltarMenu = document.getElementById('btnVoltarMenu');
         if (btnVoltarMenu) {
             btnVoltarMenu.addEventListener('click', limparQuizFlags);
@@ -266,7 +237,6 @@
     });
 </script>
 
-<!-- Bootstrap JS Bundle (for modal functionality) -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

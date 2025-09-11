@@ -40,6 +40,20 @@ class ManagementController extends Controller
         }
     }
 
+    public function grades()
+    {
+        if (Auth::check()) {
+            return view('management.admin.index', ['page' => 'management/grades/display']);
+        }
+    }
+
+    public function contents()
+    {
+        if (Auth::check()) {
+            return view('management.admin.index', ['page' => 'management/contents/display']);
+        }
+    }
+
     public function messages()
     {
         if (Auth::check()) {
@@ -58,13 +72,6 @@ class ManagementController extends Controller
     {
         if (Auth::check()) {
             return view('management.admin.index', ['page' => 'management/statistics/graphics']);
-        }
-    }
-
-    public function teams()
-    {
-        if (Auth::check()) {
-            return view('management.admin.index', ['page' => 'management/teams/display']);
         }
     }
 
@@ -189,20 +196,6 @@ class ManagementController extends Controller
         return redirect()->route('login');
     }
 
-    public function questionsLevel()
-    {
-        if (Auth::check()) {
-            return view('management.admin.index', ['page' => 'management/questions/level']);
-        }
-    }
-
-    public function questionsContent()
-    {
-        if (Auth::check()) {
-            return view('management.admin.index', ['page' => 'management/questions/content']);
-        }
-    }
-
     public function challenge()
     {
         if (Auth::check()) {
@@ -217,6 +210,11 @@ class ManagementController extends Controller
         }
     }
 
-
+    public function users()
+    {
+        if (Auth::check()) {
+            return view('management.admin.index', ['page' => 'management/users/display']);
+        }
+    }
 
 }

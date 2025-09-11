@@ -1,15 +1,11 @@
 <div class="d-flex flex-column justify-content-center align-items-center">
-
     <div class="card col-md-5 card-border col-11 p-3">
         <div class="card-body">
-
             <div class="row text-center mt-2 mb-4">
                 <h5 class="">Cadastro de Usuário</h5>
             </div>
-
-            <form action="{{ route('register.perform') }}" method="POST">
+            <form action="{{ route('register.submit') }}" method="POST">
                 @csrf
-
                 <div class="row mt-3 m-2">
                     <label for="email" class="form-label fw-bold">Nome</label>
                     <div class="position-relative">
@@ -21,7 +17,6 @@
                         <small class="text-danger mt-1">{{ $message }}</small>
                     @enderror
                 </div>
-
                 <div class="row mt-3 m-2">
                     <label for="email" class="form-label fw-bold">Email</label>
                     <div class="position-relative">
@@ -33,7 +28,6 @@
                         <small class="text-danger mt-1">{{ $message }}</small>
                     @enderror
                 </div>
-
                 <div class="row mt-3 m-2">
                     <label for="password" class="form-label fw-bold">Senha</label>
                     <div class="position-relative">
@@ -50,8 +44,7 @@
                         <small class="text-danger mt-1">{{ $message }}</small>
                     @enderror
                 </div>
-
-                <div class="row mt-3 m-2">
+                <div class="row mt-3 m-2 mb-4">
                     <label for="password" class="form-label fw-bold">Confirmar Senha</label>
                     <div class="position-relative">
                         <i
@@ -63,7 +56,7 @@
                         <small class="text-danger mt-1">{{ $message }}</small>
                     @enderror
                 </div>
-
+                {{-- REMOVER A SELEÇÃO DO TIPO DE CONTA! --}}
                 <div class="row">
                     <div class="col mb-3 mx-3">
                         <select class="form-select form-select-sm py-2 @error('user_account_type') is-invalid @enderror"
@@ -78,30 +71,22 @@
                         @enderror
                     </div>
                 </div>
-
                 <div class="row mt-2">
                     <div class="input-group">
                         <button type="submit" class="btn btn-danger btn-default w-100 p-2">Registrar-se</button>
                     </div>
                 </div>
-
                 <div class="row m-2">
                     <div class="d-flex justify-content-center mt-4">
                         <small class="form-text text-dark">
-                           Já possui uma conta? <a class="text-danger" href="/users/login">Entrar</a>
+                           Já possui uma conta? <a class="text-danger" href="{{ route('login') }}">Entrar</a>
                         </small>
                     </div>
                 </div>
             </form>
-
         </div>
     </div>
 </div>
-
-<footer class="text-center fixed mb-3 mt-3">
-    <a href="https://www.unijui.edu.br/" target="_blank"><img src="{{ asset('assets/img/unijui_branco.png') }}"
-            alt="Unijuí" width="150" class="img-fluid"></a>
-</footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous">

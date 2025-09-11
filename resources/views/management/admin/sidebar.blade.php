@@ -6,13 +6,13 @@
   <ul class="nav nav-pills flex-column mb-auto">
 
     <li class="nav-item">
-      <a href="/management/home" class="nav-link text-white mb-1 {{ activeClass('management/home') }}">
+      <a href="{{ route('management.home') }}" class="nav-link text-white mb-1 {{ activeClass('management/home') }}">
         <i class="bi bi-house-door-fill me-2"></i> Home
       </a>
     </li>
 
     <li>
-      <a href="/management/publications" class="nav-link text-white mb-1 {{ activeClass('management/publications') }}">
+      <a href="{{ route('management.publications') }}" class="nav-link text-white mb-1 {{ activeClass('management/publications') }}">
         <i class="bi bi-magic me-2"></i> Publicações
       </a>
     </li>
@@ -27,15 +27,15 @@
         id="submenuGestao">
         <ul class="nav flex-column">
           <li class="nav-item">
-            <a href="/management/schools"
+            <a href="{{ route('management.schools') }}"
               class="nav-link text-white mb-1 {{ activeClass('management/schools*') }}">Escolas</a>
           </li>
           <li class="nav-item">
-            <a href="/management/messages"
+            <a href="{{ route('management.messages') }}"
               class="nav-link text-white mb-1 {{ activeClass('management/messages*') }}">Mensagens</a>
           </li>
           <li class="nav-item">
-            <a href="/management/statistics"
+            <a href="{{ route('management.statistics') }}"
               class="nav-link text-white mb-1 {{ activeClass('management/statistics') }}">Estatísticas</a>
           </li>
         </ul>
@@ -52,21 +52,21 @@
         id="submenuQuestions">
         <ul class="nav flex-column">
           <li class="nav-item">
-            <a href="/management/questionsDisplay"
-              class="nav-link text-white mb-1 {{ activeClass(['management/questionsDisplay*', 'management/questionsRegister*']) }}">
-              Enunciado
+            <a href="{{ route('management.questions') }}"
+              class="nav-link text-white mb-1 {{ activeClass(['management/questions*', 'management/questions*']) }}">
+              Questões
             </a>
           </li>
           <li class="nav-item">
-            <a href="/management/questionsLevel"
-              class="nav-link text-white mb-1 {{ activeClass('management/questionsLevel*') }}">Nível</a>
+            <a href="{{ route('management.grades') }}"
+              class="nav-link text-white mb-1 {{ activeClass('management/grades*') }}">Séries</a>
           </li>
           <li class="nav-item">
-            <a href="/management/questionsContent"
-              class="nav-link text-white mb-1 {{ activeClass('management/questionsContent*') }}">Conteúdo</a>
+            <a href="{{ route('management.contents') }}"
+              class="nav-link text-white mb-1 {{ activeClass('management/contents*') }}">Conteúdo</a>
           </li>
           <li class="nav-item">
-            <a href="/management/template"
+            <a href="{{ route('management.template') }}"
               class="nav-link text-white mb-1 {{ activeClass('management/template') }}">Gabarito</a>
           </li>
         </ul>
@@ -74,19 +74,13 @@
     </li>
 
     <li>
-      <a href="/management/users" class="nav-link text-white mb-1 {{ activeClass('management/users*') }}">
+      <a href="{{ route('management.users') }}" class="nav-link text-white mb-1 {{ activeClass('management/users*') }}">
         <i class="bi bi-people-fill me-2"></i> Usuários
       </a>
     </li>
 
     <li>
-      <a href="/management/teams" class="nav-link text-white mb-1 {{ activeClass('management/teams*') }}">
-        <i class="bi bi-rocket-takeoff-fill me-2"></i> Equipes
-      </a>
-    </li>
-
-    <li>
-      <a href="/management/challenge" class="nav-link text-white mb-1 {{ activeClass('management/challenge*') }}">
+      <a href="{{ route('management.challenge') }}" class="nav-link text-white mb-1 {{ activeClass('management/challenge*') }}">
         <i class="bi bi-lightning-charge-fill me-2"></i> Desafio Temático
       </a>
     </li>
@@ -110,8 +104,4 @@
     </li>
 
   </ul>
-</div>
-</li>
-
-</ul>
 </div>
