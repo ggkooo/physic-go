@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 class School extends Model
 {
     protected $fillable = [
-        'nome_escola',
+        'school_name',
         'state',
         'city',
     ];
@@ -17,7 +17,7 @@ class School extends Model
     public static function createSchool(array $data): JsonResponse
     {
         $schoolId = DB::table('schools')->insertGetId([
-            'nome_escola' => $data['nome_escola'],
+            'school_name' => $data['school_name'],
             'state' => $data['state'],
             'city' => $data['city'],
         ]);

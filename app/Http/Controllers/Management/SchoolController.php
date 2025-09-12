@@ -2,79 +2,99 @@
 
 namespace App\Http\Controllers\Management;
 
-use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Management\SchoolRequest;
 use App\Models\School;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use App\Http\Requests\Management\CreateSchoolRequest;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
 
 class SchoolController extends Controller
 {
-    public function schools()
+    public function schools(Request $request): View|RedirectResponse
     {
         if (Auth::check()) {
-            $schools = School::all();
+            $limit = $request->input('limit', 5);
+            if ($limit === 'all') {
+                $schools = School::all();
+            } else {
+                $schools = School::paginate($limit);
+            }
             return view('management.admin.index', [
                 'page' => 'management/schools/display',
                 'schools' => $schools
             ]);
         }
+
+        return redirect()->route('login');
     }
 
-    public function schoolsRegister()
+    public function register(): View|RedirectResponse
     {
         if (Auth::check()) {
-            return view('management.admin.index', ['page' => 'management/schools/register-edit']);
+            return view('management.admin.index', [
+                'page' => 'management/schools/form'
+            ]);
         }
+
+        return redirect()->route('login');
     }
 
-    public function schoolsStore(CreateSchoolRequest $request)
-    {
-        if (Auth::check()) {
-            $school = School::create($request->validated());
-            return redirect()->route('management.schools')->with('success', 'Escola cadastrada com sucesso.');
-        }
-    }
-
-    public function removeSchool($id)
-    {
-        if (Auth::check()) {
-            $school = School::find($id);
-            if ($school) {
-                $school->delete();
-                return redirect()->route('management.schools')->with('success', 'Escola removida com sucesso.');
-            }
-            return redirect()->route('management.schools')->with('error', 'Escola não encontrada.');
-        }
-    }
-
-    public function editSchool($id)
+    public function edit($id): View|RedirectResponse
     {
         if (Auth::check()) {
             $school = School::find($id);
             if ($school) {
                 return view('management.admin.index', [
-                    'page' => 'management/schools/register-edit',
+                    'page' => 'management/schools/form',
                     'school' => $school
                 ]);
             }
+
             return redirect()->route('management.schools')->with('error', 'Escola não encontrada.');
         }
+
+        return redirect()->route('login');
     }
 
-    public function updateSchool(Request $request, $id)
+    public function store(SchoolRequest $request): RedirectResponse
+    {
+        if (Auth::check()) {
+            $school = School::create($request->validated());
+
+            return redirect()->route('management.schools')->with('success', 'Escola cadastrada com sucesso.');
+        }
+
+        return redirect()->route('login');
+    }
+
+    public function update(SchoolRequest $request, $id): RedirectResponse
     {
         if (Auth::check()) {
             $school = School::find($id);
             if ($school) {
-                $school->update($request->validate([
-                    'nome_escola' => 'required|string|max:255',
-                    'state' => 'required|string|max:255',
-                    'city' => 'required|string|max:255',
-                ]));
+                $school->update($request->validated());
                 return redirect()->route('management.schools')->with('success', 'Escola atualizada com sucesso.');
             }
             return redirect()->route('management.schools')->with('error', 'Escola não encontrada.');
         }
+        return redirect()->route('login');
+    }
+
+    public function remove($id): RedirectResponse
+    {
+        if (Auth::check()) {
+            $school = School::find($id);
+            if ($school) {
+                $school->delete();
+
+                return redirect()->route('management.schools')->with('success', 'Escola removida com sucesso.');
+            }
+
+            return redirect()->route('management.schools')->with('error', 'Escola não encontrada.');
+        }
+
+        return redirect()->route('login');
     }
 }

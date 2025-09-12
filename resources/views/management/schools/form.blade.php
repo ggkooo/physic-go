@@ -15,8 +15,8 @@
             <div class="row align-items-end">
 
                 <div class="col-md-6 mb-3">
-                    <label for="nome_escola" class="form-label fw-bold">Nome</label>
-                    <input type="text" class="form-control" name="nome_escola" id="nome_escola" value="{{ old('nome_escola', $school->nome_escola ?? '') }}">
+                    <label for="school_name" class="form-label fw-bold">Nome</label>
+                    <input type="text" class="form-control" name="school_name" id="school_name" value="{{ old('school_name', $school->school_name ?? '') }}">
                 </div>
 
                 <div class="col-md-6 mb-3">
