@@ -64,9 +64,11 @@ use App\Http\Controllers\Management\UserController;
     Route::get('/game/menu', [GameController::class, 'menu'])->name('game.menu');
     Route::get('/game/new', [GameController::class, 'new'])->name('game.new');
     Route::get('/game/display', [GameController::class, 'display'])->name('game.display');
-    Route::get('/game/students-ranking', [GameController::class, 'studentsRanking'])->name('game.students-ranking');
+    Route::get('/game/students-ranking', [GameController::class, 'students_ranking'])->name('game.students-ranking');
     Route::get('/game/questions-by-grade', [GameController::class, 'questionsByGrade'])->name('game.questions-by-grade');
     Route::post('/game/save-ranking', [GameController::class, 'saveRanking'])->name('game.save-ranking');
+    Route::get('/game/schools-ranking', [GameController::class, 'schools_ranking'])->name('game.schools-ranking');
+    Route::get('/game/rules', [GameController::class, 'rules'])->name('game.rules');
 
 // MANAGEMENT
     // Home
