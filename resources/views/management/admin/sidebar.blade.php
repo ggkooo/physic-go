@@ -48,7 +48,7 @@
         <span><i class="bi bi-question-lg me-2"></i> Perguntas</span>
       </a>
       <div
-        class="collapse ps-4 {{ request()->is('management/questions*') || request()->is('management/template') ? 'show' : '' }}"
+        class="collapse ps-4 {{ request()->is('management/questions*') || request()->is('management/grades*') || request()->is('management/contents*') || request()->is('management/template') ? 'show' : '' }}"
         id="submenuQuestions">
         <ul class="nav flex-column">
           <li class="nav-item">
