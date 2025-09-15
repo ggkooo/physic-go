@@ -5,7 +5,7 @@
 <div class="card border">
     <div class="card-header fw-bold d-flex justify-content-between">
         <div>Perguntas Cadastradas</div>
-        <div><a href="/management/challengeRegister" class="btn btn-sm btn-danger">Novo Cadastro</a></div>
+        <div><a  href="{{ route('management.challenge.register') }}" class="btn btn-sm btn-danger">Novo Cadastro</a></div>
     </div>
     <div class="card-body">
 
