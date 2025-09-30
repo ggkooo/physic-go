@@ -5,10 +5,10 @@
 
         <div class="ranking-banner">
             <img src="{{ asset('assets/img/banner.png') }}" alt="Banner Ranking" class="banner-img">
-            <h3 class="banner-title">RANKING ALUNO</h3>
+            <h3 class="banner-title">RANKING ESCOLA</h3>
         </div>
 
-        <div class="card-303030-ranking p-4  d-flex flex-column align-items-center">
+        <div class="card-303030-ranking p-4 d-flex flex-column align-items-center">
 
             <div class="row p-3 text-white align-items-center w-100 text-center d-none d-md-flex">
                 <div class="col-12 col-md-3 mb-2 mb-md-0">POSIÇÃO</div>
@@ -16,13 +16,11 @@
                 <div class="col-12 col-md-3">PONTOS</div>
             </div>
 
-            @foreach($topStudents as $index => $student)
-                <div class="row card-b4b4b4 p-3 mb-3 text-dark align-items-center w-100 text-center">
-                    <div class="col-12 col-md-3 fw-bold mb-2 mb-md-0">{{ $index + 1 }}°</div>
-                    <div class="col-12 col-md-6 mb-2 mb-md-0">{{ $student->user_name }}</div>
-                    <div class="col-12 col-md-3 fw-bold">{{ $student->points }}</div>
-                </div>
-            @endforeach
+            <div class="row card-b4b4b4 p-3 mb-3 text-dark align-items-center w-100 text-center">
+                <div class="col-12 col-md-3 fw-bold mb-2 mb-md-0">1°</div>
+                <div class="col-12 col-md-6 mb-2 mb-md-0">Teste Escola</div>
+                <div class="col-12 col-md-3 fw-bold">10000000 </div>
+            </div>
 
         </div>
     </div>

@@ -245,19 +245,56 @@ body {
     font-size: 15px;
 }
 
-.ranking .banner-ranking{
-    margin-top: -80px;
-    height: 100px;
-    width: 600px;
+.card-303030-ranking {
+    border-radius: 30px;
+    background-color: #303030;
+    color: #fff;
+    letter-spacing: 1px;
+    font-size: 15px;
+
+    padding-top: clamp(64px, 12vw, 80px) !important;
 }
 
-.ranking h3{
-    margin-top: -80px;
+.ranking-banner {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -60%);
+    width: min(400px, 90%);
+    z-index: 2;
+    text-align: center;
+}
+
+.ranking-banner .banner-img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.ranking-banner .banner-title {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+
+    color: #fff;
+    font-weight: 700;
+    font-size: clamp(1rem, 3.5vw, 1.5rem);
+    text-shadow: 0 2px 8px rgba(0, 0, 0, .35);
+    top: -20%;
 }
 
 .card-b4b4b4 {
     background-color: #b4b4b4;
     border-radius: 20px;
-    color: #fff;
+    color: #222;
     letter-spacing: 1px;
+}
+
+@media (min-width: 768px) {
+    .ranking-banner {
+        transform: translate(-50%, -55%);
+    }
 }

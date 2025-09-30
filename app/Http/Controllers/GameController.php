@@ -83,4 +83,12 @@ class GameController extends Controller
         }
         return response()->json(['success' => true, 'ranking' => $ranking]);
     }
+
+    public function schools_ranking(){
+        return view('admin.index', ['page' => 'game/schools_ranking']);
+    }
+
+    public function rules(){
+        return view('admin.index', ['page' => 'game/rules']);
+    }
 }
