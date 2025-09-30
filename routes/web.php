@@ -15,6 +15,7 @@ use App\Http\Controllers\GameController;
 use App\Http\Controllers\ManagementController;
 use App\Http\Controllers\Management\SchoolController;
 use App\Http\Controllers\Management\UserController;
+use App\Http\Controllers\ChallengeController;
 
 // AUTHENTICATION ROUTES
     // Login
@@ -199,3 +200,6 @@ use App\Http\Controllers\Management\UserController;
             // remove question from challenge
             Route::delete('/management/challenge/{challenge_id}/questions/remove/{question_id}', [ManagementController::class, 'challengeQuestionsRemove'])->name('management.challenge.questions.remove');
 
+// CHALLENGE
+    // Display
+    Route::get('/challenge/display', [ChallengeController::class, 'display'])->name('challenge.display');
