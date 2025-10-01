@@ -1,22 +1,22 @@
 <div class="d-flex flex-column align-items-center mt-4">
     <div class="col-md-9">
         <div class="d-flex justify-content-center mb-4">
-            <h5>CONTEÚDOS</h5>
+            <h5>ENSINO MÉDIO</h5>
         </div>
         <div class="d-flex flex-column align-items-center mt-4">
             <div class="col-12 col-md-4 mb-4">
-                <a href="{{ route('study.elementary_school') }}" class="btn btn-danger w-100 p-3 btn-default btn-raise">ENSINO FUNDAMENTAL</a>
+                <a href="{{ route('study.first') }}" class="btn btn-danger w-100 p-3 btn-default btn-raise">1º ANO</a>
             </div>
             <div class="col-12 col-md-4 mb-4">
-                <a href="{{ route('study.ninth_qualification') }}" class="btn btn-danger w-100 p-3 btn-default btn-raise">QUALIFICAÇÃO - 9° ANO</a>
+                <a href="{{ route('study.second') }}" class="btn btn-danger w-100 p-3 btn-default btn-raise">2º ANO</a>
             </div>
             <div class="col-12 col-md-4 mb-4">
-                <a href="{{ route('study.high_school') }}" class="btn btn-danger w-100 p-3 btn-default btn-raise">ENSINO MÉDIO</a>
+                <a href="{{ route('study.third') }}" class="btn btn-danger w-100 p-3 btn-default btn-raise">3º ANO</a>
             </div>
         </div>
     </div>
     <div class="row">
-        <a href="{{ route('home') }}"
+        <a href="{{ route('study') }}"
             class="btn-exit text-decoration-none text-white w-100 p-1 position-relative d-inline-block overflow-hidden mt-4 mb-2">
             <i class="bi bi-arrow-left icon" style="font-size: 20px; margin-top: 2px;"></i>
             <span class="exit-text" style="font-size: 18px;">Voltar</span>

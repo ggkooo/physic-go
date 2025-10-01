@@ -59,7 +59,24 @@ use App\Http\Controllers\ChallengeController;
     Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 
     // Study
-    Route::get('/study', [StudyController::class, 'index'])->name('study');
+        //Display
+        Route::get('/study', [StudyController::class, 'index'])->name('study');
+
+        //Elementary school
+        Route::get('/study/elementary_school', [StudyController::class, 'elementary_school'])->name('study.elementary_school');
+        Route::get('/study/elementary_school/sixth', [StudyController::class, 'sixth'])->name('study.sixth');
+        Route::get('/study/elementary_school/seventh', [StudyController::class, 'seventh'])->name('study.seventh');
+        Route::get('/study/elementary_school/eighth', [StudyController::class, 'eighth'])->name('study.eighth');
+        Route::get('/study/elementary_school/ninth', [StudyController::class, 'ninth'])->name('study.ninth');
+
+        //Ninth qualification
+        Route::get('/study/ninth_qualification', [StudyController::class, 'ninth_qualification'])->name('study.ninth_qualification');
+
+        //High School
+        Route::get('/study/high_school', [StudyController::class, 'high_school'])->name('study.high_school');
+        Route::get('/study/high_school/first', [StudyController::class, 'first'])->name('study.first');
+        Route::get('/study/high_school/second', [StudyController::class, 'second'])->name('study.second');
+        Route::get('/study/high_school/third', [StudyController::class, 'third'])->name('study.third');
 
     // Game
     Route::get('/game/menu', [GameController::class, 'menu'])->name('game.menu');
