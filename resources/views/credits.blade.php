@@ -61,7 +61,7 @@
 
                         <div class="text-center">
                             <span class="d-block">
-                                <a href="mailto:" rel="external" target="_blank"><i class="bi bi-wechat icon-credits"
+                                <a href="mailto:barbara.gundel@unijui.edu.br" rel="external" target="_blank"><i class="bi bi-wechat icon-credits"
                                         style="font-size: 22px;"></i></a>
                             </span>
                         </div>
@@ -80,7 +80,7 @@
 
                         <div class="text-center">
                             <span class="d-block">
-                                <a href="mailto:" rel="external" target="_blank"><i class="bi bi-wechat icon-credits"
+                                <a href="mailto:padoin@unijui.edu.br" rel="external" target="_blank"><i class="bi bi-wechat icon-credits"
                                         style="font-size: 22px;"></i></a>
                             </span>
                         </div>
@@ -105,7 +105,7 @@
 
                         <div class="text-center">
                             <span class="d-block">
-                                <a href="mailto:" rel="external" target="_blank"><i class="bi bi-wechat icon-credits"
+                                <a href="mailto:taise.possani@unijui.edu.br" rel="external" target="_blank"><i class="bi bi-wechat icon-credits"
                                         style="font-size: 22px;"></i></a>
                             </span>
                         </div>
@@ -124,7 +124,7 @@
 
                         <div class="text-center">
                             <span class="d-block">
-                                <a href="mailto:" rel="external" target="_blank"><i class="bi bi-wechat icon-credits"
+                                <a href="mailto:patricia.pedrali@unijui.edu.br" rel="external" target="_blank"><i class="bi bi-wechat icon-credits"
                                         style="font-size: 22px;"></i></a>
                             </span>
                         </div>
@@ -143,7 +143,7 @@
 
                         <div class="text-center">
                             <span class="d-block">
-                                <a href="mailto:" rel="external" target="_blank"><i class="bi bi-wechat icon-credits"
+                                <a href="mailto:karoline.andrade@sou.unijui.edu.br" rel="external" target="_blank"><i class="bi bi-wechat icon-credits"
                                         style="font-size: 22px;"></i></a>
                             </span>
                         </div>
