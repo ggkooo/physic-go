@@ -4,10 +4,14 @@
 
 <div class="card border mb-4">
     <div class="card-header fw-bold d-flex justify-content-between align-items-center">
-        <div>Novo Cadastro</div>
+        <div>{{ isset($editChallenge) ? 'Editando Questão' : 'Novo Cadastro' }}</div>
     </div>
     <div class="card-body">
-        <form id="form_layout" method="post" action="" enctype="multipart/form-data">
+        <form id="form_layout" method="post" action="{{ isset($editChallenge) ? route('management.challenge.update', $editChallenge->id) : route('management.challenge.store') }}" enctype="multipart/form-data">
+            @csrf
+            @if(isset($editChallenge))
+                @method('PUT')
+            @endif
             <div class="row align-items-end">
 
                 <span class="fw-bold mb-2 mt-2">
@@ -15,28 +19,36 @@
                 </span>
 
                 <div class="col-sm-12 mb-3">
-                    <label for="enunciado" class="form-label fw-bold">Enunciado <span>*</span></label>
-                    <textarea class="summernote" name="enunciado" id="enunciado" required
-                        placeholder="Informe o enunciado..."></textarea>
-                </div>
-
-
-                <div class="col-md-4 mb-3 align-self-start">
-                    <label for="arquivo_enunciado_um" class="form-label fw-bold">Anexo 1</label>
-                    <input type="file" class="form-control" name="arquivo_enunciado_um" id="arquivo_enunciado_um"
-                        accept=".pdf,.doc,.docx,.jpg,.png,.jpeg">
+                    <label for="statement" class="form-label fw-bold">Enunciado <span>*</span></label>
+                    <textarea class="summernote" name="statement" id="statement" required
+                        placeholder="Informe o enunciado...">{{ old('statement', isset($editChallenge) ? $editChallenge->statement : '') }}</textarea>
                 </div>
 
                 <div class="col-md-4 mb-3 align-self-start">
-                    <label for="arquivo_enunciado_dois" class="form-label fw-bold">Anexo 2</label>
-                    <input type="file" class="form-control" name="arquivo_enunciado_dois" id="arquivo_enunciado_dois"
+                    <label for="attachment_01" class="form-label fw-bold">Anexo 1</label>
+                    <input type="file" class="form-control" name="attachment_01" id="attachment_01"
                         accept=".pdf,.doc,.docx,.jpg,.png,.jpeg">
+                    @if(isset($editChallenge) && $editChallenge->attachment_01)
+                        <div class="mt-1"><a href="{{ asset('storage/' . $editChallenge->attachment_01) }}" target="_blank">Ver anexo atual</a></div>
+                    @endif
                 </div>
 
                 <div class="col-md-4 mb-3 align-self-start">
-                    <label for="arquivo_enunciado_tres" class="form-label fw-bold">Anexo 3</label>
-                    <input type="file" class="form-control" name="arquivo_enunciado_tres" id="arquivo_enunciado_tres"
+                    <label for="attachment_02" class="form-label fw-bold">Anexo 2</label>
+                    <input type="file" class="form-control" name="attachment_02" id="attachment_02"
                         accept=".pdf,.doc,.docx,.jpg,.png,.jpeg">
+                    @if(isset($editChallenge) && $editChallenge->attachment_02)
+                        <div class="mt-1"><a href="{{ asset('storage/' . $editChallenge->attachment_02) }}" target="_blank">Ver anexo atual</a></div>
+                    @endif
+                </div>
+
+                <div class="col-md-4 mb-3 align-self-start">
+                    <label for="attachment_03" class="form-label fw-bold">Anexo 3</label>
+                    <input type="file" class="form-control" name="attachment_03" id="attachment_03"
+                        accept=".pdf,.doc,.docx,.jpg,.png,.jpeg">
+                    @if(isset($editChallenge) && $editChallenge->attachment_03)
+                        <div class="mt-1"><a href="{{ asset('storage/' . $editChallenge->attachment_03) }}" target="_blank">Ver anexo atual</a></div>
+                    @endif
                 </div>
 
                 <span class="fw-bold mb-2 mt-4">
@@ -44,15 +56,14 @@
                 </span>
 
                 <div class="col-sm-12 mb-3">
-                    <label for="dica" class="form-label fw-bold">Dica <span>*</span></label>
-                    <textarea class="summernote" name="dica" id="dica" required
-                        placeholder="Informe a dica..."></textarea>
+                    <label for="hint" class="form-label fw-bold">Dica <span>*</span></label>
+                    <textarea class="summernote" name="hint" id="hint" required
+                        placeholder="Informe a dica...">{{ old('hint', isset($editChallenge) ? $editChallenge->hint : '') }}</textarea>
                 </div>
 
-
                 <div class="col-sm-12 d-flex flex-column mb-3">
-                    <label for="fonte" class="form-label fw-bold">Fonte <span>*</span></label>
-                    <input class="form-control" name="fonte" id="fonte" required placeholder="Informe a fonte...">
+                    <label for="source" class="form-label fw-bold">Fonte <span>*</span></label>
+                    <input class="form-control" name="source" id="source" required placeholder="Informe a fonte..." value="{{ old('source', isset($editChallenge) ? $editChallenge->source : '') }}">
                 </div>
 
                 <span class="fw-bold mb-2 mt-4">
@@ -61,73 +72,44 @@
 
                 <div class="col-md-12">
                     <div class="col-sm-4 mb-3">
-                        <label for="alternativa_correta" class="form-label fw-bold">
+                        <label for="correct_alternative" class="form-label fw-bold">
                             Alternativa Correta <span>*</span>
                         </label>
-                        <select class="form-select" name="alternativa_correta" id="alternativa_correta" required>
+                        <select class="form-select" name="correct_alternative" id="correct_alternative" required>
                             <option value="">Selecione uma opção</option>
-                            <option value="A">Alternativa A</option>
-                            <option value="B">Alternativa B</option>
-                            <option value="C">Alternativa C</option>
-                            <option value="D">Alternativa D</option>
-                            <option value="E">Alternativa E</option>
+                            <option value="a" {{ old('correct_alternative', isset($editChallenge) ? $editChallenge->correct_alternative : '') == 'a' ? 'selected' : '' }}>Alternativa A</option>
+                            <option value="b" {{ old('correct_alternative', isset($editChallenge) ? $editChallenge->correct_alternative : '') == 'b' ? 'selected' : '' }}>Alternativa B</option>
+                            <option value="c" {{ old('correct_alternative', isset($editChallenge) ? $editChallenge->correct_alternative : '') == 'c' ? 'selected' : '' }}>Alternativa C</option>
+                            <option value="d" {{ old('correct_alternative', isset($editChallenge) ? $editChallenge->correct_alternative : '') == 'd' ? 'selected' : '' }}>Alternativa D</option>
+                            <option value="e" {{ old('correct_alternative', isset($editChallenge) ? $editChallenge->correct_alternative : '') == 'e' ? 'selected' : '' }}>Alternativa E</option>
                         </select>
                     </div>
                 </div>
 
                 <div class="col-sm-8 mb-3">
-                    <label for="alternativa_a" class="form-label fw-bold">Alternativa A </label>
-                    <input class="form-control" name="alternativa_a" id="alternativa_a" required
-                        placeholder="Alternativa A">
+                    <label for="alternative_a" class="form-label fw-bold">Alternativa A </label>
+                    <input class="form-control" name="alternative_a" id="alternative_a" required
+                        placeholder="Alternativa A" value="{{ old('alternative_a', isset($editChallenge) ? $editChallenge->alternative_a : '') }}">
                 </div>
-                <div class="col-md-4 mb-3 align-self-start">
-                    <label for="anexo_a" class="form-label fw-bold">Anexo A</label>
-                    <input type="file" class="form-control" name="anexo_a" id="anexo_a"
-                        accept=".pdf,.doc,.docx,.jpg,.png,.jpeg">
-                </div>
-
                 <div class="col-sm-8 mb-3">
-                    <label for="alternativa_b" class="form-label fw-bold">Alternativa B </label>
-                    <input class="form-control" name="alternativa_b" id="alternativa_b" required
-                        placeholder="Alternativa B">
+                    <label for="alternative_b" class="form-label fw-bold">Alternativa B </label>
+                    <input class="form-control" name="alternative_b" id="alternative_b" required
+                        placeholder="Alternativa B" value="{{ old('alternative_b', isset($editChallenge) ? $editChallenge->alternative_b : '') }}">
                 </div>
-                <div class="col-md-4 mb-3 align-self-start">
-                    <label for="anexo_b" class="form-label fw-bold">Anexo B</label>
-                    <input type="file" class="form-control" name="anexo_b" id="anexo_b"
-                        accept=".pdf,.doc,.docx,.jpg,.png,.jpeg">
-                </div>
-
                 <div class="col-sm-8 mb-3">
-                    <label for="alternativa_c" class="form-label fw-bold">Alternativa C </label>
-                    <input class="form-control" name="alternativa_c" id="alternativa_c" required
-                        placeholder="Alternativa C">
+                    <label for="alternative_c" class="form-label fw-bold">Alternativa C </label>
+                    <input class="form-control" name="alternative_c" id="alternative_c" required
+                        placeholder="Alternativa C" value="{{ old('alternative_c', isset($editChallenge) ? $editChallenge->alternative_c : '') }}">
                 </div>
-                <div class="col-md-4 mb-3 align-self-start">
-                    <label for="anexo_c" class="form-label fw-bold">Anexo C</label>
-                    <input type="file" class="form-control" name="anexo_c" id="anexo_c"
-                        accept=".pdf,.doc,.docx,.jpg,.png,.jpeg">
-                </div>
-
                 <div class="col-sm-8 mb-3">
-                    <label for="alternativa_d" class="form-label fw-bold">Alternativa D </label>
-                    <input class="form-control" name="alternativa_d" id="alternativa_d" required
-                        placeholder="Alternativa D">
+                    <label for="alternative_d" class="form-label fw-bold">Alternativa D </label>
+                    <input class="form-control" name="alternative_d" id="alternative_d" required
+                        placeholder="Alternativa D" value="{{ old('alternative_d', isset($editChallenge) ? $editChallenge->alternative_d : '') }}">
                 </div>
-                <div class="col-md-4 mb-3 align-self-start">
-                    <label for="anexo_d" class="form-label fw-bold">Anexo D</label>
-                    <input type="file" class="form-control" name="anexo_d" id="anexo_d"
-                        accept=".pdf,.doc,.docx,.jpg,.png,.jpeg">
-                </div>
-
                 <div class="col-sm-8 mb-3">
-                    <label for="alternativa_e" class="form-label fw-bold">Alternativa E </label>
-                    <input class="form-control" name="alternativa_e" id="alternativa_e" required
-                        placeholder="Alternativa E">
-                </div>
-                <div class="col-md-4 mb-3 align-self-start">
-                    <label for="anexo_e" class="form-label fw-bold">Anexo E</label>
-                    <input type="file" class="form-control" name="anexo_e" id="anexo_e"
-                        accept=".pdf,.doc,.docx,.jpg,.png,.jpeg">
+                    <label for="alternative_e" class="form-label fw-bold">Alternativa E </label>
+                    <input class="form-control" name="alternative_e" id="alternative_e" required
+                        placeholder="Alternativa E" value="{{ old('alternative_e', isset($editChallenge) ? $editChallenge->alternative_e : '') }}">
                 </div>
 
             </div>
