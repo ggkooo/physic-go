@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 
 class ChallengeController extends Controller
 {
+    
     /**
      * Create a new controller instance.
      *
@@ -21,10 +22,33 @@ class ChallengeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-     public function display()
+    public function display()
     {
-        if (Auth::check()) {
-            return view('admin.index', ['page' => 'challenge/display']);
+        if (!Auth::check()) {
+            return redirect()->route('login');
         }
+
+        $questions = \App\Models\Challenge::inRandomOrder()
+            ->limit(10)
+            ->get([
+                'id',
+                'statement',
+                'source',
+                'hint',
+                'correct_alternative',
+                'alternative_a',
+                'alternative_b',
+                'alternative_c',
+                'alternative_d',
+                'alternative_e',
+                'attachment_01',
+                'attachment_02',
+                'attachment_03',
+            ]);
+
+        return view('admin.index', [
+            'page' => 'challenge/display',
+            'questions' => $questions,
+        ]);
     }
 }
