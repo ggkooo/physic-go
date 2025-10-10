@@ -220,7 +220,7 @@
       }
 
       nivel.textContent = `Nível ${i + 1}`;
-      enunciado.textContent = q.statement || '';
+      enunciado.innerHTML = (q.statement || '').replace(/<\/?p>/gi, '');
 
       a.textContent = q.alternative_a || '';
       b.textContent = q.alternative_b || '';
