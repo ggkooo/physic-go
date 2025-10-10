@@ -55,7 +55,8 @@
   </div>
 </div>
 
-<div class="modal fade" id="modalDerrota" tabindex="-1" aria-labelledby="modalDerrotaLabel" aria-hidden="true">
+<div class="modal fade" id="modalDerrota" tabindex="-1" aria-labelledby="modalDerrotaLabel" aria-hidden="true"
+  data-bs-backdrop="static" data-bs-keyboard="false">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header bg-danger text-white">
@@ -77,7 +78,8 @@
   </div>
 </div>
 
-<div class="modal fade" id="modalVitoria" tabindex="-1" aria-labelledby="modalVitoriaLabel" aria-hidden="true">
+<div class="modal fade" id="modalVitoria" tabindex="-1" aria-labelledby="modalVitoriaLabel" aria-hidden="true"
+  data-bs-backdrop="static" data-bs-keyboard="false">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header bg-success text-white">
@@ -108,24 +110,22 @@
 <script>
   document.addEventListener('DOMContentLoaded', () => {
     const qs = window.__QUESTIONS__ || [];
+    const STORAGE_KEYS = {
+      LOCK: 'quizLocked',
+      USED_HINTS: 'quizUsedHints',
+      USED_SWAPS: 'quizUsedSwaps'
+    };
 
-    if (!qs.length) {
-      if (window.bootstrap?.Modal) {
-        new bootstrap.Modal(document.getElementById('modalDerrota')).show();
-      } else {
-        document.getElementById('modalDerrota')?.classList.add('show');
-        document.getElementById('modalDerrota').style.display = 'block';
-      }
-      return;
-    }
+    let isLocked = localStorage.getItem(STORAGE_KEYS.LOCK) === '1';
+    const MAX_HINTS = 3;
+    const MAX_SWAPS = 3;
+
+    let usedHints = Number(localStorage.getItem(STORAGE_KEYS.USED_HINTS) || 0);
+    let usedSwaps = Number(localStorage.getItem(STORAGE_KEYS.USED_SWAPS) || 0);
 
     let idx = 0;
     let score = 0;
-
-    const MAX_HINTS = 3;
-    const MAX_SWAPS = 3;
-    let usedHints = 0;
-    let usedSwaps = 0;
+    let hasSavedScore = false;
 
     const nivel = document.getElementById('nivel');
     const pontuacao = document.getElementById('pontuacao');
@@ -141,6 +141,34 @@
     const altCards = Array.from(document.querySelectorAll('.card-alternativas'));
     const btnHint = document.getElementById('btnHint');
     const btnSwap = document.getElementById('btnSwap');
+    const btnVoltarMenuDerrota = document.getElementById('btnVoltarMenu');
+    const btnVoltarMenuVitoria = document.getElementById('btnVoltarMenuVitoria');
+
+    function getModal(id) {
+      const el = document.getElementById(id);
+      if (!el) return null;
+      const modal = (window.bootstrap?.Modal)
+        ? new bootstrap.Modal(el, { backdrop: 'static', keyboard: false })
+        : null;
+
+      el.addEventListener('hide.bs.modal', (e) => {
+        if (localStorage.getItem(STORAGE_KEYS.LOCK) === '1') e.preventDefault();
+      });
+
+      return { el, modal };
+    }
+
+    const derrota = getModal('modalDerrota');
+    const vitoria = getModal('modalVitoria');
+
+    function showModal(mod) {
+      if (!mod) return;
+      if (mod.modal) mod.modal.show();
+      else {
+        mod.el.classList.add('show');
+        mod.el.style.display = 'block';
+      }
+    }
 
     function disableIcon(el) {
       if (!el) return;
@@ -150,21 +178,19 @@
     }
 
     function updateIconsState() {
-      if (usedHints >= MAX_HINTS) disableIcon(btnHint);
-      else btnHint.title = `Mostrar dica (${MAX_HINTS - usedHints} restante${MAX_HINTS - usedHints === 1 ? '' : 's'})`;
-
-      if (usedSwaps >= MAX_SWAPS) disableIcon(btnSwap);
-      else btnSwap.title = `Trocar questão (${MAX_SWAPS - usedSwaps} restante${MAX_SWAPS - usedSwaps === 1 ? '' : 's'})`;
-    }
-
-    function showModal(id) {
-      const el = document.getElementById(id);
-      if (!el) return;
-      if (window.bootstrap?.Modal) {
-        new bootstrap.Modal(el).show();
-      } else {
-        el.classList.add('show');
-        el.style.display = 'block';
+      if (usedHints >= MAX_HINTS) {
+        disableIcon(btnHint);
+      } else if (btnHint) {
+        btnHint.style.opacity = '';
+        btnHint.style.pointerEvents = '';
+        btnHint.title = `Mostrar dica (${MAX_HINTS - usedHints} restante${MAX_HINTS - usedHints === 1 ? '' : 's'})`;
+      }
+      if (usedSwaps >= MAX_SWAPS) {
+        disableIcon(btnSwap);
+      } else if (btnSwap) {
+        btnSwap.style.opacity = '';
+        btnSwap.style.pointerEvents = '';
+        btnSwap.title = `Trocar questão (${MAX_SWAPS - usedSwaps} restante${MAX_SWAPS - usedSwaps === 1 ? '' : 's'})`;
       }
     }
 
@@ -183,7 +209,13 @@
     function render(i) {
       const q = qs[i];
       if (!q) {
-        showModal('modalVitoria');
+        const totalMax = qs.length * 10;
+        if (!hasSavedScore && score === totalMax) {
+          hasSavedScore = true;
+          saveScore(score).finally(() => showModal(vitoria));
+        } else {
+          showModal(vitoria);
+        }
         return;
       }
 
@@ -209,7 +241,23 @@
       updateIconsState();
     }
 
+    function lockGame() {
+      localStorage.setItem(STORAGE_KEYS.LOCK, '1');
+      isLocked = true;
+      showModal(derrota);
+      altCards.forEach(c => c.style.pointerEvents = 'none');
+      if (btnHint) btnHint.style.pointerEvents = 'none';
+      if (btnSwap) btnSwap.style.pointerEvents = 'none';
+    }
+
+    function unlockAndResetAll() {
+      localStorage.removeItem(STORAGE_KEYS.LOCK);
+      localStorage.removeItem(STORAGE_KEYS.USED_HINTS);
+      localStorage.removeItem(STORAGE_KEYS.USED_SWAPS);
+    }
+
     function check(letter) {
+      if (isLocked) return;
       const q = qs[idx];
       if (!q) return;
 
@@ -228,11 +276,18 @@
         idx++;
         setTimeout(() => {
           render(idx);
-          if (!qs[idx]) showModal('modalVitoria');
         }, 150);
       } else {
-        showModal('modalDerrota');
+        lockGame();
       }
+    }
+
+    function resetCounters() {
+      usedHints = 0;
+      usedSwaps = 0;
+      localStorage.setItem(STORAGE_KEYS.USED_HINTS, '0');
+      localStorage.setItem(STORAGE_KEYS.USED_SWAPS, '0');
+      updateIconsState();
     }
 
     const mapLetters = ['a', 'b', 'c', 'd', 'e'];
@@ -241,36 +296,77 @@
       card.addEventListener('click', () => check(mapLetters[i]));
     });
 
+    btnSwap?.addEventListener('click', () => {
+      if (isLocked) return;
+      if (usedSwaps >= MAX_SWAPS) return;
+      if (!qs[idx]) return;
+
+      const moved = qs.splice(idx, 1)[0];
+      qs.push(moved);
+
+      usedSwaps++;
+      localStorage.setItem(STORAGE_KEYS.USED_SWAPS, String(usedSwaps));
+
+      render(idx);
+      updateIconsState();
+    });
+
     btnHint?.addEventListener('click', () => {
+      if (isLocked) return;
       if (usedHints >= MAX_HINTS) return;
+
       const q = qs[idx];
       if (!q) return;
-
       hintText.textContent = q.hint || 'Sem dica para esta questão.';
       hintBox.classList.remove('d-none');
       hintBox.classList.add('show');
 
       usedHints++;
-      if (usedHints >= MAX_HINTS) disableIcon(btnHint);
-      else updateIconsState();
+      localStorage.setItem(STORAGE_KEYS.USED_HINTS, String(usedHints));
+      updateIconsState();
     });
 
-    btnSwap?.addEventListener('click', () => {
-      if (usedSwaps >= MAX_SWAPS) return;
+    function saveScore(points) {
+      const csrf = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
+      const totalQuestions = (window.__QUESTIONS__ || []).length;
 
-      idx++;
-      usedSwaps++;
+      return fetch("{{ route('rankings.store') }}", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRF-TOKEN": csrf
+        },
+        body: JSON.stringify({
+          points: points,
+          total_questions: totalQuestions
+        })
+      }).then(async (res) => {
+        if (!res.ok) {
+          const data = await res.json().catch(() => ({}));
+          console.warn("Falha ao salvar ranking:", data);
+          return false;
+        }
+        return true;
+      }).catch(err => {
+        console.error("Erro ao salvar ranking:", err);
+        return false;
+      });
+    }
 
-      if (!qs[idx]) {
-        updateIconsState();
-        showModal('modalVitoria');
-        return;
-      }
+    btnVoltarMenuDerrota?.addEventListener('click', () => unlockAndResetAll());
+    btnVoltarMenuVitoria?.addEventListener('click', () => unlockAndResetAll());
 
-      render(idx);
-      if (usedSwaps >= MAX_SWAPS) disableIcon(btnSwap);
-      else updateIconsState();
-    });
+    if (!qs.length) {
+      lockGame();
+      return;
+    }
+
+    if (isLocked) {
+      lockGame();
+      return;
+    }
+
+    resetCounters();
 
     render(idx);
   });

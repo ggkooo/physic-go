@@ -16,6 +16,7 @@ use App\Http\Controllers\ManagementController;
 use App\Http\Controllers\Management\SchoolController;
 use App\Http\Controllers\Management\UserController;
 use App\Http\Controllers\ChallengeController;
+use App\Http\Controllers\RankingController;
 
 // AUTHENTICATION ROUTES
     // Login
@@ -220,3 +221,8 @@ use App\Http\Controllers\ChallengeController;
 // CHALLENGE
     // Display
     Route::get('/challenge/display', [ChallengeController::class, 'display'])->name('challenge.display');
+
+    // Ranking 
+    Route::post('/rankings', [RankingController::class, 'store'])
+    ->name('rankings.store')
+    ->middleware('auth');
