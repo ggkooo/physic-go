@@ -11,13 +11,13 @@
     </div>
 
     <div class="col-10 col-md-3 mb-4">
-        <a href="{{ route('game.menu') }}" class="btn btn-danger w-100 p-3 btn-default btn-raise">JOGAR</a>
+        <a href="{{ route('game.menu') }}" class="btn btn-danger w-100 p-3 btn-default btn-raise disabled">JOGAR</a>
     </div>
     <div class="col-10 col-md-3 mb-4">
-        <a href="{{ route('study') }}" class="btn btn-danger w-100 p-3 btn-default btn-raise">ESTUDAR</a>
+        <a href="{{ route('study') }}" class="btn btn-danger w-100 p-3 btn-default btn-raise disabled">ESTUDAR</a>
     </div>
     <div class="col-10 col-md-3 mb-4">
-        <a href="{{ route('config.account') }}" class="btn btn-danger w-100 p-3 btn-default btn-raise">CONFIGURAR</a>
+        <a href="{{ route('config.account') }}" class="btn btn-danger w-100 p-3 btn-default btn-raise disabled">CONFIGURAR</a>
     </div>
     <div class="col-10 col-md-3 mb-4">
         <a href="{{ route('credits') }}"><button
