@@ -15,6 +15,7 @@ use App\Http\Controllers\GameController;
 use App\Http\Controllers\ManagementController;
 use App\Http\Controllers\Management\SchoolController;
 use App\Http\Controllers\Management\UserController;
+use App\Http\Controllers\Management\QuestionController;
 use App\Http\Controllers\ChallengeController;
 use App\Http\Controllers\RankingController;
 
@@ -117,24 +118,24 @@ use App\Http\Controllers\RankingController;
 
     // Questions
         // show
-        Route::get('/management/questions', [ManagementController::class, 'questions'])->name('management.questions');
+        Route::get('/management/questions', [QuestionController::class, 'index'])->name('management.questions');
 
         // register
-        Route::get('/management/questions/register', [ManagementController::class, 'questionsRegister'])->name('management.questionsRegister');
-        Route::post('/management/questions/register', [ManagementController::class, 'questionsStore'])->name('management.questions.store');
+        Route::get('/management/questions/register', [QuestionController::class, 'create'])->name('management.questionsRegister');
+        Route::post('/management/questions/register', [QuestionController::class, 'store'])->name('management.questions.store');
 
         // edit
-        Route::get('/management/questions/edit/{id}', [ManagementController::class, 'questionsEdit'])->name('management.questions.edit');
-        Route::put('/management/questions/update/{id}', [ManagementController::class, 'questionsUpdate'])->name('management.questions.update');
+        Route::get('/management/questions/edit/{id}', [QuestionController::class, 'edit'])->name('management.questions.edit');
+        Route::put('/management/questions/update/{id}', [QuestionController::class, 'update'])->name('management.questions.update');
 
         // remove
-        Route::delete('/management/questions/remove/{id}', [ManagementController::class, 'questionsRemove'])->name('management.questions.remove');
+        Route::delete('/management/questions/remove/{id}', [QuestionController::class, 'destroy'])->name('management.questions.remove');
 
         // view one only
-        Route::get('/management/questions/view/{id}', [ManagementController::class, 'questionsView'])->name('management.questions.view');
+        Route::get('/management/questions/view/{id}', [QuestionController::class, 'show'])->name('management.questions.view');
 
         // view one statistics only
-        Route::get('/management/questions/statistics/{id}', [ManagementController::class, 'questionsStatistics'])->name('management.questions.statistics');
+        Route::get('/management/questions/statistics/{id}', [QuestionController::class, 'statistics'])->name('management.questions.statistics');
 
     // Grade
         // show
@@ -183,14 +184,14 @@ use App\Http\Controllers\RankingController;
 
     // Users
         // show
-        Route::get('/management/users',  [ManagementController::class, 'users'])->name('management.users');
+        Route::get('/management/users',  [UserController::class, 'users'])->name('management.users');
 
         // edit
-        Route::get('/management/users/edit/{id}', [ManagementController::class, 'usersEdit'])->name('management.users.edit');
-        Route::put('/management/users/update/{id}', [ManagementController::class, 'usersUpdate'])->name('management.users.update');
+        Route::get('/management/users/edit/{id}', [UserController::class, 'editUser'])->name('management.users.edit');
+        Route::put('/management/users/update/{id}', [UserController::class, 'updateUser'])->name('management.users.update');
 
         // remove
-        Route::delete('/management/users/remove/{id}', [ManagementController::class, 'usersRemove'])->name('management.users.remove');
+        Route::delete('/management/users/remove/{id}', [UserController::class, 'removeUser'])->name('management.users.remove');
 
     // Challenge
         // show

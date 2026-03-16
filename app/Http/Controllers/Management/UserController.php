@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Management;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Http\Requests\Management\EditUserRequest;
@@ -12,33 +11,42 @@ class UserController extends Controller
 {
     public function users()
     {
-        if (Auth::check()) {
-            $users = User::all();
-            return view('management.admin.index', [
-                'page' => 'management/users/display',
-                'users' => $users
-            ]);
+        if (!Auth::check()) {
+            return redirect()->route('login');
         }
+
+        $users = User::orderBy('name')->get();
+
+        return view('management.admin.index', [
+            'page' => 'management/users/display',
+            'users' => $users,
+        ]);
     }
 
     public function editUser($id)
     {
-        if (Auth::check()) {
-            $user = User::findOrFail($id);
-            return view('management.admin.index', [
-                'page' => 'management/users/edit',
-                'editUser' => $user
-            ]);
+        if (!Auth::check()) {
+            return redirect()->route('login');
         }
+
+        $user = User::findOrFail($id);
+
+        return view('management.admin.index', [
+            'page' => 'management/users/edit',
+            'editUser' => $user,
+        ]);
     }
     
     public function removeUser($id)
     {
-        if (Auth::check()) {
-            $user = User::findOrFail($id);
-            $user->delete();
-            return redirect()->route('management.users')->with('success', 'Usuário removido com sucesso!');
+        if (!Auth::check()) {
+            return redirect()->route('login');
         }
+
+        $user = User::findOrFail($id);
+        $user->delete();
+
+        return redirect()->route('management.users')->with('success', 'Usuário removido com sucesso!');
     }
 
     public function updateUser(EditUserRequest $request, $id)
