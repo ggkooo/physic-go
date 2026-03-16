@@ -21,22 +21,23 @@
                 <div class="col-sm-4 mb-3">
                     <label for="grade" class="form-label fw-bold">Série <span>*</span></label>
                     <select class="form-select" name="grade" id="grade" required>
-                        <option selected disabled>Selecione uma série...</option>
-                        <option value="1" {{ (isset($editQuestion) && $editQuestion->grade == '1') ? 'selected' : '' }}>Test</option>
+                        <option value="" disabled {{ old('grade', $editQuestion->grade ?? '') === '' ? 'selected' : '' }}>Selecione uma série...</option>
+                        @foreach(($grades ?? collect()) as $grade)
+                            <option value="{{ $grade->name }}" {{ old('grade', $editQuestion->grade ?? '') === $grade->name ? 'selected' : '' }}>
+                                {{ $grade->name }}
+                            </option>
+                        @endforeach
                     </select>
                 </div>
 
                 <div class="col-sm-4 mb-3">
                     <label for="content" class="form-label fw-bold">Conteúdo <span>*</span></label>
-                    <select class="form-select" name="content" id="content" required>
-                        <option selected disabled>Selecione um conteúdo...</option>
-                        <option value="2" {{ (isset($editQuestion) && $editQuestion->content == '2') ? 'selected' : '' }}>Test2</option>
-                    </select>
+                    <input class="form-control" name="content" id="content" required placeholder="Informe o conteúdo da questão..." value="{{ old('content', $editQuestion->content ?? '') }}">
                 </div>
 
                 <div class="col-sm-4 mb-3">
                     <label for="source" class="form-label fw-bold">Fonte <span>*</span></label>
-                    <input class="form-control" name="source" id="source" required placeholder="Coloque a fonte da questão..." value="{{ isset($editQuestion) ? $editQuestion->source : '' }}">
+                    <input class="form-control" name="source" id="source" required placeholder="Coloque a fonte da questão..." value="{{ old('source', $editQuestion->source ?? '') }}">
                 </div>
 
                 <div class="col-sm-6 mb-3">
@@ -93,7 +94,7 @@
 
                 <div class="col-sm-8 mb-3">
                     <label for="option_a" class="form-label fw-bold">Opção A </label>
-                    <input class="form-control" name="option_a" id="option_a" required placeholder="Option A" value="{{ isset($editQuestion) ? $editQuestion->option_a : '' }}">
+                    <input class="form-control" name="option_a" id="option_a" required placeholder="Option A" value="{{ old('option_a', $editQuestion->option_a ?? '') }}">
                 </div>
                 <div class="col-md-4 mb-3 align-self-start">
                     <label for="option_a_attachment" class="form-label fw-bold">Arquivo A</label>
@@ -102,7 +103,7 @@
 
                 <div class="col-sm-8 mb-3">
                     <label for="option_b" class="form-label fw-bold">Opção B </label>
-                    <input class="form-control" name="option_b" id="option_b" required placeholder="Option B" value="{{ isset($editQuestion) ? $editQuestion->option_b : '' }}">
+                    <input class="form-control" name="option_b" id="option_b" required placeholder="Option B" value="{{ old('option_b', $editQuestion->option_b ?? '') }}">
                 </div>
                 <div class="col-md-4 mb-3 align-self-start">
                     <label for="option_b_attachment" class="form-label fw-bold">Arquivo B</label>
@@ -111,7 +112,7 @@
 
                 <div class="col-sm-8 mb-3">
                     <label for="option_c" class="form-label fw-bold">Opção C </label>
-                    <input class="form-control" name="option_c" id="option_c" required placeholder="Option C" value="{{ isset($editQuestion) ? $editQuestion->option_c : '' }}">
+                    <input class="form-control" name="option_c" id="option_c" required placeholder="Option C" value="{{ old('option_c', $editQuestion->option_c ?? '') }}">
                 </div>
                 <div class="col-md-4 mb-3 align-self-start">
                     <label for="option_c_attachment" class="form-label fw-bold">Arquivo C</label>
@@ -120,7 +121,7 @@
 
                 <div class="col-sm-8 mb-3">
                     <label for="option_d" class="form-label fw-bold">Opção D </label>
-                    <input class="form-control" name="option_d" id="option_d" required placeholder="Option D" value="{{ isset($editQuestion) ? $editQuestion->option_d : '' }}">
+                    <input class="form-control" name="option_d" id="option_d" required placeholder="Option D" value="{{ old('option_d', $editQuestion->option_d ?? '') }}">
                 </div>
                 <div class="col-md-4 mb-3 align-self-start">
                     <label for="option_d_attachment" class="form-label fw-bold">Arquivo D</label>
@@ -129,7 +130,7 @@
 
                 <div class="col-sm-8 mb-3">
                     <label for="option_e" class="form-label fw-bold">Opção E </label>
-                    <input class="form-control" name="option_e" id="option_e" required placeholder="Option E" value="{{ isset($editQuestion) ? $editQuestion->option_e : '' }}">
+                    <input class="form-control" name="option_e" id="option_e" required placeholder="Option E" value="{{ old('option_e', $editQuestion->option_e ?? '') }}">
                 </div>
                 <div class="col-md-4 mb-3 align-self-start">
                     <label for="option_e_attachment" class="form-label fw-bold">Arquivo E</label>

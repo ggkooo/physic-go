@@ -27,7 +27,7 @@
 <div class="card border">
     <div class="card-header fw-bold d-flex justify-content-between">
         <div>Perguntas Cadastradas</div>
-        <div><a href="/management/questions/register" class="btn btn-sm btn-danger">Novo Cadastro</a></div>
+        <div><a href="{{ route('management.questionsRegister') }}" class="btn btn-sm btn-danger">Novo Cadastro</a></div>
     </div>
     <div class="card-body">
         <form method="GET" class="mb-3 d-flex align-items-center" action="{{ route('management.questions') }}">
@@ -59,7 +59,7 @@
                         @foreach($questions as $question)
                             <tr>
                                 <td>{{ $question->id }}</td>
-                                <td>{{ Str::limit(strip_tags($question->statement), 60) }}</td>
+                                <td>{{ \Illuminate\Support\Str::limit(strip_tags($question->statement), 60) }}</td>
                                 <td>{{ $question->source }}</td>
                                 <td>{{ $question->grade }}</td>
                                 <td>{{ $question->content }}</td>
@@ -74,6 +74,13 @@
                                         <a class="btn btn-secondary btn-sm" href="{{ route('management.questions.statistics', $question->id) }}" title="Statistics">
                                             <i class="bi bi-bar-chart-fill"></i>
                                         </a>
+                                        <form action="{{ route('management.questions.remove', $question->id) }}" method="post" style="display:inline;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="btn btn-secondary btn-sm" title="Remover" onclick="return confirm('Deseja remover esta pergunta?')">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+                                        </form>
                                     </div>
                                 </td>
                             </tr>
@@ -98,39 +105,46 @@
         </div>
         <div class="d-flex justify-content-between align-items-center mt-3 flex-wrap">
             <div class="text-muted small">
-                @if($questions->total() > 0)
-                    Mostrando {{ $questions->firstItem() }} a {{ $questions->lastItem() }} de {{ $questions->total() }} resultados
+                @if(method_exists($questions, 'total'))
+                    @if($questions->total() > 0)
+                        Mostrando {{ $questions->firstItem() }} a {{ $questions->lastItem() }} de {{ $questions->total() }} resultados
+                    @else
+                        Nenhum resultado encontrado
+                    @endif
                 @else
-                    Nenhum resultado encontrado
+                    @if($questions->count() > 0)
+                        Mostrando {{ $questions->count() }} resultado(s)
+                    @else
+                        Nenhum resultado encontrado
+                    @endif
                 @endif
             </div>
             <div class="pagination-container">
-                <nav>
-                    <ul class="pagination pagination-sm mb-0">
-                        {{-- Previous Page Link --}}
-                        @if ($questions->onFirstPage())
-                            <li class="page-item disabled"><span class="page-link">&laquo;</span></li>
-                        @else
-                            <li class="page-item"><a class="page-link" href="{{ $questions->previousPageUrl() }}" rel="prev">&laquo;</a></li>
-                        @endif
-
-                        {{-- Pagination Elements --}}
-                        @foreach ($questions->getUrlRange(1, $questions->lastPage()) as $page => $url)
-                            @if ($page == $questions->currentPage())
-                                <li class="page-item active"><span class="page-link">{{ $page }}</span></li>
+                @if(method_exists($questions, 'getUrlRange'))
+                    <nav>
+                        <ul class="pagination pagination-sm mb-0">
+                            @if ($questions->onFirstPage())
+                                <li class="page-item disabled"><span class="page-link">&laquo;</span></li>
                             @else
-                                <li class="page-item"><a class="page-link" href="{{ $url }}">{{ $page }}</a></li>
+                                <li class="page-item"><a class="page-link" href="{{ $questions->previousPageUrl() }}" rel="prev">&laquo;</a></li>
                             @endif
-                        @endforeach
 
-                        {{-- Next Page Link --}}
-                        @if ($questions->hasMorePages())
-                            <li class="page-item"><a class="page-link" href="{{ $questions->nextPageUrl() }}" rel="next">&raquo;</a></li>
-                        @else
-                            <li class="page-item disabled"><span class="page-link">&raquo;</span></li>
-                        @endif
-                    </ul>
-                </nav>
+                            @foreach ($questions->getUrlRange(1, $questions->lastPage()) as $page => $url)
+                                @if ($page == $questions->currentPage())
+                                    <li class="page-item active"><span class="page-link">{{ $page }}</span></li>
+                                @else
+                                    <li class="page-item"><a class="page-link" href="{{ $url }}">{{ $page }}</a></li>
+                                @endif
+                            @endforeach
+
+                            @if ($questions->hasMorePages())
+                                <li class="page-item"><a class="page-link" href="{{ $questions->nextPageUrl() }}" rel="next">&raquo;</a></li>
+                            @else
+                                <li class="page-item disabled"><span class="page-link">&raquo;</span></li>
+                            @endif
+                        </ul>
+                    </nav>
+                @endif
             </div>
         </div>
     </div>

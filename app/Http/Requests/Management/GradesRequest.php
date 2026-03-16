@@ -1,18 +1,17 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Management;
 
 use Illuminate\Foundation\Http\FormRequest;
-use PhpParser\Node\Expr\Array_;
 
 class GradesRequest extends FormRequest
 {
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
 
-    public function rules()
+    public function rules(): array
     {
         return [
             'name' => 'required|string|max:255',

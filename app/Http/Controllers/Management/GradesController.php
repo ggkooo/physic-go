@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Management;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\GradesRequest;
+use App\Http\Requests\Management\GradesRequest;
 use App\Models\Grade;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
