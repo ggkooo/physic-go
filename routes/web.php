@@ -220,8 +220,6 @@ use App\Http\Controllers\RankingController;
             Route::delete('/management/challenge/{challenge_id}/questions/remove/{question_id}', [ManagementController::class, 'challengeQuestionsRemove'])->name('management.challenge.questions.remove');
 
 // CHALLENGE
-    // Display
-    Route::get('/challenge/display', [ChallengeController::class, 'display'])->name('challenge.display');
 
     // Ranking 
     Route::post('/rankings', [RankingController::class, 'store'])

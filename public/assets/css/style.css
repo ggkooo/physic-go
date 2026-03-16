@@ -1,8 +1,11 @@
 body {
-    background-color: black;
+    background:
+        radial-gradient(circle at top, rgba(255, 255, 255, 0.05), transparent 30%),
+        linear-gradient(180deg, #050505 0%, #0f0f10 100%);
     color: white;
-    font-family: "Space Mono", sans-serif;
-    letter-spacing: 1.5px;
+    font-family: "Poppins", sans-serif;
+    letter-spacing: 0.4px;
+    min-height: 100vh;
 }
 
 .hide {
@@ -36,19 +39,135 @@ body {
     border: 1px solid #dc3545;
 }
 
-
-
 .btn-raise {
-    transition: transform 0.2s ease;
-    letter-spacing: 1.2px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    letter-spacing: 1px;
 }
 
 .btn-raise:hover {
     transform: translateY(-3px);
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
-
 }
 
+/* HOME */
+.home-panel {
+    background: rgba(24, 24, 27, 0.92);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 28px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(10px);
+    overflow: hidden;
+}
+
+.home-panel-content {
+    padding: 2.5rem 2rem;
+}
+
+.home-icon {
+    width: 84px;
+    height: 84px;
+    margin: 0 auto;
+    border-radius: 50%;
+    background: rgba(220, 53, 69, 0.12);
+    border: 1px solid rgba(220, 53, 69, 0.28);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.home-icon i {
+    font-size: 2rem;
+    color: #dc3545;
+}
+
+.home-title {
+    font-size: clamp(1.8rem, 4vw, 2.4rem);
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: -0.4px;
+}
+
+.home-subtitle {
+    color: #b3b3b8;
+    font-size: 0.98rem;
+    line-height: 1.6;
+    max-width: 320px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* .home-start-btn {
+    min-height: 56px;
+    border: none;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 1rem;
+    letter-spacing: 0.3px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    box-shadow: 0 10px 24px rgba(220, 53, 69, 0.22);
+}
+
+.home-start-btn:hover,
+.home-start-btn:focus {
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 14px 30px rgba(220, 53, 69, 0.28);
+    background: linear-gradient(135deg, #ac2230 0%, #c82333 100%);
+}
+
+.home-start-btn:active {
+    transform: translateY(0);
+} */
+
+.home-start-btn {
+    min-height: 56px;
+    border: none;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #ac201f 0%, #8e1a19 100%);
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 1rem;
+    letter-spacing: 0.3px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    box-shadow: 0 10px 24px rgba(172, 32, 31, 0.35);
+}
+
+.home-start-btn:hover,
+.home-start-btn:focus {
+    color: #ffffff;
+    transform: translateY(-2px);
+    background: linear-gradient(135deg, #c52a29 0%, #ac201f 100%);
+    box-shadow: 0 14px 32px rgba(172, 32, 31, 0.45);
+}
+
+.home-start-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 6px 14px rgba(172, 32, 31, 0.35);
+}
+
+.home-logout-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #b3b3b8;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: color 0.2s ease, transform 0.2s ease;
+    margin-top: 12px;
+}
+
+.home-logout-link:hover {
+    color: #ffffff;
+    transform: translateY(-1px);
+}
 
 .btn-exit {
     display: flex;
@@ -116,7 +235,6 @@ body {
     background-color: #fff;
 }
 
-
 .icon-credits {
     color: #c1c0c0;
     transition: color 0.3s ease;
@@ -126,7 +244,6 @@ body {
     color: #fff;
     cursor: pointer;
 }
-
 
 .card-questions {
     position: relative;
@@ -162,7 +279,6 @@ body {
     background: #dc3545;
     z-index: -1;
     transform-origin: bottom;
-
     border-radius: inherit;
     transition: all 0.48s cubic-bezier(0.23, 1, 0.32, 1);
 }
@@ -228,7 +344,7 @@ body {
 .card-alternativas {
     background-color: #dc3545;
     border-radius: 20px;
-    transition: transform 0.2s ease;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
 }
 
 .card-alternativas:hover {
@@ -251,7 +367,6 @@ body {
     color: #fff;
     letter-spacing: 1px;
     font-size: 15px;
-
     padding-top: clamp(64px, 12vw, 80px) !important;
 }
 
@@ -278,7 +393,6 @@ body {
     align-items: center;
     justify-content: center;
     margin: 0;
-
     color: #fff;
     font-weight: 700;
     font-size: clamp(1rem, 3.5vw, 1.5rem);
@@ -292,15 +406,6 @@ body {
     color: #222;
     letter-spacing: 1px;
 }
-
-@media (min-width: 768px) {
-    .ranking-banner {
-        transform: translate(-50%, -55%);
-    }
-}
-
-
-
 
 .badge-new {
     position: absolute;
@@ -327,7 +432,7 @@ body {
     left: -40%;
     height: 100%;
     width: 40%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 100), transparent);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 1), transparent);
     transform: skewX(-20deg);
     animation: badgeShimmer 3.2s ease-in-out infinite;
     pointer-events: none;
@@ -336,7 +441,7 @@ body {
 @keyframes badgeShimmer {
     0% {
         left: -50%;
-        opacity: .0;
+        opacity: 0;
     }
 
     20% {
@@ -345,12 +450,12 @@ body {
 
     50% {
         left: 120%;
-        opacity: .0;
+        opacity: 0;
     }
 
     100% {
         left: 120%;
-        opacity: .0;
+        opacity: 0;
     }
 }
 
@@ -367,15 +472,6 @@ body {
         opacity: .85;
     }
 }
-
-@media (prefers-reduced-motion: reduce) {
-
-    .badge-new::after,
-    .sparkle {
-        animation: none;
-    }
-}
-
 
 .hint-box {
     background: linear-gradient(135deg, #343a40, #23272b);
@@ -396,7 +492,6 @@ body {
     align-items: center;
     justify-content: center;
 }
-
 
 .hint-box h6 {
     letter-spacing: 0.5px;
@@ -424,3 +519,55 @@ body {
     }
 }
 
+@media (min-width: 768px) {
+    .ranking-banner {
+        transform: translate(-50%, -55%);
+    }
+}
+
+@media (max-width: 576px) {
+    body {
+        letter-spacing: 0.2px;
+    }
+
+    .home-panel-content {
+        padding: 2rem 1.25rem;
+    }
+
+    .home-icon {
+        width: 72px;
+        height: 72px;
+    }
+
+    .home-icon i {
+        font-size: 1.7rem;
+    }
+
+    .home-title {
+        font-size: 1.7rem;
+    }
+
+    .home-subtitle {
+        font-size: 0.92rem;
+    }
+
+    .home-start-btn {
+        min-height: 52px;
+        font-size: 0.95rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .badge-new::after,
+    .sparkle,
+    .btn-raise,
+    .card-contact,
+    .card-questions,
+    .card-alternativas,
+    .home-start-btn,
+    .home-logout-link {
+        animation: none !important;
+        transition: none !important;
+    }
+}
