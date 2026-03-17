@@ -12,7 +12,7 @@
                         Inicie o desafio e teste seus conhecimentos.
                     </p>
 
-                    <div class="d-grid mb-3">
+                    <div class="d-grid mb-4">
                         <a href="{{ route('game.menu') }}" class="btn home-start-btn">
                             <i class="bi bi-play-fill me-2"></i>
                             Iniciar Quiz
