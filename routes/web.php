@@ -20,210 +20,208 @@ use App\Http\Controllers\ChallengeController;
 use App\Http\Controllers\RankingController;
 
 // AUTHENTICATION ROUTES
-    // Login
-    Route::get('/users/login', [LoginController::class, 'showLoginForm'])->name('login');
-    Route::post('/users/login', [LoginController::class, 'login'])->name('login.submit');
+// Login
+Route::get('/users/login', [LoginController::class, 'showLoginForm'])->name('login');
+Route::post('/users/login', [LoginController::class, 'login'])->name('login.submit');
 
-    // Register
-    Route::get('/users/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
-    Route::post('/users/register', [RegisterController::class, 'register'])->name('register.submit');
+// Register
+Route::get('/users/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
+Route::post('/users/register', [RegisterController::class, 'register'])->name('register.submit');
 
-    // Logout
-    Route::get('/users/logout', [LoginController::class, 'logout'])->name('logout');
+// Logout
+Route::get('/users/logout', [LoginController::class, 'logout'])->name('logout');
 
-    // Password Reset
-    Route::get('password/reset', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.reset');
-    Route::post('password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
-    Route::get('password/reset/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset.token');
-    Route::post('password/reset', [ResetPasswordController::class, 'reset'])->name('password.update');
+// Password Reset
+Route::get('password/reset', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.reset');
+Route::post('password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
+Route::get('password/reset/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset.token');
+Route::post('password/reset', [ResetPasswordController::class, 'reset'])->name('password.update');
 
-    // Google
-    Route::get('auth/google', [GoogleController::class, 'redirectToGoogle'])->name('google.login');
-    Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
+// Google
+Route::get('auth/google', [GoogleController::class, 'redirectToGoogle'])->name('google.login');
+Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
 
 // ACCOUNT
-    Route::get('/account', [ConfigAccountController::class, 'index'])->name('config.account');
-    Route::post('/account', [ConfigAccountController::class, 'update'])->name('config.account.update');
+Route::get('/account', [ConfigAccountController::class, 'index'])->name('config.account');
+Route::post('/account', [ConfigAccountController::class, 'update'])->name('config.account.update');
 
 // PAGES ROUTES
-    // Redirect root to /home
-    Route::get('/', function () {
-        return redirect()->route('home');
-    });
+// Redirect root to /home
+Route::get('/', function () {
+    return redirect()->route('home');
+});
 
-    // Home
-    Route::get('/home', [HomeController::class, 'index'])->name('home');
+// Home
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-    // Credits
-    Route::get('/credits', [HomeController::class, 'credits'])->name('credits');
+// Credits
+// Route::get('/credits', [HomeController::class, 'credits'])->name('credits');
 
-    // Contact
-    Route::get('/contact', [ContactController::class, 'index'])->name('contact');
+// Contact
+// Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 
-    // Study
-        //Display
-        Route::get('/study', [StudyController::class, 'index'])->name('study');
+// Study
+//Display
+Route::get('/study', [StudyController::class, 'index'])->name('study');
 
-        //Elementary school
-        Route::get('/study/elementary_school', [StudyController::class, 'elementary_school'])->name('study.elementary_school');
-        Route::get('/study/elementary_school/sixth', [StudyController::class, 'sixth'])->name('study.sixth');
-        Route::get('/study/elementary_school/seventh', [StudyController::class, 'seventh'])->name('study.seventh');
-        Route::get('/study/elementary_school/eighth', [StudyController::class, 'eighth'])->name('study.eighth');
-        Route::get('/study/elementary_school/ninth', [StudyController::class, 'ninth'])->name('study.ninth');
+//Elementary school
+Route::get('/study/elementary_school', [StudyController::class, 'elementary_school'])->name('study.elementary_school');
+Route::get('/study/elementary_school/sixth', [StudyController::class, 'sixth'])->name('study.sixth');
+Route::get('/study/elementary_school/seventh', [StudyController::class, 'seventh'])->name('study.seventh');
+Route::get('/study/elementary_school/eighth', [StudyController::class, 'eighth'])->name('study.eighth');
+Route::get('/study/elementary_school/ninth', [StudyController::class, 'ninth'])->name('study.ninth');
 
-        //Ninth qualification
-        Route::get('/study/ninth_qualification', [StudyController::class, 'ninth_qualification'])->name('study.ninth_qualification');
+//Ninth qualification
+Route::get('/study/ninth_qualification', [StudyController::class, 'ninth_qualification'])->name('study.ninth_qualification');
 
-        //High School
-        Route::get('/study/high_school', [StudyController::class, 'high_school'])->name('study.high_school');
-        Route::get('/study/high_school/first', [StudyController::class, 'first'])->name('study.first');
-        Route::get('/study/high_school/second', [StudyController::class, 'second'])->name('study.second');
-        Route::get('/study/high_school/third', [StudyController::class, 'third'])->name('study.third');
+//High School
+Route::get('/study/high_school', [StudyController::class, 'high_school'])->name('study.high_school');
+Route::get('/study/high_school/first', [StudyController::class, 'first'])->name('study.first');
+Route::get('/study/high_school/second', [StudyController::class, 'second'])->name('study.second');
+Route::get('/study/high_school/third', [StudyController::class, 'third'])->name('study.third');
 
-    // Game
-    Route::get('/game/menu', [GameController::class, 'menu'])->name('game.menu');
-    Route::get('/game/new', [GameController::class, 'new'])->name('game.new');
-    Route::get('/game/display', [GameController::class, 'display'])->name('game.display');
-    Route::get('/game/students-ranking', [GameController::class, 'students_ranking'])->name('game.students-ranking');
-    Route::get('/game/questions-by-grade', [GameController::class, 'questionsByGrade'])->name('game.questions-by-grade');
-    Route::post('/game/save-ranking', [GameController::class, 'saveRanking'])->name('game.save-ranking');
-    Route::get('/game/schools-ranking', [GameController::class, 'schools_ranking'])->name('game.schools-ranking');
-    Route::get('/game/rules', [GameController::class, 'rules'])->name('game.rules');
+// Game
+Route::get('/game/menu', [GameController::class, 'menu'])->name('game.menu');
+Route::get('/game/new', [GameController::class, 'new'])->name('game.new');
+Route::get('/game/students-ranking', [GameController::class, 'students_ranking'])->name('game.students-ranking');
+Route::get('/game/display/{grade}', [GameController::class, 'display'])->name('game.display');
+Route::get('/game/questions-by-serie/{grade}', [GameController::class, 'questionsBySerie'])->name('game.questionsBySerie');
+Route::post('/game/save-ranking', [GameController::class, 'saveRanking'])->name('game.save-ranking');
+// Route::get('/game/schools-ranking', [GameController::class, 'schools_ranking'])->name('game.schools-ranking');
+// Route::get('/game/rules', [GameController::class, 'rules'])->name('game.rules');
 
 // MANAGEMENT
-    // Home
-    Route::get('/management/home', [ManagementController::class, 'home'])->name('management.home');
+// Home
+Route::get('/management/home', [ManagementController::class, 'home'])->name('management.home');
 
-    // Publications
-    Route::get('/management/publications', [ManagementController::class, 'publications'])->name('management.publications');
+// Publications
+Route::get('/management/publications', [ManagementController::class, 'publications'])->name('management.publications');
 
-    // Schools
-        // show
-        Route::get('/management/schools', [SchoolController::class, 'schools'])->name('management.schools');
+// Schools
+// show
+Route::get('/management/schools', [SchoolController::class, 'schools'])->name('management.schools');
 
-        // register
-        Route::get('/management/schools/register', [SchoolController::class, 'register'])->name('management.schools.register');
-        Route::post('/management/schools/register', [SchoolController::class, 'store'])->name('management.schools.store');
+// register
+Route::get('/management/schools/register', [SchoolController::class, 'register'])->name('management.schools.register');
+Route::post('/management/schools/register', [SchoolController::class, 'store'])->name('management.schools.store');
 
-        // edit, update, remove
-        Route::delete('/management/schools/remove/{id}', [SchoolController::class, 'remove'])->name('management.schools.remove');
-        Route::get('/management/schools/edit/{id}', [SchoolController::class, 'edit'])->name('management.schools.edit');
-        Route::put('/management/schools/update/{id}', [SchoolController::class, 'update'])->name('management.schools.update');
+// edit, update, remove
+Route::delete('/management/schools/remove/{id}', [SchoolController::class, 'remove'])->name('management.schools.remove');
+Route::get('/management/schools/edit/{id}', [SchoolController::class, 'edit'])->name('management.schools.edit');
+Route::put('/management/schools/update/{id}', [SchoolController::class, 'update'])->name('management.schools.update');
 
-    // Messages
-    Route::get('/management/messages', [ManagementController::class, 'messages'])->name('management.messages');
+// Messages
+Route::get('/management/messages', [ManagementController::class, 'messages'])->name('management.messages');
 
-    // Statistics
-    Route::get('/management/statistics', [ManagementController::class, 'statistics'])->name('management.statistics');
+// Statistics
+Route::get('/management/statistics', [ManagementController::class, 'statistics'])->name('management.statistics');
 
-    // Questions
-        // show
-        Route::get('/management/questions', [QuestionController::class, 'index'])->name('management.questions');
+// Questions
+// show
+Route::get('/management/questions', [QuestionController::class, 'index'])->name('management.questions');
 
-        // register
-        Route::get('/management/questions/register', [QuestionController::class, 'create'])->name('management.questionsRegister');
-        Route::post('/management/questions/register', [QuestionController::class, 'store'])->name('management.questions.store');
+// register
+Route::get('/management/questions/register', [QuestionController::class, 'create'])->name('management.questionsRegister');
+Route::post('/management/questions/register', [QuestionController::class, 'store'])->name('management.questions.store');
 
-        // edit
-        Route::get('/management/questions/edit/{id}', [QuestionController::class, 'edit'])->name('management.questions.edit');
-        Route::put('/management/questions/update/{id}', [QuestionController::class, 'update'])->name('management.questions.update');
+// edit
+Route::get('/management/questions/edit/{id}', [QuestionController::class, 'edit'])->name('management.questions.edit');
+Route::put('/management/questions/update/{id}', [QuestionController::class, 'update'])->name('management.questions.update');
 
-        // remove
-        Route::delete('/management/questions/remove/{id}', [QuestionController::class, 'destroy'])->name('management.questions.remove');
+// remove
+Route::delete('/management/questions/remove/{id}', [QuestionController::class, 'destroy'])->name('management.questions.remove');
 
-        // view one only
-        Route::get('/management/questions/view/{id}', [QuestionController::class, 'show'])->name('management.questions.view');
+// view one only
+Route::get('/management/questions/view/{id}', [QuestionController::class, 'show'])->name('management.questions.view');
 
-        // view one statistics only
-        Route::get('/management/questions/statistics/{id}', [QuestionController::class, 'statistics'])->name('management.questions.statistics');
+// view one statistics only
+Route::get('/management/questions/statistics/{id}', [QuestionController::class, 'statistics'])->name('management.questions.statistics');
 
-    // Grade
-        // show
-        Route::get('/management/grades', [GradesController::class, 'grades'])->name('management.grades');
+// Grade
+// show
+Route::get('/management/grades', [GradesController::class, 'grades'])->name('management.grades');
 
-        // register
-        Route::get('/management/grades/register', [GradesController::class, 'register'])->name('management.grades.register');
-        Route::post('/management/grades/register', [GradesController::class, 'store'])->name('management.grades.store');
+// register
+Route::get('/management/grades/register', [GradesController::class, 'register'])->name('management.grades.register');
+Route::post('/management/grades/register', [GradesController::class, 'store'])->name('management.grades.store');
 
-        // edit
-        Route::get('/management/grades/edit/{id}', [GradesController::class, 'edit'])->name('management.grades.edit');
-        Route::put('/management/grades/update/{id}', [GradesController::class, 'update'])->name('management.grades.update');
+// edit
+Route::get('/management/grades/edit/{id}', [GradesController::class, 'edit'])->name('management.grades.edit');
+Route::put('/management/grades/update/{id}', [GradesController::class, 'update'])->name('management.grades.update');
 
-        // remove
-        Route::delete('/management/grades/remove/{id}', [GradesController::class, 'remove'])->name('management.grades.remove');
+// remove
+Route::delete('/management/grades/remove/{id}', [GradesController::class, 'remove'])->name('management.grades.remove');
 
-    // Content
-        // show
-        Route::get('/management/contents', [ManagementController::class, 'contents'])->name('management.contents');
+// Content
+// show
+Route::get('/management/contents', [ManagementController::class, 'contents'])->name('management.contents');
 
-        // register
-        Route::get('/management/contents/register', [ManagementController::class, 'contentsRegister'])->name('management.contents.register');
-        Route::post('/management/contents/register', [ManagementController::class, 'contentsStore'])->name('management.contents.store');
+// register
+Route::get('/management/contents/register', [ManagementController::class, 'contentsRegister'])->name('management.contents.register');
+Route::post('/management/contents/register', [ManagementController::class, 'contentsStore'])->name('management.contents.store');
 
-        // edit
-        Route::get('/management/contents/edit/{id}', [ManagementController::class, 'contentsEdit'])->name('management.contents.edit');
-        Route::put('/management/contents/update/{id}', [ManagementController::class, 'contentsUpdate'])->name('management.contents.update');
+// edit
+Route::get('/management/contents/edit/{id}', [ManagementController::class, 'contentsEdit'])->name('management.contents.edit');
+Route::put('/management/contents/update/{id}', [ManagementController::class, 'contentsUpdate'])->name('management.contents.update');
 
-        // remove
-        Route::delete('/management/contents/remove/{id}', [ManagementController::class, 'contentsRemove'])->name('management.contents.remove');
+// remove
+Route::delete('/management/contents/remove/{id}', [ManagementController::class, 'contentsRemove'])->name('management.contents.remove');
 
-    // Template
-        // show
-        Route::get('/management/template', [ManagementController::class, 'template'])->name('management.template');
+// Template
+// show
+Route::get('/management/template', [ManagementController::class, 'template'])->name('management.template');
 
-        // register
-        Route::get('/management/template/register', [ManagementController::class, 'templateRegister'])->name('management.template.register');
-        Route::post('/management/template/register', [ManagementController::class, 'templateStore'])->name('management.template.store');
+// register
+Route::get('/management/template/register', [ManagementController::class, 'templateRegister'])->name('management.template.register');
+Route::post('/management/template/register', [ManagementController::class, 'templateStore'])->name('management.template.store');
 
-        // edit
-        Route::get('/management/template/edit/{id}', [ManagementController::class, 'templateEdit'])->name('management.template.edit');
-        Route::put('/management/template/update/{id}', [ManagementController::class, 'templateUpdate'])->name('management.template.update');
+// edit
+Route::get('/management/template/edit/{id}', [ManagementController::class, 'templateEdit'])->name('management.template.edit');
+Route::put('/management/template/update/{id}', [ManagementController::class, 'templateUpdate'])->name('management.template.update');
 
-        // remove
-        Route::delete('/management/template/remove/{id}', [ManagementController::class, 'templateRemove'])->name('management.template.remove');
+// remove
+Route::delete('/management/template/remove/{id}', [ManagementController::class, 'templateRemove'])->name('management.template.remove');
 
-    // Users
-        // show
-        Route::get('/management/users',  [UserController::class, 'users'])->name('management.users');
+// Users
+// show
+Route::get('/management/users', [UserController::class, 'users'])->name('management.users');
 
-        // edit
-        Route::get('/management/users/edit/{id}', [UserController::class, 'editUser'])->name('management.users.edit');
-        Route::put('/management/users/update/{id}', [UserController::class, 'updateUser'])->name('management.users.update');
+// edit
+Route::get('/management/users/edit/{id}', [UserController::class, 'editUser'])->name('management.users.edit');
+Route::put('/management/users/update/{id}', [UserController::class, 'updateUser'])->name('management.users.update');
 
-        // remove
-        Route::delete('/management/users/remove/{id}', [UserController::class, 'removeUser'])->name('management.users.remove');
+// remove
+Route::delete('/management/users/remove/{id}', [UserController::class, 'removeUser'])->name('management.users.remove');
 
-    // Challenge
-        // show
-        Route::get('/management/challenge', [ManagementController::class, 'challenge'])->name('management.challenge');
+// Challenge
+// show
+Route::get('/management/challenge', [ManagementController::class, 'challenge'])->name('management.challenge');
 
-        // register
-        Route::get('/management/challenge/register', [ManagementController::class, 'challengeRegister'])->name('management.challenge.register');
-        Route::post('/management/challenge/register', [ManagementController::class, 'challengeStore'])->name('management.challenge.store');
+// register
+Route::get('/management/challenge/register', [ManagementController::class, 'challengeRegister'])->name('management.challenge.register');
+Route::post('/management/challenge/register', [ManagementController::class, 'challengeStore'])->name('management.challenge.store');
 
-        // edit
-        Route::get('/management/challenge/edit/{id}', [ManagementController::class, 'challengeEdit'])->name('management.challenge.edit');
-        Route::put('/management/challenge/update/{id}', [ManagementController::class, 'challengeUpdate'])->name('management.challenge.update');
+// edit
+Route::get('/management/challenge/edit/{id}', [ManagementController::class, 'challengeEdit'])->name('management.challenge.edit');
+Route::put('/management/challenge/update/{id}', [ManagementController::class, 'challengeUpdate'])->name('management.challenge.update');
 
-        // remove
-        Route::delete('/management/challenge/remove/{id}', [ManagementController::class, 'challengeRemove'])->name('management.challenge.remove');
+// remove
+Route::delete('/management/challenge/remove/{id}', [ManagementController::class, 'challengeRemove'])->name('management.challenge.remove');
 
-        // questions in a challenge
-            // show
-            Route::get('/management/challenge/{id}/questions', [ManagementController::class, 'challengeQuestions'])->name('management.challenge.questions');
+// questions in a challenge
+// show
+Route::get('/management/challenge/{id}/questions', [ManagementController::class, 'challengeQuestions'])->name('management.challenge.questions');
 
-            // add question to challenge
-            Route::get('/management/challenge/{id}/questions/add', [ManagementController::class, 'challengeQuestionsAdd'])->name('management.challenge.questions.add');
-            Route::post('/management/challenge/{id}/questions/add', [ManagementController::class, 'challengeQuestionsStore'])->name('management.challenge.questions.store');
+// add question to challenge
+Route::get('/management/challenge/{id}/questions/add', [ManagementController::class, 'challengeQuestionsAdd'])->name('management.challenge.questions.add');
+Route::post('/management/challenge/{id}/questions/add', [ManagementController::class, 'challengeQuestionsStore'])->name('management.challenge.questions.store');
 
-            // remove question from challenge
-            Route::delete('/management/challenge/{challenge_id}/questions/remove/{question_id}', [ManagementController::class, 'challengeQuestionsRemove'])->name('management.challenge.questions.remove');
+// remove question from challenge
+Route::delete('/management/challenge/{challenge_id}/questions/remove/{question_id}', [ManagementController::class, 'challengeQuestionsRemove'])->name('management.challenge.questions.remove');
 
 // CHALLENGE
-    // Display
-    Route::get('/challenge/display', [ChallengeController::class, 'display'])->name('challenge.display');
 
-    // Ranking 
-    Route::post('/rankings', [RankingController::class, 'store'])
+// Ranking 
+Route::post('/rankings', [RankingController::class, 'store'])
     ->name('rankings.store')
     ->middleware('auth');
