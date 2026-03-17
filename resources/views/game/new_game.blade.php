@@ -1,3 +1,15 @@
+@php
+    $fundamentalGrades = $grades->filter(function ($grade) {
+        preg_match('/\d+/', $grade->name, $m);
+        return isset($m[0]) && $m[0] >= 6 && $m[0] <= 9;
+    });
+
+    $medioGrades = $grades->filter(function ($grade) {
+        preg_match('/\d+/', $grade->name, $m);
+        return isset($m[0]) && $m[0] >= 1 && $m[0] <= 3;
+    });
+@endphp
+
 <div class="container d-flex align-items-center justify-content-center py-4">
     <div class="row justify-content-center w-100">
         <div class="col-12 col-lg-10 col-xl-8">
@@ -20,22 +32,16 @@
                                 </div>
 
                                 <div class="d-grid gap-3">
-                                    <a href="{{ route('game.display', ['grade' => '6']) }}"
-                                        class="btn home-start-btn grade-btn">
-                                        6º Ano
-                                    </a>
-                                    <a href="{{ route('game.display', ['grade' => '7']) }}"
-                                        class="btn home-start-btn grade-btn">
-                                        7º Ano
-                                    </a>
-                                    <a href="{{ route('game.display', ['grade' => '8']) }}"
-                                        class="btn home-start-btn grade-btn">
-                                        8º Ano
-                                    </a>
-                                    <a href="{{ route('game.display', ['grade' => '9']) }}"
-                                        class="btn home-start-btn grade-btn">
-                                        9º Ano
-                                    </a>
+                                    @forelse($fundamentalGrades as $grade)
+                                        <a href="{{ route('game.display', ['grade' => $grade->id]) }}"
+                                            class="btn home-start-btn grade-btn">
+                                            {{ $grade->name }}
+                                        </a>
+                                    @empty
+                                        <div class="text-white-50 small text-center">
+                                            Nenhuma série cadastrada.
+                                        </div>
+                                    @endforelse
                                 </div>
                             </div>
                         </div>
@@ -47,18 +53,16 @@
                                 </div>
 
                                 <div class="d-grid gap-3">
-                                    <a href="{{ route('game.display', ['grade' => '1']) }}"
-                                        class="btn home-start-btn grade-btn">
-                                        1º Ano
-                                    </a>
-                                    <a href="{{ route('game.display', ['grade' => '2']) }}"
-                                        class="btn home-start-btn grade-btn">
-                                        2º Ano
-                                    </a>
-                                    <a href="{{ route('game.display', ['grade' => '3']) }}"
-                                        class="btn home-start-btn grade-btn">
-                                        3º Ano
-                                    </a>
+                                    @forelse($medioGrades as $grade)
+                                        <a href="{{ route('game.display', ['grade' => $grade->id]) }}"
+                                            class="btn home-start-btn grade-btn">
+                                            {{ $grade->name }}
+                                        </a>
+                                    @empty
+                                        <div class="text-white-50 small text-center">
+                                            Nenhuma série cadastrada.
+                                        </div>
+                                    @endforelse
                                 </div>
                             </div>
                         </div>

@@ -49,7 +49,6 @@ body {
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
 }
 
-/* HOME */
 .home-panel {
     background: rgba(24, 24, 27, 0.92);
     border: 1px solid rgba(255, 255, 255, 0.08);
@@ -546,7 +545,6 @@ body {
 }
 
 
-/* QUIZ */
 .home-icon i.bi-patch-question-fill {
     font-size: 1.9rem;
     color: #c52a29;
@@ -999,7 +997,6 @@ body {
 }
 
 
-/* RANKING */
 .home-icon i.bi-trophy-fill {
     font-size: 1.9rem;
     color: #c52a29;

@@ -1,77 +1,115 @@
 <div class="container d-flex align-items-center justify-content-center py-4">
     <div class="row justify-content-center w-100">
         <div class="col-12 col-xl-9">
-            <div class="home-panel">
-                <div class="home-panel-content">
 
-                    <div class="quiz-status-bar mb-4">
-                        <div class="quiz-status-item">
-                            <span class="quiz-status-label">Nível</span>
-                            <strong id="nivel" class="quiz-status-value">Nível 1</strong>
-                        </div>
+            <div id="quizWrapper">
+                <div class="home-panel">
+                    <div class="home-panel-content">
 
-                        <div class="quiz-status-item text-center">
-                            <span class="quiz-status-label">Tentativas</span>
+                        <div class="quiz-status-bar mb-4">
+                            <div class="quiz-status-item">
+                                <span class="quiz-status-label">Nível</span>
+                                <strong id="nivel" class="quiz-status-value">Nível 1</strong>
+                            </div>
 
-                            <div id="vidasContainer" class="quiz-lives mt-2" aria-label="Vidas restantes">
-                                <i class="bi bi-heart-fill"></i>
-                                <i class="bi bi-heart-fill"></i>
-                                <i class="bi bi-heart-fill"></i>
+                            <div class="quiz-status-item text-center">
+                                <span class="quiz-status-label">Tentativas</span>
+
+                                <div id="vidasContainer" class="quiz-lives mt-2 d-flex justify-content-center" aria-label="Vidas restantes">
+                                    <i class="bi bi-heart-fill"></i>
+                                    <i class="bi bi-heart-fill"></i>
+                                    <i class="bi bi-heart-fill"></i>
+                                </div>
+                            </div>
+
+                            <div class="quiz-status-item text-md-end">
+                                <span class="quiz-status-label">Pontuação</span>
+                                <strong id="pontuacao" class="quiz-status-value">Pontuação: 0</strong>
                             </div>
                         </div>
 
-                        <div class="quiz-status-item text-md-end">
-                            <span class="quiz-status-label">Pontuação</span>
-                            <strong id="pontuacao" class="quiz-status-value">Pontuação: 0</strong>
+                        <div class="quiz-question-card mb-4">
+                            <p class="quiz-question-text mb-0">
+                                <span id="enunciado"></span>
+                            </p>
                         </div>
-                    </div>
 
-                    <div class="quiz-question-card mb-4">
-                        <p class="quiz-question-text mb-0">
-                            <span id="enunciado"></span>
-                        </p>
-                    </div>
-
-                    <div class="quiz-options">
-                        <button type="button" class="quiz-option-btn" data-alt="a">
-                            <span class="quiz-option-letter">A</span>
-                            <span id="alternativa_a" class="quiz-option-text"></span>
-                        </button>
-
-                        <button type="button" class="quiz-option-btn" data-alt="b">
-                            <span class="quiz-option-letter">B</span>
-                            <span id="alternativa_b" class="quiz-option-text"></span>
-                        </button>
-
-                        <button type="button" class="quiz-option-btn" data-alt="c">
-                            <span class="quiz-option-letter">C</span>
-                            <span id="alternativa_c" class="quiz-option-text"></span>
-                        </button>
-
-                        <button type="button" class="quiz-option-btn" data-alt="d">
-                            <span class="quiz-option-letter">D</span>
-                            <span id="alternativa_d" class="quiz-option-text"></span>
-                        </button>
-                    </div>
-
-                    <div class="quiz-footer mt-4">
-                        <div class="quiz-footer-icons">
-                            <button type="button" class="quiz-icon-btn" title="Dica">
-                                <i class="bi bi-lightbulb-fill"></i>
+                        <div class="quiz-options">
+                            <button type="button" class="quiz-option-btn" data-alt="a">
+                                <span class="quiz-option-letter">A</span>
+                                <span id="alternativa_a" class="quiz-option-text"></span>
                             </button>
-                            <button type="button" class="quiz-icon-btn" title="Trocar questão">
-                                <i class="bi bi-arrow-left-right"></i>
+
+                            <button type="button" class="quiz-option-btn" data-alt="b">
+                                <span class="quiz-option-letter">B</span>
+                                <span id="alternativa_b" class="quiz-option-text"></span>
+                            </button>
+
+                            <button type="button" class="quiz-option-btn" data-alt="c">
+                                <span class="quiz-option-letter">C</span>
+                                <span id="alternativa_c" class="quiz-option-text"></span>
+                            </button>
+
+                            <button type="button" class="quiz-option-btn" data-alt="d">
+                                <span class="quiz-option-letter">D</span>
+                                <span id="alternativa_d" class="quiz-option-text"></span>
                             </button>
                         </div>
 
-                        <div class="text-md-end">
-                            <a href="{{ route('game.menu') }}" class="quiz-quit-btn text-decoration-none">
-                                Desistir
-                            </a>
+                        <div id="hintBox" class="hint-box hide">
+                            <div class="d-flex align-items-start gap-3">
+                                <div class="icon-box">
+                                    <i class="bi bi-lightbulb-fill text-warning"></i>
+                                </div>
+                                <div>
+                                    <h6 class="mb-1 text-warning fw-bold">Dica</h6>
+                                    <p id="hintText" class="mb-0"></p>
+                                </div>
+                            </div>
                         </div>
+
+                        <div class="quiz-footer mt-4">
+                            <div class="quiz-footer-icons">
+                                <button type="button" class="quiz-icon-btn" id="btnHint" title="Dica">
+                                    <i class="bi bi-lightbulb-fill"></i>
+                                </button>
+                                <button type="button" class="quiz-icon-btn" id="btnSkipQuestion" title="Trocar questão">
+                                    <i class="bi bi-arrow-left-right"></i>
+                                </button>
+                            </div>
+
+                            <div class="text-md-end">
+                                <a href="{{ route('game.menu') }}" id="btnDesistir"
+                                    class="quiz-quit-btn text-decoration-none">
+                                    Desistir
+                                </a>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
+
+            <div id="emptyQuestionsWrapper" class="hide">
+                <div class="home-panel">
+                    <div class="home-panel-content text-center">
+                        <div class="home-icon mb-5">
+                            <i class="bi bi-exclamation-circle-fill"></i>
+                        </div>
+
+                        <h1 class="home-title mb-3">Nada por aqui ainda 👀</h1>
+                        <p class="home-subtitle mb-5" id="emptyQuestionsText">
+                            Essa série ainda não tem questões cadastradas. Que tal escolher outra enquanto isso?
+                        </p>
+
+                        <a href="{{ route('game.new') }}" class="btn home-start-btn">
+                            Escolher outra série
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 </div>
@@ -137,6 +175,11 @@
 </div>
 
 <script>
+    const questionsUrl = "{{ route('game.questionsBySerie', ['grade' => $grade->id]) }}";
+    const gradeId = "{{ $grade->id }}";
+</script>
+
+<script>
     let questoes = [];
     let indiceAtual = 0;
     let respostaCorreta = '';
@@ -146,10 +189,69 @@
     let vidas = 3;
     const vidasMaximas = 3;
 
+    const totalPerguntasJogo = 5;
+    let perguntasRespondidas = 0;
+
+    const maxDicas = 3;
+    const maxTrocas = 3;
+    let dicasRestantes = maxDicas;
+    let trocasRestantes = maxTrocas;
+
+    const quizStateKey = `quiz_state_grade_${gradeId}`;
+
     if (localStorage.getItem('quiz_perdeu') === '1' || localStorage.getItem('quiz_vitoria') === '1') {
         localStorage.removeItem('quiz_perdeu');
         localStorage.removeItem('quiz_vitoria');
+        localStorage.removeItem(quizStateKey);
         window.location.href = '/game/menu';
+    }
+
+    function salvarEstadoQuiz() {
+        const estado = {
+            questoes,
+            indiceAtual,
+            respostaCorreta,
+            nivel,
+            pontos,
+            vidas,
+            perguntasRespondidas,
+            dicasRestantes,
+            trocasRestantes
+        };
+
+        localStorage.setItem(quizStateKey, JSON.stringify(estado));
+    }
+
+    function carregarEstadoQuiz() {
+        const estadoSalvo = localStorage.getItem(quizStateKey);
+
+        if (!estadoSalvo) {
+            return false;
+        }
+
+        try {
+            const estado = JSON.parse(estadoSalvo);
+
+            questoes = Array.isArray(estado.questoes) ? estado.questoes : [];
+            indiceAtual = Number.isInteger(estado.indiceAtual) ? estado.indiceAtual : 0;
+            respostaCorreta = estado.respostaCorreta || '';
+            nivel = Number.isInteger(estado.nivel) ? estado.nivel : 1;
+            pontos = Number.isInteger(estado.pontos) ? estado.pontos : 0;
+            vidas = Number.isInteger(estado.vidas) ? estado.vidas : vidasMaximas;
+            perguntasRespondidas = Number.isInteger(estado.perguntasRespondidas) ? estado.perguntasRespondidas : 0;
+            dicasRestantes = Number.isInteger(estado.dicasRestantes) ? estado.dicasRestantes : maxDicas;
+            trocasRestantes = Number.isInteger(estado.trocasRestantes) ? estado.trocasRestantes : maxTrocas;
+
+            return questoes.length > 0;
+        } catch (error) {
+            console.error('Erro ao carregar estado do quiz:', error);
+            localStorage.removeItem(quizStateKey);
+            return false;
+        }
+    }
+
+    function limparEstadoQuizSalvo() {
+        localStorage.removeItem(quizStateKey);
     }
 
     function atualizarNivel() {
@@ -161,12 +263,7 @@
     }
 
     function atualizarVidas() {
-        const vidasTexto = document.getElementById('vidasTexto');
         const vidasContainer = document.getElementById('vidasContainer');
-
-        if (vidasTexto) {
-            vidasTexto.textContent = vidas === 1 ? '1 vida' : `${vidas} vidas`;
-        }
 
         if (vidasContainer) {
             const hearts = vidasContainer.querySelectorAll('i');
@@ -187,6 +284,8 @@
         document.querySelectorAll('.quiz-option-btn').forEach(btn => {
             btn.classList.remove('is-correct', 'is-wrong');
             btn.disabled = false;
+            btn.style.visibility = 'visible';
+            btn.style.pointerEvents = 'auto';
         });
     }
 
@@ -200,25 +299,87 @@
         document.querySelectorAll('.quiz-option-btn').forEach(btn => {
             btn.disabled = true;
             btn.classList.remove('is-correct', 'is-wrong');
+            btn.style.visibility = 'visible';
+            btn.style.pointerEvents = 'none';
         });
+
+        esconderDica();
+        atualizarEstadoBotoesAcao();
+    }
+
+    function esconderDica() {
+        const hintBox = document.getElementById('hintBox');
+        const hintText = document.getElementById('hintText');
+
+        if (hintBox) {
+            hintBox.classList.add('hide');
+            hintBox.classList.remove('show');
+        }
+
+        if (hintText) {
+            hintText.textContent = '';
+        }
+    }
+
+    function mostrarDica(texto) {
+        const hintBox = document.getElementById('hintBox');
+        const hintText = document.getElementById('hintText');
+
+        if (!hintBox || !hintText) return;
+
+        hintText.innerHTML = texto;
+        hintBox.classList.remove('hide');
+        hintBox.classList.add('show');
+    }
+
+    function atualizarEstadoBotoesAcao() {
+        const btnHint = document.getElementById('btnHint');
+        const btnSkipQuestion = document.getElementById('btnSkipQuestion');
+
+        if (btnHint) {
+            const semDicas = dicasRestantes <= 0;
+            btnHint.disabled = bloqueado || semDicas;
+            btnHint.style.opacity = btnHint.disabled ? '0.45' : '1';
+            btnHint.style.pointerEvents = btnHint.disabled ? 'none' : 'auto';
+            btnHint.title = semDicas ? 'Sem dicas restantes' : `Dica (${dicasRestantes} restantes)`;
+        }
+
+        if (btnSkipQuestion) {
+            const semTrocas = trocasRestantes <= 0;
+            btnSkipQuestion.disabled = bloqueado || semTrocas;
+            btnSkipQuestion.style.opacity = btnSkipQuestion.disabled ? '0.45' : '1';
+            btnSkipQuestion.style.pointerEvents = btnSkipQuestion.disabled ? 'none' : 'auto';
+            btnSkipQuestion.title = semTrocas ? 'Sem trocas restantes' : `Trocar questão (${trocasRestantes} restantes)`;
+        }
+    }
+
+    function obterQuestaoAtual() {
+        return questoes[indiceAtual] || null;
     }
 
     function exibirQuestao(indice) {
         const q = questoes[indice];
 
-        document.getElementById('enunciado').textContent = q.enunciado;
-        document.getElementById('alternativa_a').textContent = q.alternativa_a;
-        document.getElementById('alternativa_b').textContent = q.alternativa_b;
-        document.getElementById('alternativa_c').textContent = q.alternativa_c;
-        document.getElementById('alternativa_d').textContent = q.alternativa_d;
+        if (!q) {
+            limparQuestaoTela('Questão não encontrada.');
+            return;
+        }
 
-        respostaCorreta = q.resposta_correta;
+        document.getElementById('enunciado').innerHTML = q.statement;
+        document.getElementById('alternativa_a').textContent = q.option_a;
+        document.getElementById('alternativa_b').textContent = q.option_b;
+        document.getElementById('alternativa_c').textContent = q.option_c;
+        document.getElementById('alternativa_d').textContent = q.option_d;
+
+        respostaCorreta = (q.correct_option || '').trim().toLowerCase();
         bloqueado = false;
 
+        esconderDica();
         limparEstadoAlternativas();
         atualizarNivel();
         atualizarPontuacao();
         atualizarVidas();
+        atualizarEstadoBotoesAcao();
     }
 
     function marcarRespostaVisual(letraClicada, resposta) {
@@ -236,10 +397,13 @@
         document.querySelectorAll('.quiz-option-btn').forEach(btn => {
             btn.disabled = true;
         });
+
+        atualizarEstadoBotoesAcao();
     }
 
     function mostrarModalDerrota() {
         localStorage.setItem('quiz_perdeu', '1');
+        limparEstadoQuizSalvo();
 
         const modal = new bootstrap.Modal(document.getElementById('modalDerrota'), {
             backdrop: 'static',
@@ -251,6 +415,7 @@
 
     function mostrarModalVitoria() {
         localStorage.setItem('quiz_vitoria', '1');
+        limparEstadoQuizSalvo();
 
         salvarRanking(pontos, function () {
             const modalVitoria = new bootstrap.Modal(document.getElementById('modalVitoria'), {
@@ -263,12 +428,22 @@
     }
 
     function avancarParaProximaQuestao() {
-        indiceAtual++;
+        perguntasRespondidas++;
         nivel++;
+
+        if (perguntasRespondidas >= totalPerguntasJogo) {
+            salvarEstadoQuiz();
+            mostrarModalVitoria();
+            return;
+        }
+
+        indiceAtual++;
 
         if (indiceAtual < questoes.length) {
             exibirQuestao(indiceAtual);
+            salvarEstadoQuiz();
         } else {
+            salvarEstadoQuiz();
             mostrarModalVitoria();
         }
     }
@@ -277,6 +452,7 @@
         if (bloqueado) return;
 
         bloqueado = true;
+        atualizarEstadoBotoesAcao();
 
         const resposta = (respostaCorreta || '').trim().toLowerCase();
         const letraClicada = (letra || '').trim().toLowerCase();
@@ -285,6 +461,7 @@
 
         if (letraClicada === resposta) {
             pontos += 100;
+            salvarEstadoQuiz();
 
             setTimeout(() => {
                 avancarParaProximaQuestao();
@@ -292,6 +469,7 @@
         } else {
             vidas--;
             atualizarVidas();
+            salvarEstadoQuiz();
 
             setTimeout(() => {
                 if (vidas <= 0) {
@@ -301,6 +479,53 @@
                 }
             }, 700);
         }
+    }
+
+    function usarDica() {
+        if (bloqueado || dicasRestantes <= 0) return;
+
+        const questaoAtual = obterQuestaoAtual();
+        if (!questaoAtual) return;
+
+        const dicaTexto = questaoAtual.hint || questaoAtual.tip || questaoAtual.dica || 'Esta questão não possui dica cadastrada.';
+
+        dicasRestantes--;
+        mostrarDica(dicaTexto);
+        atualizarEstadoBotoesAcao();
+        salvarEstadoQuiz();
+    }
+
+    function buscarQuestaoNaoUsadaParaTroca() {
+        const idsEmTela = new Set(
+            questoes
+                .slice(0, indiceAtual + 1)
+                .map(q => q?.id)
+                .filter(Boolean)
+        );
+
+        const atual = obterQuestaoAtual();
+        if (atual?.id) {
+            idsEmTela.add(atual.id);
+        }
+
+        return questoes.find((q, index) => {
+            if (!q || !q.id) return false;
+            if (index === indiceAtual) return false;
+            return !idsEmTela.has(q.id);
+        }) || null;
+    }
+
+    function trocarQuestaoAtual() {
+        if (bloqueado || trocasRestantes <= 0) return;
+
+        const novaQuestao = buscarQuestaoNaoUsadaParaTroca();
+        if (!novaQuestao) return;
+
+        trocasRestantes--;
+        questoes[indiceAtual] = novaQuestao;
+
+        exibirQuestao(indiceAtual);
+        salvarEstadoQuiz();
     }
 
     function salvarRanking(pontos, callback) {
@@ -325,43 +550,89 @@
     function limparQuizFlags() {
         localStorage.removeItem('quiz_perdeu');
         localStorage.removeItem('quiz_vitoria');
+        limparEstadoQuizSalvo();
     }
 
-    function getSerieFromUrl() {
-        const params = new URLSearchParams(window.location.search);
-        return params.get('grade');
-    }
-
-    document.addEventListener('DOMContentLoaded', function () {
+    function iniciarNovoQuiz(data) {
+        questoes = data;
         indiceAtual = 0;
+        respostaCorreta = '';
+        bloqueado = false;
         nivel = 1;
         pontos = 0;
         vidas = vidasMaximas;
+        perguntasRespondidas = 0;
+        dicasRestantes = maxDicas;
+        trocasRestantes = maxTrocas;
+
+        mostrarQuiz();
+        salvarEstadoQuiz();
+        exibirQuestao(indiceAtual);
+    }
+
+    function mostrarEstadoSemQuestoes(mensagem = 'Ainda não há questões cadastradas para esta série.') {
+        const quizWrapper = document.getElementById('quizWrapper');
+        const emptyQuestionsWrapper = document.getElementById('emptyQuestionsWrapper');
+        const emptyQuestionsText = document.getElementById('emptyQuestionsText');
+
+        if (quizWrapper) {
+            quizWrapper.classList.add('hide');
+        }
+
+        if (emptyQuestionsWrapper) {
+            emptyQuestionsWrapper.classList.remove('hide');
+        }
+
+        if (emptyQuestionsText) {
+            emptyQuestionsText.textContent = mensagem;
+        }
+    }
+
+    function mostrarQuiz() {
+        const quizWrapper = document.getElementById('quizWrapper');
+        const emptyQuestionsWrapper = document.getElementById('emptyQuestionsWrapper');
+
+        if (quizWrapper) {
+            quizWrapper.classList.remove('hide');
+        }
+
+        if (emptyQuestionsWrapper) {
+            emptyQuestionsWrapper.classList.add('hide');
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        atualizarNivel();
+        atualizarPontuacao();
         atualizarVidas();
+        atualizarEstadoBotoesAcao();
 
-        const grade = getSerieFromUrl();
+        const estadoCarregado = carregarEstadoQuiz();
 
-        if (grade) {
-            fetch(`/game/questions-by-grade?grade=${encodeURIComponent(grade)}`)
-                .then(response => response.json())
+        if (estadoCarregado) {
+            mostrarQuiz();
+            exibirQuestao(indiceAtual);
+        } else {
+            fetch(questionsUrl)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Erro ao buscar questões');
+                    }
+                    return response.json();
+                })
                 .then(data => {
                     if (Array.isArray(data) && data.length > 0) {
-                        questoes = data;
-                        indiceAtual = 0;
-                        nivel = 1;
-                        pontos = 0;
-                        vidas = vidasMaximas;
-                        exibirQuestao(indiceAtual);
+                        iniciarNovoQuiz(data);
                     } else {
-                        limparQuestaoTela('Nenhuma questão encontrada para esta série.');
+                        limparEstadoQuizSalvo();
+                        mostrarEstadoSemQuestoes('Essa série ainda não tem questões cadastradas. Que tal escolher outra enquanto isso?');
                     }
                 })
                 .catch(error => {
                     console.error('Erro ao buscar questões:', error);
-                    limparQuestaoTela('Erro ao buscar questões.');
+                    limparEstadoQuizSalvo();
+                    mostrarEstadoSemQuestoes('Não foi possível carregar as questões desta série no momento.');
                 });
-        } else {
-            limparQuestaoTela('Nenhuma série informada na URL.');
         }
 
         document.querySelectorAll('.quiz-option-btn').forEach(btn => {
@@ -369,6 +640,16 @@
                 alternativaClickHandler(this.dataset.alt);
             });
         });
+
+        const btnHint = document.getElementById('btnHint');
+        if (btnHint) {
+            btnHint.addEventListener('click', usarDica);
+        }
+
+        const btnSkipQuestion = document.getElementById('btnSkipQuestion');
+        if (btnSkipQuestion) {
+            btnSkipQuestion.addEventListener('click', trocarQuestaoAtual);
+        }
 
         const btnVoltarMenu = document.getElementById('btnVoltarMenu');
         if (btnVoltarMenu) {
