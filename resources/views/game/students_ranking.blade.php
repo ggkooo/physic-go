@@ -1,37 +1,54 @@
-<div class="d-flex flex-column align-items-center mt-5">
-    <div class="mt-4"></div>
+<div class="container d-flex align-items-center justify-content-center py-4">
+    <div class="row justify-content-center w-100">
+        <div class="col-12 col-xl-8">
+            <div class="home-panel">
+                <div class="home-panel-content">
+                    <div class="text-center mb-4">
+                        <div class="home-icon mb-3">
+                            <i class="bi bi-trophy-fill"></i>
+                        </div>
+                        <h1 class="home-title mb-2">Ranking Aluno</h1>
+                        <p class="home-subtitle mb-0">
+                            Confira os alunos com maior pontuação no quiz.
+                        </p>
+                    </div>
 
-    <div class="col-md-8 col-11 position-relative mb-4">
+                    <div class="ranking-wrapper">
+                        <div class="ranking-header d-none d-md-flex">
+                            <div class="ranking-col ranking-col-position">Posição</div>
+                            <div class="ranking-col ranking-col-name">Nome</div>
+                            <div class="ranking-col ranking-col-points">Pontos</div>
+                        </div>
 
-        <div class="ranking-banner">
-            <img src="{{ asset('assets/img/banner.png') }}" alt="Banner Ranking" class="banner-img">
-            <h3 class="banner-title">RANKING ALUNO</h3>
-        </div>
+                        @foreach($topStudents as $index => $student)
+                            <div class="ranking-item {{ $index < 3 ? 'ranking-item-top' : '' }}">
+                                <div class="ranking-col ranking-col-position">
+                                    <div class="ranking-position-badge {{ $index === 0 ? 'first' : ($index === 1 ? 'second' : ($index === 2 ? 'third' : 'default')) }}">
+                                        {{ $index + 1 }}º
+                                    </div>
+                                </div>
 
-        <div class="card-303030-ranking p-4  d-flex flex-column align-items-center">
+                                <div class="ranking-col ranking-col-name">
+                                    <div class="ranking-mobile-label d-md-none">Nome</div>
+                                    <div class="ranking-student-name">{{ $student->user_name }}</div>
+                                </div>
 
-            <div class="row p-3 text-white align-items-center w-100 text-center d-none d-md-flex">
-                <div class="col-12 col-md-3 mb-2 mb-md-0">POSIÇÃO</div>
-                <div class="col-12 col-md-6 mb-2 mb-md-0">NOME</div>
-                <div class="col-12 col-md-3">PONTOS</div>
-            </div>
+                                <div class="ranking-col ranking-col-points">
+                                    <div class="ranking-mobile-label d-md-none">Pontos</div>
+                                    <div class="ranking-points">{{ $student->points }}</div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
 
-            @foreach($topStudents as $index => $student)
-                <div class="row card-b4b4b4 p-3 mb-3 text-dark align-items-center w-100 text-center">
-                    <div class="col-12 col-md-3 fw-bold mb-2 mb-md-0">{{ $index + 1 }}°</div>
-                    <div class="col-12 col-md-6 mb-2 mb-md-0">{{ $student->user_name }}</div>
-                    <div class="col-12 col-md-3 fw-bold">{{ $student->points }}</div>
+                    <div class="text-center mt-4">
+                        <a href="{{ route('game.menu') }}" class="home-logout-link text-decoration-none">
+                            <i class="bi bi-arrow-left me-1"></i>
+                            Voltar
+                        </a>
+                    </div>
                 </div>
-            @endforeach
-
+            </div>
         </div>
-    </div>
-
-    <div class="row">
-        <a href="{{ route('game.menu') }}"
-            class="btn-exit text-decoration-none text-white w-100 p-1 position-relative d-inline-block overflow-hidden mt-4 mb-1">
-            <i class="bi bi-arrow-left icon" style="font-size: 20px; margin-top: 2px;"></i>
-            <span class="exit-text" style="font-size: 18px;">Voltar</span>
-        </a>
     </div>
 </div>

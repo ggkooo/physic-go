@@ -55,10 +55,10 @@ use App\Http\Controllers\RankingController;
     Route::get('/home', [HomeController::class, 'index'])->name('home');
 
     // Credits
-    Route::get('/credits', [HomeController::class, 'credits'])->name('credits');
+    // Route::get('/credits', [HomeController::class, 'credits'])->name('credits');
 
     // Contact
-    Route::get('/contact', [ContactController::class, 'index'])->name('contact');
+    // Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 
     // Study
         //Display
@@ -87,8 +87,8 @@ use App\Http\Controllers\RankingController;
     Route::get('/game/students-ranking', [GameController::class, 'students_ranking'])->name('game.students-ranking');
     Route::get('/game/questions-by-grade', [GameController::class, 'questionsByGrade'])->name('game.questions-by-grade');
     Route::post('/game/save-ranking', [GameController::class, 'saveRanking'])->name('game.save-ranking');
-    Route::get('/game/schools-ranking', [GameController::class, 'schools_ranking'])->name('game.schools-ranking');
-    Route::get('/game/rules', [GameController::class, 'rules'])->name('game.rules');
+    // Route::get('/game/schools-ranking', [GameController::class, 'schools_ranking'])->name('game.schools-ranking');
+    // Route::get('/game/rules', [GameController::class, 'rules'])->name('game.rules');
 
 // MANAGEMENT
     // Home

@@ -13,8 +13,12 @@
                     </p>
 
                     <div class="d-grid mb-4">
-                        <a href="{{ route('game.new') }}" class="btn home-start-btn">
+                        <a href="{{ route('game.new') }}" class="btn home-start-btn mb-3">
                             Novo Jogo
+                        </a>
+
+                        <a href="{{ route('game.students-ranking') }}" class="btn home-start-btn">
+                            Ranking Aluno
                         </a>
                     </div>
 
@@ -27,13 +31,3 @@
         </div>
     </div>
 </div>
-
-<!-- <div class="col-10 col-md-3 mb-4">
-         <a href="{{ route('game.students-ranking') }}" class="btn btn-danger w-100 p-3 btn-default btn-raise">RANKING ALUNO</a>
-    </div>
-    <div class="col-10 col-md-3 mb-4">
-        <a href="{{ route('game.schools-ranking') }}" class="btn btn-danger w-100 p-3 btn-default btn-raise">RANKING ESCOLA</a>
-    </div> -->
-<!-- <div class="col-10 col-md-3 mb-4">
-         <a href="{{ route('game.rules') }}"><button class="btn btn-danger w-100 p-3 btn-default btn-raise">REGRAS</button></a>
-    </div> -->
