@@ -32,7 +32,7 @@ class QuestionRequest extends FormRequest
             'option_c_attachment' => 'nullable|file|max:4096',
             'option_d' => 'required|string',
             'option_d_attachment' => 'nullable|file|max:4096',
-            'option_e' => 'required|string',
+            'option_e' => 'nullable|string',
             'option_e_attachment' => 'nullable|file|max:4096',
         ];
     }

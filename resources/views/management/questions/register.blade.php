@@ -42,7 +42,7 @@
 
                 <div class="col-sm-6 mb-3">
                     <label for="tip" class="form-label fw-bold">Dica <span>*</span></label>
-                    <textarea class="summernote" name="tip" id="tip" required placeholder="Coloque a dica da questão...">{{ isset($editQuestion) ? $editQuestion->tip : old('tip') }}</textarea>
+                    <textarea class="form-control auto-resize" name="tip" id="tip" required placeholder="Coloque a dica da questão...">{{ isset($editQuestion) ? $editQuestion->tip : old('tip') }}</textarea>
                 </div>
 
                 <div class="col-md-6 mb-3 align-self-start">
@@ -57,7 +57,7 @@
 
                 <div class="col-sm-12 mb-3">
                     <label for="statement" class="form-label fw-bold">Enunciado <span>*</span></label>
-                    <textarea class="summernote" name="statement" id="statement" required placeholder="Coloque o enunciado da questão...">{{ isset($editQuestion) ? $editQuestion->statement : old('statement') }}</textarea>
+                    <textarea class="form-control auto-resize" name="statement" id="statement" required placeholder="Coloque o enunciado da questão...">{{ isset($editQuestion) ? $editQuestion->statement : old('statement') }}</textarea>
                 </div>
 
                 <div class="col-md-4 mb-3 align-self-start">
@@ -130,7 +130,7 @@
 
                 <div class="col-sm-8 mb-3">
                     <label for="option_e" class="form-label fw-bold">Opção E </label>
-                    <input class="form-control" name="option_e" id="option_e" required placeholder="Option E" value="{{ old('option_e', $editQuestion->option_e ?? '') }}">
+                    <input class="form-control" name="option_e" id="option_e" placeholder="Option E" value="{{ old('option_e', $editQuestion->option_e ?? '') }}">
                 </div>
                 <div class="col-md-4 mb-3 align-self-start">
                     <label for="option_e_attachment" class="form-label fw-bold">Arquivo E</label>
