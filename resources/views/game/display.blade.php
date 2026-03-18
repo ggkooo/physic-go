@@ -2,7 +2,22 @@
     <div class="row justify-content-center w-100">
         <div class="col-12 col-xl-9">
 
-            <div id="quizWrapper">
+            <div id="loadingWrapper">
+                <div class="home-panel">
+                    <div class="home-panel-content text-center">
+                        <div class="home-icon mb-4">
+                            <i class="bi bi-hourglass-split"></i>
+                        </div>
+
+                        <h1 class="home-title mb-3">Carregando questões...</h1>
+                        <p class="home-subtitle mb-0">
+                            Aguarde um instante enquanto preparamos o jogo.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="quizWrapper" class="hide">
                 <div class="home-panel">
                     <div class="home-panel-content">
 
@@ -15,7 +30,8 @@
                             <div class="quiz-status-item text-center">
                                 <span class="quiz-status-label">Tentativas</span>
 
-                                <div id="vidasContainer" class="quiz-lives mt-2 d-flex justify-content-center" aria-label="Vidas restantes">
+                                <div id="vidasContainer" class="quiz-lives mt-2 d-flex justify-content-center"
+                                    aria-label="Vidas restantes">
                                     <i class="bi bi-heart-fill"></i>
                                     <i class="bi bi-heart-fill"></i>
                                     <i class="bi bi-heart-fill"></i>
@@ -53,6 +69,11 @@
                             <button type="button" class="quiz-option-btn" data-alt="d">
                                 <span class="quiz-option-letter">D</span>
                                 <span id="alternativa_d" class="quiz-option-text"></span>
+                            </button>
+
+                            <button type="button" class="quiz-option-btn hide" data-alt="e" id="option_btn_e">
+                                <span class="quiz-option-letter">E</span>
+                                <span id="alternativa_e" class="quiz-option-text"></span>
                             </button>
                         </div>
 
@@ -187,9 +208,11 @@
     let nivel = 1;
     let pontos = 0;
     let vidas = 3;
-    const vidasMaximas = 3;
+    let questoesComDicaUsada = [];
 
+    const vidasMaximas = 3;
     const totalPerguntasJogo = 5;
+
     let perguntasRespondidas = 0;
 
     const maxDicas = 3;
@@ -206,6 +229,14 @@
         window.location.href = '/game/menu';
     }
 
+    function esconderLoading() {
+        const loadingWrapper = document.getElementById('loadingWrapper');
+
+        if (loadingWrapper) {
+            loadingWrapper.classList.add('hide');
+        }
+    }
+
     function salvarEstadoQuiz() {
         const estado = {
             questoes,
@@ -216,7 +247,8 @@
             vidas,
             perguntasRespondidas,
             dicasRestantes,
-            trocasRestantes
+            trocasRestantes,
+            questoesComDicaUsada
         };
 
         localStorage.setItem(quizStateKey, JSON.stringify(estado));
@@ -241,6 +273,7 @@
             perguntasRespondidas = Number.isInteger(estado.perguntasRespondidas) ? estado.perguntasRespondidas : 0;
             dicasRestantes = Number.isInteger(estado.dicasRestantes) ? estado.dicasRestantes : maxDicas;
             trocasRestantes = Number.isInteger(estado.trocasRestantes) ? estado.trocasRestantes : maxTrocas;
+            questoesComDicaUsada = Array.isArray(estado.questoesComDicaUsada) ? estado.questoesComDicaUsada : [];
 
             return questoes.length > 0;
         } catch (error) {
@@ -287,6 +320,13 @@
             btn.style.visibility = 'visible';
             btn.style.pointerEvents = 'auto';
         });
+
+        const botaoE = document.getElementById('option_btn_e');
+        const alternativaE = document.getElementById('alternativa_e');
+
+        if (botaoE && alternativaE && alternativaE.textContent.trim() === '') {
+            botaoE.classList.add('hide');
+        }
     }
 
     function limparQuestaoTela(mensagem) {
@@ -295,6 +335,7 @@
         document.getElementById('alternativa_b').textContent = '';
         document.getElementById('alternativa_c').textContent = '';
         document.getElementById('alternativa_d').textContent = '';
+        document.getElementById('alternativa_e').textContent = '';
 
         document.querySelectorAll('.quiz-option-btn').forEach(btn => {
             btn.disabled = true;
@@ -346,10 +387,19 @@
 
         if (btnSkipQuestion) {
             const semTrocas = trocasRestantes <= 0;
-            btnSkipQuestion.disabled = bloqueado || semTrocas;
+            const semQuestoesParaTrocar = !buscarQuestaoNaoUsadaParaTroca();
+
+            btnSkipQuestion.disabled = bloqueado || semTrocas || semQuestoesParaTrocar;
             btnSkipQuestion.style.opacity = btnSkipQuestion.disabled ? '0.45' : '1';
             btnSkipQuestion.style.pointerEvents = btnSkipQuestion.disabled ? 'none' : 'auto';
-            btnSkipQuestion.title = semTrocas ? 'Sem trocas restantes' : `Trocar questão (${trocasRestantes} restantes)`;
+
+            if (semTrocas) {
+                btnSkipQuestion.title = 'Sem trocas restantes';
+            } else if (semQuestoesParaTrocar) {
+                btnSkipQuestion.title = 'Não há mais questões disponíveis para troca';
+            } else {
+                btnSkipQuestion.title = `Trocar questão (${trocasRestantes} restantes)`;
+            }
         }
     }
 
@@ -366,10 +416,24 @@
         }
 
         document.getElementById('enunciado').innerHTML = q.statement;
-        document.getElementById('alternativa_a').textContent = q.option_a;
-        document.getElementById('alternativa_b').textContent = q.option_b;
-        document.getElementById('alternativa_c').textContent = q.option_c;
-        document.getElementById('alternativa_d').textContent = q.option_d;
+        document.getElementById('alternativa_a').textContent = q.option_a || '';
+        document.getElementById('alternativa_b').textContent = q.option_b || '';
+        document.getElementById('alternativa_c').textContent = q.option_c || '';
+        document.getElementById('alternativa_d').textContent = q.option_d || '';
+
+        const alternativaE = document.getElementById('alternativa_e');
+        const botaoE = document.getElementById('option_btn_e');
+
+        if ((q.option_e || '').trim() !== '') {
+            alternativaE.textContent = q.option_e;
+            botaoE.classList.remove('hide');
+            botaoE.disabled = false;
+            botaoE.style.visibility = 'visible';
+            botaoE.style.pointerEvents = 'auto';
+        } else {
+            alternativaE.textContent = '';
+            botaoE.classList.add('hide');
+        }
 
         respostaCorreta = (q.correct_option || '').trim().toLowerCase();
         bloqueado = false;
@@ -487,9 +551,16 @@
         const questaoAtual = obterQuestaoAtual();
         if (!questaoAtual) return;
 
+        const questaoId = questaoAtual.id ?? `indice_${indiceAtual}`;
+        const dicaJaConsumidaNestaQuestao = questoesComDicaUsada.includes(questaoId);
+
         const dicaTexto = questaoAtual.hint || questaoAtual.tip || questaoAtual.dica || 'Esta questão não possui dica cadastrada.';
 
-        dicasRestantes--;
+        if (!dicaJaConsumidaNestaQuestao) {
+            dicasRestantes--;
+            questoesComDicaUsada.push(questaoId);
+        }
+
         mostrarDica(dicaTexto);
         atualizarEstadoBotoesAcao();
         salvarEstadoQuiz();
@@ -564,6 +635,7 @@
         perguntasRespondidas = 0;
         dicasRestantes = maxDicas;
         trocasRestantes = maxTrocas;
+        questoesComDicaUsada = [];
 
         mostrarQuiz();
         salvarEstadoQuiz();
@@ -571,9 +643,14 @@
     }
 
     function mostrarEstadoSemQuestoes(mensagem = 'Ainda não há questões cadastradas para esta série.') {
+        const loadingWrapper = document.getElementById('loadingWrapper');
         const quizWrapper = document.getElementById('quizWrapper');
         const emptyQuestionsWrapper = document.getElementById('emptyQuestionsWrapper');
         const emptyQuestionsText = document.getElementById('emptyQuestionsText');
+
+        if (loadingWrapper) {
+            loadingWrapper.classList.add('hide');
+        }
 
         if (quizWrapper) {
             quizWrapper.classList.add('hide');
@@ -589,8 +666,13 @@
     }
 
     function mostrarQuiz() {
+        const loadingWrapper = document.getElementById('loadingWrapper');
         const quizWrapper = document.getElementById('quizWrapper');
         const emptyQuestionsWrapper = document.getElementById('emptyQuestionsWrapper');
+
+        if (loadingWrapper) {
+            loadingWrapper.classList.add('hide');
+        }
 
         if (quizWrapper) {
             quizWrapper.classList.remove('hide');

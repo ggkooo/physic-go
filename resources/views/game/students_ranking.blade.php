@@ -23,19 +23,22 @@
                         @foreach($topStudents as $index => $student)
                             <div class="ranking-item {{ $index < 3 ? 'ranking-item-top' : '' }}">
                                 <div class="ranking-col ranking-col-position">
-                                    <div class="ranking-position-badge {{ $index === 0 ? 'first' : ($index === 1 ? 'second' : ($index === 2 ? 'third' : 'default')) }}">
+                                    <div
+                                        class="ranking-position-badge {{ $index === 0 ? 'first' : ($index === 1 ? 'second' : ($index === 2 ? 'third' : 'default')) }}">
                                         {{ $index + 1 }}º
                                     </div>
                                 </div>
 
-                                <div class="ranking-col ranking-col-name">
-                                    <div class="ranking-mobile-label d-md-none">Nome</div>
-                                    <div class="ranking-student-name">{{ $student->user_name }}</div>
-                                </div>
+                                <div class="ranking-main-content">
+                                    <div class="ranking-col ranking-col-name">
+                                        <div class="ranking-mobile-label d-md-none">Aluno</div>
+                                        <div class="ranking-student-name">{{ $student->user_name }}</div>
+                                    </div>
 
-                                <div class="ranking-col ranking-col-points">
-                                    <div class="ranking-mobile-label d-md-none">Pontos</div>
-                                    <div class="ranking-points">{{ $student->points }}</div>
+                                    <div class="ranking-col ranking-col-points">
+                                        <div class="ranking-mobile-label d-md-none">Pontuação</div>
+                                        <div class="ranking-points">{{ $student->points }}</div>
+                                    </div>
                                 </div>
                             </div>
                         @endforeach
