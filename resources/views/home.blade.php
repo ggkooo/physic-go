@@ -17,6 +17,11 @@
                             <i class="bi bi-play-fill me-2"></i>
                             Iniciar Quiz
                         </a>
+
+                        <a href="{{ route('profile.edit') }}" class="btn home-start-btn mt-3">
+                            <i class="bi bi-person-circle me-2"></i>
+                            Meu Perfil
+                        </a>
                     </div>
 
                     <a href="{{ route('logout') }}" class="home-logout-link text-decoration-none">
