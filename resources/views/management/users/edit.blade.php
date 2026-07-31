@@ -7,24 +7,79 @@
         <div>Edição</div>
     </div>
     <div class="card-body">
-        <form id="form_layout" method="post" action="{{ route('management.users.update', $editUser->id) }}" enctype="multipart/form-data">
+        <form id="form_layout" method="post" action="{{ route('management.users.update', $editUser->id) }}"
+            enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class="row align-items-end">
 
                 <div class="col-sm-6 mb-3">
                     <label for="nome" class="form-label fw-bold">Nome <span>*</span></label>
-                    <input class="form-control" name="nome" id="nome" required placeholder="Informe o nome..." value="{{ $editUser->name ?? '' }}">
+                    <input class="form-control" name="nome" id="nome" required placeholder="Informe o nome..."
+                        value="{{ $editUser->name ?? '' }}">
+                </div>
+
+                <div class="col-12 mb-3">
+                    <label class="form-label fw-bold">
+                        Grupos de acesso
+                    </label>
+
+                    <div class="row border rounded p-2 mx-0">
+                        @forelse($groups as $group)
+                            <div class="col-md-4 col-sm-6 py-2">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="groups[]" value="{{ $group->id }}"
+                                        id="group_{{ $group->id }}" @checked(
+                                            in_array(
+                                                $group->id,
+                                                old(
+                                                    'groups',
+                                                    $editUser->groups
+                                                        ->pluck('id')
+                                                        ->all()
+                                                )
+                                            )
+                                        )>
+
+                                    <label class="form-check-label" for="group_{{ $group->id }}">
+                                        <strong>
+                                            {{ $group->name }}
+                                        </strong>
+
+                                        <small class="d-block text-muted">
+                                            {{ $group->description }}
+                                        </small>
+                                    </label>
+                                </div>
+                            </div>
+                        @empty
+                            <div class="col-12 text-muted">
+                                Nenhum grupo cadastrado.
+
+                                <a href="{{ route('management.groups.create') }}">
+                                    Cadastrar grupo
+                                </a>
+                            </div>
+                        @endforelse
+                    </div>
+
+                    @error('groups')
+                        <div class="text-danger mt-1">
+                            {{ $message }}
+                        </div>
+                    @enderror
                 </div>
 
                 <div class="col-sm-6 mb-3">
                     <label for="email" class="form-label fw-bold">Email <span>*</span></label>
-                    <input class="form-control" name="email" id="email" required placeholder="Informe o email..." value="{{ $editUser->email ?? '' }}">
+                    <input class="form-control" name="email" id="email" required placeholder="Informe o email..."
+                        value="{{ $editUser->email ?? '' }}">
                 </div>
 
                 <div class="col-sm-3 mb-3">
                     <label for="cpf" class="form-label fw-bold">CPF <span>*</span></label>
-                    <input type="text" class="form-control cpf-mask" id="cpf" name="cpf" placeholder="Ex: 123.456.789-10" value="{{ $editUser->cpf ?? '' }}">
+                    <input type="text" class="form-control cpf-mask" id="cpf" name="cpf"
+                        placeholder="Ex: 123.456.789-10" value="{{ $editUser->cpf ?? '' }}">
                 </div>
 
                 <div class="col-sm-3 mb-3">
@@ -39,7 +94,8 @@
                         <option value="">Selecione o cargo...</option>
                         <option value="Aluno" @if($editUser->user_account_type == 'Aluno' || $editUser->user_account_type == 'student') selected @endif>Aluno</option>
                         <option value="Professor" @if($editUser->user_account_type == 'Professor' || $editUser->user_account_type == 'teacher') selected @endif>Professor</option>
-                        <option value="Administrador" @if($editUser->user_account_type == 'Administrador' || $editUser->user_account_type == 'admin' || $editUser->user_account_type == 'administrator') selected @endif>Administrador</option>
+                        <option value="Administrador" @if($editUser->user_account_type == 'Administrador' || $editUser->user_account_type == 'admin' || $editUser->user_account_type == 'administrator')
+                        selected @endif>Administrador</option>
                     </select>
                 </div>
 
