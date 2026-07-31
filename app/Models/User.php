@@ -24,10 +24,19 @@ class User extends Authenticatable
         'avatar',
     ];
 
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
+    protected static function booted(): void
+    {
+        static::created(function (User $user) {
+            $userGroup = Group::firstOrCreate(
+                ['name' => 'user'],
+                ['description' => 'Usuário padrão']
+            );
+
+            $user->groups()->syncWithoutDetaching([
+                $userGroup->id,
+            ]);
+        });
+    }
 
     public function groups(): BelongsToMany
     {
@@ -41,20 +50,6 @@ class User extends Authenticatable
 
     public function isAdmin(): bool
     {
-        $adminPorCargo = in_array(
-            strtolower(trim((string) $this->user_account_type)),
-            [
-                'admin',
-                'administrator',
-                'administrador',
-            ],
-            true
-        );
-
-        if ($adminPorCargo) {
-            return true;
-        }
-
         return $this->groups()
             ->where('groups.name', 'admin')
             ->exists();

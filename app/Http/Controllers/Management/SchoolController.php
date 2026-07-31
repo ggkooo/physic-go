@@ -14,6 +14,8 @@ class SchoolController extends Controller
 {
     public function schools(Request $request): View|RedirectResponse
     {
+        acesso('management', 1);
+
         if (Auth::check()) {
             $limit = $request->input('limit', 5);
             if ($limit === 'all') {
@@ -32,6 +34,8 @@ class SchoolController extends Controller
 
     public function register(): View|RedirectResponse
     {
+        acesso('management', 1);
+
         if (Auth::check()) {
             return view('management.admin.index', [
                 'page' => 'management/schools/form'
@@ -43,6 +47,8 @@ class SchoolController extends Controller
 
     public function edit($id): View|RedirectResponse
     {
+        acesso('management', 1);
+
         if (Auth::check()) {
             $school = School::find($id);
             if ($school) {
@@ -60,6 +66,8 @@ class SchoolController extends Controller
 
     public function store(SchoolRequest $request): RedirectResponse
     {
+        acesso('management', 1);
+
         if (Auth::check()) {
             $school = School::create($request->validated());
 
@@ -71,6 +79,8 @@ class SchoolController extends Controller
 
     public function update(SchoolRequest $request, $id): RedirectResponse
     {
+        acesso('management', 1);
+
         if (Auth::check()) {
             $school = School::find($id);
             if ($school) {
@@ -84,6 +94,8 @@ class SchoolController extends Controller
 
     public function remove($id): RedirectResponse
     {
+        acesso('management', 1);
+
         if (Auth::check()) {
             $school = School::find($id);
             if ($school) {

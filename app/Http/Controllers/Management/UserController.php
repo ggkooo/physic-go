@@ -13,6 +13,8 @@ class UserController extends Controller
 {
     public function users()
     {
+        acesso('admin', 1);
+
         if (!Auth::check()) {
             return redirect()->route('login');
         }
@@ -29,6 +31,8 @@ class UserController extends Controller
 
     public function editUser($id)
     {
+        acesso('admin', 1);
+
         if (!Auth::check()) {
             return redirect()->route('login');
         }
@@ -48,6 +52,8 @@ class UserController extends Controller
 
     public function updateUser(EditUserRequest $request, $id)
     {
+        acesso('admin', 1);
+
         if (!Auth::check()) {
             return redirect()
                 ->route('login')
@@ -75,9 +81,11 @@ class UserController extends Controller
             ->with('success', 'Usuário e permissões salvos com sucesso!');
     }
 
-    
+
     public function removeUser($id)
     {
+        acesso('admin', 1);
+
         if (!Auth::check()) {
             return redirect()->route('login');
         }

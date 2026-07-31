@@ -29,6 +29,8 @@ class ManagementController extends Controller
      */
     public function home()
     {
+        acesso('management', 1);
+
         if (Auth::check()) {
             return view('management.admin.index', ['page' => 'management/home']);
         }
@@ -38,6 +40,8 @@ class ManagementController extends Controller
 
     public function publications()
     {
+        acesso('management', 1);
+
         if (Auth::check()) {
             return view('management.admin.index', ['page' => 'management/publications']);
         }
@@ -46,6 +50,8 @@ class ManagementController extends Controller
 
     public function contents()
     {
+        acesso('management', 1);
+
         if (Auth::check()) {
             return view('management.admin.index', ['page' => 'management/contents/display']);
         }
@@ -54,6 +60,8 @@ class ManagementController extends Controller
 
     public function messages()
     {
+        acesso('management', 1);
+
         if (Auth::check()) {
             return view('management.admin.index', ['page' => 'management/messages/display']);
         }
@@ -62,6 +70,8 @@ class ManagementController extends Controller
 
     public function template()
     {
+        acesso('management', 1);
+
         if (Auth::check()) {
             return view('management.admin.index', ['page' => 'management/template/display']);
         }
@@ -70,6 +80,8 @@ class ManagementController extends Controller
 
     public function statistics()
     {
+        acesso('management', 1);
+
         if (Auth::check()) {
             return view('management.admin.index', ['page' => 'management/statistics/graphics']);
         }
@@ -78,6 +90,8 @@ class ManagementController extends Controller
 
     public function questions(Request $request)
     {
+        acesso('management', 1);
+
         if (Auth::check()) {
             $limit = $request->get('limit', 5);
             $questions = \App\Models\Question::orderBy('id')->paginate($limit);
@@ -91,6 +105,8 @@ class ManagementController extends Controller
 
     public function questionsRegister()
     {
+        acesso('management', 1);
+
         if (Auth::check()) {
             return view('management.admin.index', ['page' => 'management/questions/register']);
         }
@@ -99,6 +115,8 @@ class ManagementController extends Controller
 
     public function questionsStore(Request $request)
     {
+        acesso('management', 1);
+
         if (!Auth::check()) {
             return redirect()->route('login')->with('error', 'You must be authenticated.');
         }
@@ -125,6 +143,8 @@ class ManagementController extends Controller
 
     public function questionsEdit($id)
     {
+        acesso('management', 1);
+
         if (Auth::check()) {
             $question = \App\Models\Question::findOrFail($id);
             return view('management.admin.index', [
@@ -137,6 +157,8 @@ class ManagementController extends Controller
 
     public function questionsUpdate(Request $request, $id)
     {
+        acesso('management', 1);
+
         if (!Auth::check()) {
             return redirect()->route('login')->with('error', 'You must be authenticated.');
         }
@@ -177,6 +199,8 @@ class ManagementController extends Controller
 
     public function questionsView($id)
     {
+        acesso('management', 1);
+
         if (Auth::check()) {
             $question = \App\Models\Question::findOrFail($id);
             return view('management.admin.index', [
@@ -189,6 +213,8 @@ class ManagementController extends Controller
 
     public function questionsStatistics($id)
     {
+        acesso('management', 1);
+
         if (Auth::check()) {
             $question = \App\Models\Question::findOrFail($id);
             return view('management.admin.index', [
@@ -201,6 +227,8 @@ class ManagementController extends Controller
 
     public function challenge(Request $request)
     {
+        acesso('management', 1);
+
         if (Auth::check()) {
             $limit = $request->get('limit', 5);
             if ($limit === 'all') {
@@ -218,6 +246,8 @@ class ManagementController extends Controller
 
     public function challengeRegister()
     {
+        acesso('management', 1);
+
         if (Auth::check()) {
             return view('management.admin.index', ['page' => 'management/challenge/register']);
         }
@@ -227,6 +257,8 @@ class ManagementController extends Controller
     // PHP
     public function challengeStore(Request $request)
     {
+        acesso('management', 1);
+
         if (!Auth::check()) {
             return redirect()->route('login')->with('error', 'You must be authenticated.');
         }
@@ -259,6 +291,8 @@ class ManagementController extends Controller
 
     public function challengeEdit($id)
     {
+        acesso('management', 1);
+
         if (Auth::check()) {
             $challenge = \App\Models\Challenge::findOrFail($id);
             return view('management.admin.index', [
@@ -271,6 +305,8 @@ class ManagementController extends Controller
 
     public function challengeUpdate(Request $request, $id)
     {
+        acesso('management', 1);
+
         if (!Auth::check()) {
             return redirect()->route('login')->with('error', 'You must be authenticated.');
         }
@@ -300,7 +336,7 @@ class ManagementController extends Controller
 
     public function users()
     {
-        // acesso('gestao_usuarios', 1);
+        acesso('gestao_usuarios', 1);
 
         $users = User::with('groups')->orderBy('name')->get();
 
@@ -312,7 +348,7 @@ class ManagementController extends Controller
 
     public function usersEdit(int $id)
     {
-        // acesso('gestao_usuarios', 1);
+        acesso('gestao_usuarios', 1);
 
         return view('management.admin.index', [
             'page' => 'management/users/edit',
@@ -323,7 +359,7 @@ class ManagementController extends Controller
 
     public function usersUpdate(Request $request, int $id)
     {
-        // acesso('gestao_usuarios', 1);
+        acesso('gestao_usuarios', 1);
 
         $user = User::findOrFail($id);
 
@@ -353,7 +389,7 @@ class ManagementController extends Controller
 
     public function usersRemove(int $id)
     {
-        // acesso('gestao_usuarios', 1);
+        acesso('gestao_usuarios', 1);
 
         User::findOrFail($id)->delete();
 
@@ -372,14 +408,14 @@ class ManagementController extends Controller
 
     public function groupsCreate()
     {
-        // acesso('gestao_usuarios', 1);
+        acesso('gestao_usuarios', 1);
 
         return view('management.admin.index', ['page' => 'management/groups/edit']);
     }
 
     public function groupsStore(Request $request)
     {
-        // acesso('gestao_usuarios', 1);
+        acesso('gestao_usuarios', 1);
 
         $validated = $request->validate([
             'name' => ['required', 'string', 'max:255', 'alpha_dash', 'unique:groups,name'],
@@ -392,7 +428,7 @@ class ManagementController extends Controller
 
     public function groupsEdit(int $id)
     {
-        // acesso('gestao_usuarios', 1);
+        acesso('gestao_usuarios', 1);
 
         return view('management.admin.index', [
             'page' => 'management/groups/edit',
@@ -402,7 +438,7 @@ class ManagementController extends Controller
 
     public function groupsUpdate(Request $request, int $id)
     {
-        // acesso('gestao_usuarios', 1);
+        acesso('gestao_usuarios', 1);
 
         $group = Group::findOrFail($id);
         $validated = $request->validate([
@@ -416,7 +452,7 @@ class ManagementController extends Controller
 
     public function groupsRemove(int $id)
     {
-        // acesso('gestao_usuarios', 1);
+        acesso('gestao_usuarios', 1);
 
         Group::findOrFail($id)->delete();
 
