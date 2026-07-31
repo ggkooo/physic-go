@@ -2,10 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Foundation\Auth\User as Authenticatable; // Alterado
-use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
@@ -26,18 +24,56 @@ class User extends Authenticatable
         'avatar',
     ];
 
-    public static function createUser(array $data): JsonResponse
+    protected static function booted(): void
     {
-        $data['user_password'] = Hash::make($data['user_password']);
+        static::created(function (User $user) {
+            $userGroup = Group::firstOrCreate(
+                ['name' => 'user'],
+                ['description' => 'Usuário padrão']
+            );
 
-        $userId = DB::table("users")->insertGetId([
-            'name' => $data['user_name'],
-            'email' => $data['user_email'],
-            'password' => $data['user_password']
-        ]);
+            $user->groups()->syncWithoutDetaching([
+                $userGroup->id,
+            ]);
+        });
+    }
 
-        $user = self::find($userId);
+    public function groups(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            Group::class,
+            'user_has_group',
+            'user_id',
+            'group_id'
+        );
+    }
 
-        return response()->json($user, 201);
+    public function isAdmin(): bool
+    {
+        return $this->groups()
+            ->where('groups.name', 'admin')
+            ->exists();
+    }
+
+    public function hasAccess(string $group): bool
+    {
+        if ($this->isAdmin()) {
+            return true;
+        }
+
+        return $this->groups()
+            ->where('groups.name', $group)
+            ->exists();
+    }
+
+    public function hasAnyAccess(array $groups): bool
+    {
+        if ($this->isAdmin()) {
+            return true;
+        }
+
+        return $this->groups()
+            ->whereIn('groups.name', $groups)
+            ->exists();
     }
 }

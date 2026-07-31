@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\School;
+use App\Models\Group;
+use App\Models\User;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Validation\Rule;
 
 class ManagementController extends Controller
 {
@@ -26,6 +29,8 @@ class ManagementController extends Controller
      */
     public function home()
     {
+        acesso('management', 1);
+
         if (Auth::check()) {
             return view('management.admin.index', ['page' => 'management/home']);
         }
@@ -35,6 +40,8 @@ class ManagementController extends Controller
 
     public function publications()
     {
+        acesso('management', 1);
+
         if (Auth::check()) {
             return view('management.admin.index', ['page' => 'management/publications']);
         }
@@ -43,6 +50,8 @@ class ManagementController extends Controller
 
     public function contents()
     {
+        acesso('management', 1);
+
         if (Auth::check()) {
             return view('management.admin.index', ['page' => 'management/contents/display']);
         }
@@ -51,6 +60,8 @@ class ManagementController extends Controller
 
     public function messages()
     {
+        acesso('management', 1);
+
         if (Auth::check()) {
             return view('management.admin.index', ['page' => 'management/messages/display']);
         }
@@ -59,6 +70,8 @@ class ManagementController extends Controller
 
     public function template()
     {
+        acesso('management', 1);
+
         if (Auth::check()) {
             return view('management.admin.index', ['page' => 'management/template/display']);
         }
@@ -67,6 +80,8 @@ class ManagementController extends Controller
 
     public function statistics()
     {
+        acesso('management', 1);
+
         if (Auth::check()) {
             return view('management.admin.index', ['page' => 'management/statistics/graphics']);
         }
@@ -75,6 +90,8 @@ class ManagementController extends Controller
 
     public function questions(Request $request)
     {
+        acesso('management', 1);
+
         if (Auth::check()) {
             $limit = $request->get('limit', 5);
             $questions = \App\Models\Question::orderBy('id')->paginate($limit);
@@ -88,6 +105,8 @@ class ManagementController extends Controller
 
     public function questionsRegister()
     {
+        acesso('management', 1);
+
         if (Auth::check()) {
             return view('management.admin.index', ['page' => 'management/questions/register']);
         }
@@ -96,6 +115,8 @@ class ManagementController extends Controller
 
     public function questionsStore(Request $request)
     {
+        acesso('management', 1);
+
         if (!Auth::check()) {
             return redirect()->route('login')->with('error', 'You must be authenticated.');
         }
@@ -122,6 +143,8 @@ class ManagementController extends Controller
 
     public function questionsEdit($id)
     {
+        acesso('management', 1);
+
         if (Auth::check()) {
             $question = \App\Models\Question::findOrFail($id);
             return view('management.admin.index', [
@@ -134,6 +157,8 @@ class ManagementController extends Controller
 
     public function questionsUpdate(Request $request, $id)
     {
+        acesso('management', 1);
+
         if (!Auth::check()) {
             return redirect()->route('login')->with('error', 'You must be authenticated.');
         }
@@ -174,6 +199,8 @@ class ManagementController extends Controller
 
     public function questionsView($id)
     {
+        acesso('management', 1);
+
         if (Auth::check()) {
             $question = \App\Models\Question::findOrFail($id);
             return view('management.admin.index', [
@@ -186,6 +213,8 @@ class ManagementController extends Controller
 
     public function questionsStatistics($id)
     {
+        acesso('management', 1);
+
         if (Auth::check()) {
             $question = \App\Models\Question::findOrFail($id);
             return view('management.admin.index', [
@@ -198,12 +227,14 @@ class ManagementController extends Controller
 
     public function challenge(Request $request)
     {
+        acesso('management', 1);
+
         if (Auth::check()) {
             $limit = $request->get('limit', 5);
             if ($limit === 'all') {
                 $challenges = \App\Models\Challenge::orderBy('id', 'desc')->get();
             } else {
-                $challenges = \App\Models\Challenge::orderBy('id', 'desc')->paginate((int)$limit);
+                $challenges = \App\Models\Challenge::orderBy('id', 'desc')->paginate((int) $limit);
             }
             return view('management.admin.index', [
                 'page' => 'management/challenge/display',
@@ -215,15 +246,19 @@ class ManagementController extends Controller
 
     public function challengeRegister()
     {
+        acesso('management', 1);
+
         if (Auth::check()) {
             return view('management.admin.index', ['page' => 'management/challenge/register']);
         }
         return redirect()->route('login');
     }
 
-// PHP
+    // PHP
     public function challengeStore(Request $request)
     {
+        acesso('management', 1);
+
         if (!Auth::check()) {
             return redirect()->route('login')->with('error', 'You must be authenticated.');
         }
@@ -256,6 +291,8 @@ class ManagementController extends Controller
 
     public function challengeEdit($id)
     {
+        acesso('management', 1);
+
         if (Auth::check()) {
             $challenge = \App\Models\Challenge::findOrFail($id);
             return view('management.admin.index', [
@@ -268,6 +305,8 @@ class ManagementController extends Controller
 
     public function challengeUpdate(Request $request, $id)
     {
+        acesso('management', 1);
+
         if (!Auth::check()) {
             return redirect()->route('login')->with('error', 'You must be authenticated.');
         }
@@ -297,10 +336,127 @@ class ManagementController extends Controller
 
     public function users()
     {
-        if (Auth::check()) {
-            return view('management.admin.index', ['page' => 'management/users/display']);
-        }
-        return redirect()->route('login');
+        acesso('gestao_usuarios', 1);
+
+        $users = User::with('groups')->orderBy('name')->get();
+
+        return view('management.admin.index', [
+            'page' => 'management/users/display',
+            'users' => $users,
+        ]);
+    }
+
+    public function usersEdit(int $id)
+    {
+        acesso('gestao_usuarios', 1);
+
+        return view('management.admin.index', [
+            'page' => 'management/users/edit',
+            'editUser' => User::with('groups')->findOrFail($id),
+            'groups' => Group::orderBy('description')->orderBy('name')->get(),
+        ]);
+    }
+
+    public function usersUpdate(Request $request, int $id)
+    {
+        acesso('gestao_usuarios', 1);
+
+        $user = User::findOrFail($id);
+
+        $validated = $request->validate([
+            'nome' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'email', 'max:255', Rule::unique('users', 'email')->ignore($user->id)],
+            'cpf' => ['nullable', 'string', 'max:20'],
+            'telefone' => ['nullable', 'string', 'max:30'],
+            'cargo' => ['required', 'string', 'max:50'],
+            'groups' => ['nullable', 'array'],
+            'groups.*' => ['integer', 'exists:groups,id'],
+        ]);
+
+        $user->update([
+            'name' => $validated['nome'],
+            'email' => $validated['email'],
+            'cpf' => $validated['cpf'] ?? null,
+            'phone' => $validated['telefone'] ?? null,
+            'user_account_type' => $validated['cargo'],
+        ]);
+
+        $user->groups()->sync($validated['groups'] ?? []);
+
+        return redirect()->route('management.users.edit', $user->id)
+            ->with('success', 'Usuário e permissões atualizados com sucesso!');
+    }
+
+    public function usersRemove(int $id)
+    {
+        acesso('gestao_usuarios', 1);
+
+        User::findOrFail($id)->delete();
+
+        return redirect()->route('management.users')->with('success', 'Usuário removido com sucesso!');
+    }
+
+    public function groups()
+    {
+        acesso('gestao_usuarios', 1);
+
+        return view('management.admin.index', [
+            'page' => 'management/groups/display',
+            'groups' => Group::withCount('users')->orderBy('description')->orderBy('name')->get(),
+        ]);
+    }
+
+    public function groupsCreate()
+    {
+        acesso('gestao_usuarios', 1);
+
+        return view('management.admin.index', ['page' => 'management/groups/edit']);
+    }
+
+    public function groupsStore(Request $request)
+    {
+        acesso('gestao_usuarios', 1);
+
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'max:255', 'alpha_dash', 'unique:groups,name'],
+            'description' => ['nullable', 'string', 'max:255'],
+        ]);
+        Group::create($validated);
+
+        return redirect()->route('management.groups')->with('success', 'Grupo cadastrado com sucesso!');
+    }
+
+    public function groupsEdit(int $id)
+    {
+        acesso('gestao_usuarios', 1);
+
+        return view('management.admin.index', [
+            'page' => 'management/groups/edit',
+            'editGroup' => Group::findOrFail($id),
+        ]);
+    }
+
+    public function groupsUpdate(Request $request, int $id)
+    {
+        acesso('gestao_usuarios', 1);
+
+        $group = Group::findOrFail($id);
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'max:255', 'alpha_dash', Rule::unique('groups', 'name')->ignore($group->id)],
+            'description' => ['nullable', 'string', 'max:255'],
+        ]);
+        $group->update($validated);
+
+        return redirect()->route('management.groups')->with('success', 'Grupo atualizado com sucesso!');
+    }
+
+    public function groupsRemove(int $id)
+    {
+        acesso('gestao_usuarios', 1);
+
+        Group::findOrFail($id)->delete();
+
+        return redirect()->route('management.groups')->with('success', 'Grupo removido com sucesso!');
     }
 
 }

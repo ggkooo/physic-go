@@ -195,14 +195,43 @@ Route::delete('/management/template/remove/{id}', [ManagementController::class, 
 
 // Users
 // show
-Route::get('/management/users', [UserController::class, 'users'])->name('management.users');
+Route::get('/management/users', [UserController::class, 'users'])
+    ->name('management.users');
 
 // edit
-Route::get('/management/users/edit/{id}', [UserController::class, 'editUser'])->name('management.users.edit');
-Route::put('/management/users/update/{id}', [UserController::class, 'updateUser'])->name('management.users.update');
+Route::get('/management/users/edit/{id}', [UserController::class, 'editUser'])
+    ->name('management.users.edit');
+
+Route::put('/management/users/update/{id}', [UserController::class, 'updateUser'])
+    ->name('management.users.update');
 
 // remove
-Route::delete('/management/users/remove/{id}', [UserController::class, 'removeUser'])->name('management.users.remove');
+Route::delete('/management/users/remove/{id}', [UserController::class, 'removeUser'])
+    ->name('management.users.remove');
+
+
+// Groups
+// show
+Route::get('/management/groups', [ManagementController::class, 'groups'])
+    ->name('management.groups');
+
+// register
+Route::get('/management/groups/register', [ManagementController::class, 'groupsCreate'])
+    ->name('management.groups.create');
+
+Route::post('/management/groups/register', [ManagementController::class, 'groupsStore'])
+    ->name('management.groups.store');
+
+// edit
+Route::get('/management/groups/edit/{id}', [ManagementController::class, 'groupsEdit'])
+    ->name('management.groups.edit');
+
+Route::put('/management/groups/update/{id}', [ManagementController::class, 'groupsUpdate'])
+    ->name('management.groups.update');
+
+// remove
+Route::delete('/management/groups/remove/{id}', [ManagementController::class, 'groupsRemove'])
+    ->name('management.groups.remove');
 
 // Challenge
 // show

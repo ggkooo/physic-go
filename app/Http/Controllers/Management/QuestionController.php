@@ -20,6 +20,8 @@ class QuestionController extends Controller
 
     public function index(Request $request): View
     {
+        acesso('management', 1);
+
         $limit = $request->input('limit', 5);
 
         if ($limit === 'all') {
@@ -36,6 +38,8 @@ class QuestionController extends Controller
 
     public function create(): View
     {
+        acesso('management', 1);
+
         return view('management.admin.index', [
             'page' => 'management/questions/register',
             'grades' => Grade::where('status', 'active')->orderBy('name')->get(),
@@ -44,6 +48,8 @@ class QuestionController extends Controller
 
     public function store(QuestionRequest $request, QuestionService $service): RedirectResponse
     {
+        acesso('management', 1);
+
         $service->create($request->validated(), $request);
 
         return redirect()
@@ -53,6 +59,8 @@ class QuestionController extends Controller
 
     public function edit(int $id): View
     {
+        acesso('management', 1);
+
         return view('management.admin.index', [
             'page' => 'management/questions/register',
             'editQuestion' => Question::findOrFail($id),
@@ -62,6 +70,8 @@ class QuestionController extends Controller
 
     public function update(QuestionRequest $request, int $id, QuestionService $service): RedirectResponse
     {
+        acesso('management', 1);
+
         $question = Question::findOrFail($id);
         $service->update($question, $request->validated(), $request);
 
@@ -72,6 +82,8 @@ class QuestionController extends Controller
 
     public function destroy(int $id): RedirectResponse
     {
+        acesso('management', 1);
+
         $question = Question::findOrFail($id);
         $question->delete();
 
@@ -82,6 +94,8 @@ class QuestionController extends Controller
 
     public function show(int $id): View
     {
+        acesso('management', 1);
+
         return view('management.admin.index', [
             'page' => 'management/questions/view',
             'question' => Question::findOrFail($id),
@@ -90,6 +104,8 @@ class QuestionController extends Controller
 
     public function statistics(int $id): View
     {
+        acesso('management', 1);
+
         return view('management.admin.index', [
             'page' => 'management/questions/statistics',
             'question' => Question::findOrFail($id),

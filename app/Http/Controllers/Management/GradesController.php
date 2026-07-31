@@ -18,12 +18,14 @@ class GradesController extends Controller
 
     public function grades(): View|RedirectResponse
     {
+        acesso('management', 1);
+
         if (Auth::check()) {
             $limit = request('limit', 5);
             if ($limit === 'all') {
                 $grades = Grade::all();
             } else {
-                $grades = Grade::paginate((int)$limit);
+                $grades = Grade::paginate((int) $limit);
             }
 
             return view('management.admin.index', [
@@ -37,6 +39,8 @@ class GradesController extends Controller
 
     public function register(): View
     {
+        acesso('management', 1);
+
         return view('management.admin.index', [
             'page' => 'management/grades/form',
             'type' => 'register',
@@ -45,6 +49,8 @@ class GradesController extends Controller
 
     public function edit(int $id): View
     {
+        acesso('management', 1);
+
         $grade = Grade::findOrFail($id);
 
         return view('management.admin.index', [
@@ -56,6 +62,8 @@ class GradesController extends Controller
 
     public function store(GradesRequest $request): RedirectResponse
     {
+        acesso('management', 1);
+
         Grade::create($request->validated());
 
         return redirect()->route('management.grades')->with('success', 'Série cadastrada com sucesso!');
@@ -63,6 +71,8 @@ class GradesController extends Controller
 
     public function update(GradesRequest $request, $id): RedirectResponse
     {
+        acesso('management', 1);
+
         $grade = Grade::findOrFail($id);
         $grade->update($request->validated());
 
@@ -71,6 +81,8 @@ class GradesController extends Controller
 
     public function remove($id)
     {
+        acesso('management', 1);
+
         $grade = Grade::findOrFail($id);
         $grade->delete();
 
