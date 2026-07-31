@@ -415,6 +415,8 @@
             return;
         }
 
+        questionStartedAt = Date.now();
+
         document.getElementById('enunciado').innerHTML = q.statement;
         document.getElementById('alternativa_a').textContent = q.option_a || '';
         document.getElementById('alternativa_b').textContent = q.option_b || '';
@@ -512,16 +514,33 @@
         }
     }
 
-    function alternativaClickHandler(letra) {
+    async function alternativaClickHandler(letra) {
         if (bloqueado) return;
 
         bloqueado = true;
         atualizarEstadoBotoesAcao();
 
+        const questaoAtual = obterQuestaoAtual();
         const resposta = (respostaCorreta || '').trim().toLowerCase();
         const letraClicada = (letra || '').trim().toLowerCase();
 
+        if (!questaoAtual || !questaoAtual.id) {
+            console.error('Não foi possível identificar a questão atual.');
+            bloqueado = false;
+            atualizarEstadoBotoesAcao();
+            return;
+        }
+
         marcarRespostaVisual(letraClicada, resposta);
+
+        try {
+            await registerStudentAnswer(
+                questaoAtual.id,
+                letraClicada
+            );
+        } catch (error) {
+            console.error('Erro ao registrar resposta do aluno:', error);
+        }
 
         if (letraClicada === resposta) {
             pontos += 100;
@@ -748,6 +767,52 @@
             btnRankingVitoria.addEventListener('click', limparQuizFlags);
         }
     });
+
+
+    let questionStartedAt = Date.now();
+
+    async function registerStudentAnswer(questionId, selectedOption) {
+        const responseTime = Math.max(
+            0,
+            Math.round((Date.now() - questionStartedAt) / 1000)
+        );
+
+        const csrfToken = document.querySelector(
+            'meta[name="csrf-token"]'
+        )?.getAttribute('content');
+
+        if (!csrfToken) {
+            throw new Error('Token CSRF não encontrado na página.');
+        }
+
+        const response = await fetch("{{ route('game.save-answer') }}", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'X-CSRF-TOKEN': csrfToken
+            },
+            body: JSON.stringify({
+                question_id: questionId,
+                selected_option: selectedOption,
+                response_time_seconds: responseTime
+            })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            console.error('Erro retornado pelo Laravel:', data);
+
+            throw new Error(
+                data.message || 'Não foi possível registrar a resposta.'
+            );
+        }
+
+        questionStartedAt = Date.now();
+
+        return data;
+    }
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>

@@ -18,6 +18,7 @@ use App\Http\Controllers\Management\UserController;
 use App\Http\Controllers\Management\QuestionController;
 use App\Http\Controllers\ChallengeController;
 use App\Http\Controllers\RankingController;
+use App\Http\Controllers\Auth\ProfileController;
 
 // AUTHENTICATION ROUTES
 // Login
@@ -41,9 +42,16 @@ Route::post('password/reset', [ResetPasswordController::class, 'reset'])->name('
 Route::get('auth/google', [GoogleController::class, 'redirectToGoogle'])->name('google.login');
 Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
 
+// Profile
+Route::middleware('auth')->group(function () {
+    Route::get('/meu-perfil', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::put('/meu-perfil', [ProfileController::class, 'update'])->name('profile.update');
+});
+
 // ACCOUNT
 Route::get('/account', [ConfigAccountController::class, 'index'])->name('config.account');
 Route::post('/account', [ConfigAccountController::class, 'update'])->name('config.account.update');
+
 
 // PAGES ROUTES
 // Redirect root to /home
@@ -89,6 +97,9 @@ Route::get('/game/questions-by-serie/{grade}', [GameController::class, 'question
 Route::post('/game/save-ranking', [GameController::class, 'saveRanking'])->name('game.save-ranking');
 // Route::get('/game/schools-ranking', [GameController::class, 'schools_ranking'])->name('game.schools-ranking');
 // Route::get('/game/rules', [GameController::class, 'rules'])->name('game.rules');
+Route::post('/game/save-answer', [GameController::class, 'saveAnswer'])
+    ->middleware('auth')
+    ->name('game.save-answer');
 
 // MANAGEMENT
 // Home

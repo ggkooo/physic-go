@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Question;
 use App\Models\Ranking;
 use App\Models\Grade;
+use App\Models\UserQuestionAnswer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -99,5 +100,31 @@ class GameController extends Controller
     public function rules()
     {
         return view('admin.index', ['page' => 'game/rules']);
+    }
+
+    public function saveAnswer(Request $request)
+    {
+        $data = $request->validate([
+            'question_id' => ['required', 'integer', 'exists:questions,id'],
+            'selected_option' => ['required', 'string', 'max:10'],
+            'response_time_seconds' => ['required', 'integer', 'min:0', 'max:3600'],
+        ]);
+
+        $question = Question::findOrFail($data['question_id']);
+        $selected = strtolower($data['selected_option']);
+        $correct = strtolower($question->correct_option);
+        $isCorrect = $selected === $correct;
+        $xpEarned = $isCorrect ? 20 : 5;
+
+        UserQuestionAnswer::create([
+            'user_id' => Auth::id(),
+            'question_id' => $question->id,
+            'selected_option' => $selected,
+            'is_correct' => $isCorrect,
+            'response_time_seconds' => $data['response_time_seconds'],
+            'xp_earned' => $xpEarned,
+        ]);
+
+        return response()->json(['success' => true, 'is_correct' => $isCorrect, 'xp_earned' => $xpEarned]);
     }
 }

@@ -23,6 +23,7 @@ class User extends Authenticatable
         'school',
         'class',
         'user_account_type',
+        'avatar',
     ];
 
     public static function createUser(array $data): JsonResponse
@@ -30,8 +31,8 @@ class User extends Authenticatable
         $data['user_password'] = Hash::make($data['user_password']);
 
         $userId = DB::table("users")->insertGetId([
-            'name' => $data['user_name'], 
-            'email' => $data['user_email'], 
+            'name' => $data['user_name'],
+            'email' => $data['user_email'],
             'password' => $data['user_password']
         ]);
 
